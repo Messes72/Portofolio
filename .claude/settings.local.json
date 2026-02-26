@@ -10,7 +10,8 @@
       "Bash(cp:*)",
       "Bash(mkdir:*)",
       "Bash(npx shadcn:*)",
-      "Bash(D:/Project/Portofolio/src/lib/data/projects.json:*)"
+      "Bash(D:/Project/Portofolio/src/lib/data/projects.json:*)",
+      "Bash(src/lib/data/projects.json:*)"
     ]
   }
 }
