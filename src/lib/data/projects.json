@@ -1,0 +1,53 @@
+[
+  {
+    "id": "hospital-management",
+    "title": "Hospital Management System",
+    "tagline": "Full-stack web app for hospital operations",
+    "description": "A comprehensive hospital management system with patient records, appointment scheduling, and inventory management.",
+    "thumbnail": "/images/projects/hospital-management/thumbnail.webp",
+    "screenshots": ["/images/projects/hospital-management/screenshot-1.webp"],
+    "demoUrl": "https://hospital-demo.vercel.app",
+    "githubUrl": "https://github.com/Messes72/hospital-management",
+    "techStack": ["Svelte", "Tailwind CSS", "Node.js", "PostgreSQL"],
+    "features": ["Patient management", "Appointment scheduling", "Inventory tracking"],
+    "highlights": ["Internship project at PT Cross Network Indonesia", "Real hospital deployment"],
+    "status": "live",
+    "startDate": "2025-01",
+    "endDate": "2025-06",
+    "category": "web"
+  },
+  {
+    "id": "portfolio-website",
+    "title": "Portfolio Website",
+    "tagline": "Personal portfolio with stunning animations",
+    "description": "A modern portfolio website showcasing my projects with smooth animations and interactive elements.",
+    "thumbnail": "/images/projects/portfolio/thumbnail.webp",
+    "screenshots": [],
+    "demoUrl": "https://mario-portfolio.vercel.app",
+    "githubUrl": "https://github.com/Messes72/portfolio",
+    "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    "features": ["Animated sections", "Dark mode", "Responsive design"],
+    "highlights": ["Built with modern tech stack", "Optimized for performance"],
+    "status": "live",
+    "startDate": "2025-02",
+    "endDate": "2025-02",
+    "category": "web"
+  },
+  {
+    "id": "mobile-health-app",
+    "title": "Mobile Health App",
+    "tagline": "Flutter app for health monitoring",
+    "description": "A mobile application for tracking health metrics and scheduling doctor appointments.",
+    "thumbnail": "/images/projects/mobile-health/thumbnail.webp",
+    "screenshots": [],
+    "demoUrl": "",
+    "githubUrl": "https://github.com/Messes72/health-app",
+    "techStack": ["Flutter", "Firebase", "Dart"],
+    "features": ["Health tracking", "Appointment booking", "Notifications"],
+    "highlights": ["Cross-platform mobile app", "Real-time sync"],
+    "status": "development",
+    "startDate": "2024-09",
+    "endDate": "2024-12",
+    "category": "mobile"
+  }
+]
