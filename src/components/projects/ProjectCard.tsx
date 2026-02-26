@@ -8,6 +8,7 @@ import { useRef, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Project } from "@/types";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface ProjectCardProps {
   project: Project;
@@ -34,6 +35,7 @@ const statusConfig = {
 export function ProjectCard({ project }: ProjectCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -43,7 +45,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || prefersReducedMotion) return;
 
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -68,6 +70,75 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
   const status = statusConfig[project.status];
   const visibleTechStack = project.techStack.slice(0, 4);
+
+  // If user prefers reduced motion, render without magnetic hover effect
+  if (prefersReducedMotion) {
+    return (
+      <Link href={`/projects/${project.id}`} className="block group">
+        <Card
+          className="h-full overflow-hidden border border-border bg-card transition-all duration-300
+            hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20"
+        >
+          {/* Thumbnail */}
+          <div className="relative aspect-video overflow-hidden">
+            <Image
+              src={project.thumbnail}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 ease-out
+                group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            {/* Status Badge */}
+            <div className="absolute top-3 right-3">
+              <div
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full
+                  bg-background/90 backdrop-blur-sm border border-border/50
+                  ${status.textColor}`}
+              >
+                <span
+                  className={`w-2 h-2 rounded-full ${status.dotColor}`}
+                />
+                <span className="text-xs font-medium">{status.label}</span>
+              </div>
+            </div>
+          </div>
+
+          <CardHeader className="pb-2">
+            <h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors duration-300">
+              {project.title}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-1">
+              {project.tagline}
+            </p>
+          </CardHeader>
+
+          <CardContent className="pt-0">
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-1.5">
+              {visibleTechStack.map((tech) => (
+                <Badge
+                  key={tech}
+                  variant="secondary"
+                  className="text-xs font-normal bg-secondary/50 hover:bg-secondary/80 transition-colors"
+                >
+                  {tech}
+                </Badge>
+              ))}
+              {project.techStack.length > 4 && (
+                <Badge
+                  variant="outline"
+                  className="text-xs font-normal border-dashed"
+                >
+                  +{project.techStack.length - 4}
+                </Badge>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </Link>
+    );
+  }
 
   return (
     <motion.div

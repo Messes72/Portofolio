@@ -110,7 +110,14 @@ function SkillBar({ skill, delay = 0 }: { skill: Skill; delay?: number }) {
       </div>
 
       {/* Progress Bar Container */}
-      <div className="h-2.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+      <div
+        className="h-2.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"
+        role="progressbar"
+        aria-valuenow={skill.level}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={`${skill.name} proficiency: ${skill.level}%`}
+      >
         <motion.div
           className={`h-full ${progressColor} rounded-full`}
           initial={{ width: 0 }}

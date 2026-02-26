@@ -111,7 +111,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8" role="menubar">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -123,6 +123,8 @@ export function Header() {
                     ? "text-primary"
                     : "text-muted-foreground"
                 )}
+                aria-current={activeSection === link.href ? "page" : undefined}
+                role="menuitem"
               >
                 {link.name}
                 {activeSection === link.href && (
@@ -148,10 +150,12 @@ export function Header() {
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button
-                  className="p-2 rounded-md hover:bg-accent transition-colors"
-                  aria-label="Open menu"
+                  className="p-2 rounded-md hover:bg-accent transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                  aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+                  aria-expanded={mobileMenuOpen}
+                  aria-controls="mobile-menu"
                 >
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-5 w-5" aria-hidden="true" />
                 </button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px]">
@@ -186,5 +190,6 @@ export function Header() {
         </nav>
       </div>
     </header>
+    </>
   );
 }

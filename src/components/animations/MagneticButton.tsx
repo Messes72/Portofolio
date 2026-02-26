@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useRef, ReactNode, useState } from "react";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ export function MagneticButton({
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -25,7 +27,7 @@ export function MagneticButton({
   const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || prefersReducedMotion) return;
 
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -47,6 +49,15 @@ export function MagneticButton({
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
+
+  // If user prefers reduced motion, render as regular button
+  if (prefersReducedMotion) {
+    return (
+      <button className={`relative inline-flex items-center justify-center ${className}`}>
+        {children}
+      </button>
+    );
+  }
 
   return (
     <motion.button

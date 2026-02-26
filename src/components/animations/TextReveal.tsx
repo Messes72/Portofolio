@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface TextRevealProps {
   text: string;
@@ -38,7 +39,13 @@ export function TextReveal({
   delay = 0,
   splitBy = "character",
 }: TextRevealProps) {
+  const prefersReducedMotion = useReducedMotion();
   const items = splitBy === "character" ? text.split("") : text.split(" ");
+
+  // If user prefers reduced motion, render text without animation
+  if (prefersReducedMotion) {
+    return <span className={className}>{text}</span>;
+  }
 
   const containerWithDelay = {
     ...containerVariants,
