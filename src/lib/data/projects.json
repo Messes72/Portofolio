@@ -1,53 +1,132 @@
 [
   {
-    "id": "hospital-management",
-    "title": "Hospital Management System",
-    "tagline": "Full-stack web app for hospital operations",
-    "description": "A comprehensive hospital management system with patient records, appointment scheduling, and inventory management.",
-    "thumbnail": "/images/projects/hospital-management/thumbnail.webp",
-    "screenshots": ["/images/projects/hospital-management/screenshot-1.webp"],
-    "demoUrl": "https://hospital-demo.vercel.app",
-    "githubUrl": "https://github.com/Messes72/hospital-management",
-    "techStack": ["Svelte", "Tailwind CSS", "Node.js", "PostgreSQL"],
-    "features": ["Patient management", "Appointment scheduling", "Inventory tracking"],
-    "highlights": ["Internship project at PT Cross Network Indonesia", "Real hospital deployment"],
+    "id": "rumah-sakit-bantarangin",
+    "title": "Aplikasi Rumah Sakit Bantarangin",
+    "tagline": "Sistem informasi manajemen rumah sakit berbasis web dan mobile",
+    "description": "Aplikasi sistem informasi manajemen rumah sakit yang dikembangkan selama internship di PT Cross Network Indonesia. Sistem ini mencakup modul pendaftaran pasien, manajemen jadwal dokter, rekam medis elektronik, dan integrasi dengan perangkat mobile untuk akses real-time. Dibangun menggunakan Svelte untuk frontend, dengan desain responsif menggunakan Tailwind CSS.",
+    "thumbnail": "/images/projects/rumah-sakit-bantarangin/thumbnail.webp",
+    "screenshots": [
+      "/images/projects/rumah-sakit-bantarangin/screenshot-1.webp",
+      "/images/projects/rumah-sakit-bantarangin/screenshot-2.webp",
+      "/images/projects/rumah-sakit-bantarangin/screenshot-3.webp"
+    ],
+    "demoUrl": "https://rumah-sakit-bantarangin-demo.vercel.app",
+    "githubUrl": "https://github.com/Messes72/rumah-sakit-bantarangin",
+    "techStack": ["Svelte", "Tailwind CSS", "JavaScript", "Node.js", "Supabase"],
+    "features": [
+      "Pendaftaran pasien online",
+      "Manajemen jadwal dokter",
+      "Rekam medis elektronik",
+      "Notifikasi real-time",
+      "Dashboard analytics",
+      "Multi-platform (Web & Mobile)"
+    ],
+    "highlights": [
+      "Dikembangkan untuk kebutuhan nyata industri kesehatan",
+      "Integrasi sistem web dan mobile",
+      "UI/UX yang user-friendly untuk tenaga medis",
+      "Performa optimal dengan Svelte"
+    ],
     "status": "live",
-    "startDate": "2025-01",
-    "endDate": "2025-06",
-    "category": "web"
+    "startDate": "2025-01-15",
+    "endDate": "2025-06-30",
+    "category": "full-stack"
   },
   {
     "id": "portfolio-website",
     "title": "Portfolio Website",
-    "tagline": "Personal portfolio with stunning animations",
-    "description": "A modern portfolio website showcasing my projects with smooth animations and interactive elements.",
-    "thumbnail": "/images/projects/portfolio/thumbnail.webp",
-    "screenshots": [],
-    "demoUrl": "https://mario-portfolio.vercel.app",
+    "tagline": "Website portfolio personal dengan animasi modern",
+    "description": "Website portfolio modern yang menampilkan proyek-proyek development dengan desain interaktif dan animasi yang halus. Dibangun menggunakan Next.js dengan TypeScript, Tailwind CSS untuk styling, dan Framer Motion untuk animasi. Dilengkapi dengan dark/light mode toggle dan smooth scrolling.",
+    "thumbnail": "/images/projects/portfolio-website/thumbnail.webp",
+    "screenshots": [
+      "/images/projects/portfolio-website/screenshot-1.webp",
+      "/images/projects/portfolio-website/screenshot-2.webp"
+    ],
+    "demoUrl": "https://marioclaudius.vercel.app",
     "githubUrl": "https://github.com/Messes72/portfolio",
-    "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    "features": ["Animated sections", "Dark mode", "Responsive design"],
-    "highlights": ["Built with modern tech stack", "Optimized for performance"],
+    "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "shadcn/ui"],
+    "features": [
+      "Hero section dengan animated text",
+      "Skills visualization",
+      "Projects gallery dengan filter",
+      "Dark/Light mode toggle",
+      "Smooth scrolling",
+      "SEO optimized"
+    ],
+    "highlights": [
+      "Animasi yang menarik menggunakan Framer Motion",
+      "Responsive design untuk semua device",
+      "Optimasi performa dengan Next.js",
+      "Integrasi dengan shadcn/ui components"
+    ],
     "status": "live",
-    "startDate": "2025-02",
-    "endDate": "2025-02",
+    "startDate": "2025-02-01",
+    "endDate": "2025-02-28",
     "category": "web"
   },
   {
-    "id": "mobile-health-app",
-    "title": "Mobile Health App",
-    "tagline": "Flutter app for health monitoring",
-    "description": "A mobile application for tracking health metrics and scheduling doctor appointments.",
-    "thumbnail": "/images/projects/mobile-health/thumbnail.webp",
-    "screenshots": [],
+    "id": "e-commerce-app",
+    "title": "E-Commerce Mobile App",
+    "tagline": "Aplikasi e-commerce cross-platform dengan Flutter",
+    "description": "Aplikasi e-commerce mobile yang dikembangkan menggunakan Flutter untuk platform Android. Aplikasi mencakup fitur katalog produk, keranjang belanja, checkout, dan integrasi dengan Firebase untuk autentikasi dan database real-time. Desain UI mengikuti prinsip Material Design.",
+    "thumbnail": "/images/projects/e-commerce-app/thumbnail.webp",
+    "screenshots": [
+      "/images/projects/e-commerce-app/screenshot-1.webp",
+      "/images/projects/e-commerce-app/screenshot-2.webp",
+      "/images/projects/e-commerce-app/screenshot-3.webp"
+    ],
     "demoUrl": "",
-    "githubUrl": "https://github.com/Messes72/health-app",
-    "techStack": ["Flutter", "Firebase", "Dart"],
-    "features": ["Health tracking", "Appointment booking", "Notifications"],
-    "highlights": ["Cross-platform mobile app", "Real-time sync"],
-    "status": "development",
-    "startDate": "2024-09",
-    "endDate": "2024-12",
+    "githubUrl": "https://github.com/Messes72/flutter-ecommerce",
+    "techStack": ["Flutter", "Dart", "Firebase", "Android Studio"],
+    "features": [
+      "Katalog produk dengan search dan filter",
+      "Keranjang belanja",
+      "Checkout flow",
+      "Autentikasi user",
+      "Riwayat pemesanan",
+      "Notifikasi push"
+    ],
+    "highlights": [
+      "Cross-platform development dengan Flutter",
+      "Real-time database dengan Firebase",
+      "UI/UX yang responsif",
+      "State management menggunakan Provider"
+    ],
+    "status": "in-development",
+    "startDate": "2024-09-01",
+    "endDate": "2024-12-15",
     "category": "mobile"
+  },
+  {
+    "id": "laravel-cms",
+    "title": "Content Management System",
+    "tagline": "CMS sederhana untuk manajemen konten website",
+    "description": "Content Management System yang dibangun menggunakan Laravel dan PHP. Sistem ini memungkinkan admin untuk mengelola konten website seperti artikel, kategori, dan media. Dilengkapi dengan autentikasi berbasis role, WYSIWYG editor, dan manajemen media.",
+    "thumbnail": "/images/projects/laravel-cms/thumbnail.webp",
+    "screenshots": [
+      "/images/projects/laravel-cms/screenshot-1.webp",
+      "/images/projects/laravel-cms/screenshot-2.webp"
+    ],
+    "demoUrl": "",
+    "githubUrl": "https://github.com/Messes72/laravel-cms",
+    "techStack": ["Laravel", "PHP", "MySQL", "Bootstrap", "JavaScript"],
+    "features": [
+      "Manajemen artikel dan kategori",
+      "Role-based authentication",
+      "WYSIWYG editor",
+      "Media library",
+      "SEO-friendly URLs",
+      "Dashboard admin"
+    ],
+    "highlights": [
+      "Penggunaan Laravel framework",
+      "Sistem autentikasi yang aman",
+      "MVC architecture",
+      "Database relational dengan MySQL"
+    ],
+    "status": "archived",
+    "startDate": "2024-03-01",
+    "endDate": "2024-05-30",
+    "category": "web"
   }
 ]
