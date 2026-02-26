@@ -1,46 +1,52 @@
 "use client";
 
-import * as React from "react";
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // Prevent hydration mismatch
-  React.useEffect(() => {
+  // Handle hydration mismatch
+  useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Avoid hydration mismatch by not rendering until mounted
+  // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
-      <div className="flex items-center justify-center w-10 h-10">
-        <div className="w-5 h-5 animate-pulse bg-muted rounded" />
+      <div className="flex items-center gap-2">
+        <Sun className="h-4 w-4 text-muted-foreground" />
+        <Switch disabled className="cursor-not-allowed" />
+        <Moon className="h-4 w-4 text-muted-foreground" />
       </div>
     );
   }
 
   const isDark = theme === "dark";
 
+  const handleToggle = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
+
   return (
     <div className="flex items-center gap-2">
       <Sun
-        className={`h-4 w-4 transition-colors duration-200 ${
-          isDark ? "text-muted-foreground" : "text-foreground"
+        className={`h-4 w-4 transition-colors duration-300 ${
+          !isDark ? "text-amber-500" : "text-muted-foreground"
         }`}
       />
       <Switch
         checked={isDark}
-        onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-        aria-label="Toggle theme"
-        className="data-[state=checked]:bg-primary"
+        onCheckedChange={handleToggle}
+        aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+        className="data-[state=checked]:bg-slate-700"
       />
       <Moon
-        className={`h-4 w-4 transition-colors duration-200 ${
-          isDark ? "text-foreground" : "text-muted-foreground"
+        className={`h-4 w-4 transition-colors duration-300 ${
+          isDark ? "text-indigo-400" : "text-muted-foreground"
         }`}
       />
     </div>
