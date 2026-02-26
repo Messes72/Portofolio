@@ -169,6 +169,7 @@ function FloatingShape({
         delay: delay,
       }}
       style={{ willChange: "transform" }}
+      aria-hidden="true"
     >
       {renderShape()}
     </motion.div>
@@ -178,7 +179,7 @@ function FloatingShape({
 // AnimatedGradient Component - animated background with smooth flowing gradient orbs
 function AnimatedGradient() {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {/* Primary gradient orb - blue toned */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 to-secondary/20 blur-3xl"
@@ -252,6 +253,7 @@ function ScrollIndicator() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.5, duration: 0.5 }}
+      aria-hidden="true"
     >
       <span className="text-xs text-muted-foreground uppercase tracking-widest">
         Scroll
@@ -264,7 +266,7 @@ function ScrollIndicator() {
           ease: "easeInOut",
         }}
       >
-        <ChevronDown className="w-5 h-5 text-muted-foreground" />
+        <ChevronDown className="w-5 h-5 text-muted-foreground" aria-hidden="true" />
       </motion.div>
     </motion.div>
   );

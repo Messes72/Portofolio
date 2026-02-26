@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Press_Start_2P, VT323 } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { Header } from "@/components/sections/Header";
@@ -7,6 +7,22 @@ import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
+
+const pressStart2P = Press_Start_2P({
+  weight: "400",
+  variable: "--font-pixel",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
+
+const vt323 = VT323({
+  weight: "400",
+  variable: "--font-vt323",
   subsets: ["latin"],
   display: "swap",
   preload: true,
@@ -39,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${pressStart2P.variable} ${vt323.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

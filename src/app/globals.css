@@ -9,6 +9,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+  --font-pixel: var(--font-pixel);
+  --font-vt323: var(--font-vt323);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -82,6 +84,18 @@
   --sidebar-accent-foreground: 0 0% 4%;
   --sidebar-border: 240 6% 90%;
   --sidebar-ring: 217 91% 60%;
+
+  /* Pixel Theme Colors - Retro Neon Palette */
+  --pixel-pink: #FF006E;
+  --pixel-cyan: #00F5FF;
+  --pixel-yellow: #FFD60A;
+  --pixel-purple: #9D4EDD;
+  --pixel-green: #39FF14;
+  --pixel-dark: #0D0221;
+  --pixel-grid: #1A0B2E;
+  --pixel-surface: #240946;
+  --pixel-text: #F8F9FA;
+  --pixel-muted: #B8B8D1;
 }
 
 .dark {
@@ -152,5 +166,49 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer utilities {
+  /* Pixel border utilities */
+  .pixel-border {
+    box-shadow: -4px 0 0 0 black, 4px 0 0 0 black, 0 -4px 0 0 black, 0 4px 0 0 black;
+    margin: 4px;
+  }
+
+  .pixel-border-3d {
+    box-shadow: inset -4px -4px 0 0 rgba(0,0,0,0.5), inset 4px 4px 0 0 rgba(255,255,255,0.3), -4px 0 0 0 black, 4px 0 0 0 black, 0 -4px 0 0 black, 0 4px 0 0 black;
+  }
+
+  /* Scanline overlay effect */
+  .scanlines {
+    position: relative;
+  }
+
+  .scanlines::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    z-index: 10;
+  }
+
+  /* Pixel font utilities */
+  .font-pixel {
+    font-family: var(--font-pixel), monospace;
+  }
+
+  .font-vt323 {
+    font-family: var(--font-vt323), monospace;
   }
 }

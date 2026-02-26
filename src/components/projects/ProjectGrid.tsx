@@ -40,7 +40,7 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
+      <div className="flex flex-wrap justify-center gap-2 mb-8" role="tablist" aria-label="Filter projects by category">
         {filters.map((filter) => (
           <Button
             key={filter}
@@ -48,6 +48,10 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
             size="sm"
             onClick={() => setActiveFilter(filter)}
             className="min-w-[80px]"
+            role="tab"
+            aria-selected={activeFilter === filter}
+            aria-controls="projects-grid"
+            id={`tab-${filter}`}
           >
             {filter}
           </Button>
@@ -71,12 +75,15 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
           </motion.div>
         ) : (
           <motion.div
+            id="projects-grid"
             key="grid"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            aria-live="polite"
+            aria-atomic="true"
           >
             {filteredProjects.map((project, index) => (
               <motion.div
