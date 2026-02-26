@@ -1,7 +1,14 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { getProjectById } from "@/lib/data";
+import { getProjectById, projects } from "@/lib/data";
+
+// Generate static params for all projects (required for static export)
+export function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.id,
+  }));
+}
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
