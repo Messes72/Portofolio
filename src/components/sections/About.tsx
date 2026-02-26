@@ -1,86 +1,174 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect } from "react";
-import { useTypewriter } from "@/hooks/useTypewriter";
-import { Badge } from "@/components/ui/badge";
+import { useRef, useState, useEffect } from "react";
+import { AnimatedSection } from "@/components/animations/AnimatedSection";
 import {
-  GraduationCap,
-  Briefcase,
+  Swords,
+  Users,
+  Brain,
+  Star,
   MapPin,
-  Mail,
-  Github,
-  Award,
-  Code2,
+  Trophy,
+  Scroll,
+  Shield,
+  Crown,
+  Gem,
 } from "lucide-react";
 
-const softSkills = [
-  { name: "Hardworking", color: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20" },
-  { name: "Team Player", color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20" },
-  { name: "Good Communication", color: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20" },
-  { name: "Eager to Learn", color: "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20" },
+// RPG Stats configuration
+const rpgStats = [
+  { name: "STR", label: "Hardworking", value: 85, color: "bg-red-500", icon: Swords },
+  { name: "INT", label: "Communication", value: 78, color: "bg-blue-500", icon: Brain },
+  { name: "CHA", label: "Team Player", value: 82, color: "bg-purple-500", icon: Users },
+  { name: "XP", label: "Eager to Learn", value: 92, color: "bg-green-500", icon: Star },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
+// Quests (Education & Experience)
+const quests = [
+  {
+    id: 1,
+    title: "Universitas Kristen Petra",
+    subtitle: "Informatika Degree",
+    details: "GPA: 3.38/4.00 | Graduating 2026",
+    icon: Scroll,
+    type: "education",
+    completed: true,
   },
+  {
+    id: 2,
+    title: "PT Cross Network Indonesia",
+    subtitle: "Internship Quest",
+    details: "Jan - Jun 2025 | Hospital Management App",
+    icon: Shield,
+    type: "experience",
+    completed: true,
+  },
+];
+
+// Pixel border style component
+const PixelBorder = ({ children, className = "", color = "cyan" }: { children: React.ReactNode; className?: string; color?: "cyan" | "purple" | "gold" }) => {
+  const colorMap = {
+    cyan: "border-cyan-400 shadow-[4px_4px_0px_0px_rgba(34,211,238,0.5)]",
+    purple: "border-purple-400 shadow-[4px_4px_0px_0px_rgba(192,132,252,0.5)]",
+    gold: "border-yellow-400 shadow-[4px_4px_0px_0px_rgba(250,204,21,0.5)]",
+  };
+
+  return (
+    <div className={`border-4 ${colorMap[color]} ${className}`}>
+      {children}
+    </div>
+  );
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    },
-  },
+// Pixel progress bar component
+const PixelBar = ({ value, max = 100, color = "bg-green-500", height = "h-4" }: { value: number; max?: number; color?: string; height?: string }) => {
+  const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+
+  return (
+    <div className={`relative ${height} w-full border-2 border-foreground/20 bg-muted`}>
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: `${percentage}%` }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+        className={`h-full ${color}`}
+        style={{
+          boxShadow: `inset -2px -2px 0px 0px rgba(0,0,0,0.3), inset 2px 2px 0px 0px rgba(255,255,255,0.3)`,
+        }}
+      />
+    </div>
+  );
 };
 
-const photoVariants = {
-  hidden: { opacity: 0, scale: 0.9, x: -50 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    },
-  },
+// Stat Item with counting animation
+const StatItem = ({ stat, index }: { stat: typeof rpgStats[0]; index: number }) => {
+  const [displayValue, setDisplayValue] = useState(0);
+  const Icon = stat.icon;
+
+  useEffect(() => {
+    const duration = 1000;
+    const steps = 30;
+    const increment = stat.value / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= stat.value) {
+        setDisplayValue(stat.value);
+        clearInterval(timer);
+      } else {
+        setDisplayValue(Math.floor(current));
+      }
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [stat.value]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.4 }}
+      className="group"
+    >
+      <div className="flex items-center gap-3 mb-2">
+        <div className={`flex h-10 w-10 items-center justify-center border-2 border-foreground/20 ${stat.color.replace('bg-', 'bg-')}/20`}>
+          <Icon className={`h-5 w-5 ${stat.color.replace('bg-', 'text-')}`} />
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-sm tracking-wider text-foreground">{stat.name}</span>
+            <span className="font-mono text-lg font-bold text-yellow-500">{displayValue}</span>
+          </div>
+          <span className="text-xs text-muted-foreground">{stat.label}</span>
+        </div>
+      </div>
+      <PixelBar value={displayValue} color={stat.color} height="h-3" />
+    </motion.div>
+  );
+};
+
+// Quest Item
+const QuestItem = ({ quest, index }: { quest: typeof quests[0]; index: number }) => {
+  const Icon = quest.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.15, duration: 0.4 }}
+      className="relative border-2 border-foreground/10 bg-card p-4 hover:border-primary/50 transition-colors"
+    >
+      {/* Quest complete badge */}
+      <div className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center bg-yellow-500 border-2 border-foreground">
+        <Trophy className="h-3 w-3 text-black" />
+      </div>
+
+      <div className="flex items-start gap-3">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center border-2 border-primary/50 bg-primary/10">
+          <Icon className="h-6 w-6 text-primary" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className="font-bold text-foreground text-sm">{quest.title}</h4>
+          <p className="text-xs text-yellow-500 font-medium">{quest.subtitle}</p>
+          <p className="text-xs text-muted-foreground mt-1">{quest.details}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
 };
 
 export function About() {
   const sectionRef = useRef<HTMLElement>(null);
-  const photoRef = useRef<HTMLDivElement>(null);
+  const avatarRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
-    target: photoRef,
+    target: avatarRef,
     offset: ["start end", "end start"],
   });
 
-  const photoScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1.05, 0.95]);
-  const photoY = useTransform(scrollYProgress, [0, 1], [20, -20]);
-
-  const { displayText, startTyping } = useTypewriter({
-    text: "Hardworking • Team Player • Eager to Learn",
-    speed: 80,
-    delay: 500,
-  });
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      startTyping();
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [startTyping]);
+  const avatarY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   return (
     <section
@@ -88,214 +176,235 @@ export function About() {
       id="about"
       className="relative w-full overflow-hidden bg-background py-20 md:py-32"
     >
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute -right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-secondary/5 blur-3xl" />
-      </div>
+      {/* Pixel grid background */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 4px,
+          currentColor 4px,
+          currentColor 5px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 4px,
+          currentColor 4px,
+          currentColor 5px
+        )`,
+      }} />
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-            About <span className="text-primary">Me</span>
-          </h2>
-          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-primary to-secondary" />
-        </motion.div>
-
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
-          {/* Photo Section */}
-          <motion.div
-            ref={photoRef}
-            variants={photoVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="relative mx-auto max-w-md lg:max-w-none"
-          >
+        {/* Section Header - Game Style */}
+        <AnimatedSection className="mb-12">
+          <div className="text-center">
             <motion.div
-              style={{ scale: photoScale, y: photoY }}
-              className="relative aspect-square overflow-hidden rounded-3xl border-2 border-border/50 bg-muted shadow-2xl"
-            >
-              {/* Placeholder for profile photo */}
-              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted to-muted/50">
-                <div className="text-center">
-                  <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-primary/10">
-                    <svg
-                      className="h-12 w-12 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-muted-foreground">Profile Photo</p>
-                </div>
-              </div>
-
-              {/* Decorative elements */}
-              <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/20 blur-2xl" />
-              <div className="absolute -bottom-4 -left-4 h-24 w-24 rounded-full bg-secondary/20 blur-2xl" />
-            </motion.div>
-
-            {/* Experience Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="absolute -bottom-4 -right-4 rounded-2xl border border-border bg-card p-4 shadow-xl dark:bg-card/90"
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 border-4 border-cyan-400 bg-card px-6 py-3 shadow-[4px_4px_0px_0px_rgba(34,211,238,0.5)]"
             >
-              <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                  <Briefcase className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground">6+</p>
-                  <p className="text-xs text-muted-foreground">Months Experience</p>
-                </div>
-              </div>
+              <Crown className="h-6 w-6 text-yellow-500" />
+              <h2 className="text-2xl font-bold tracking-wider text-foreground uppercase">
+                Player Profile
+              </h2>
+              <Crown className="h-6 w-6 text-yellow-500" />
             </motion.div>
-          </motion.div>
+            <p className="mt-4 text-sm text-muted-foreground uppercase tracking-widest">
+              Press START to view stats
+            </p>
+          </div>
+        </AnimatedSection>
 
-          {/* Bio Section */}
+        {/* RPG Character Screen Layout */}
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+          {/* Left Column - Avatar & Basic Info */}
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            ref={avatarRef}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            {/* Name & Role */}
-            <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold text-foreground sm:text-3xl">
-                Mario Claudius Hadinata
-              </h3>
-              <p className="mt-1 text-lg text-muted-foreground">
-                Full Stack Developer
-              </p>
-            </motion.div>
+            {/* Player Avatar Frame */}
+            <PixelBorder color="gold" className="relative">
+              <div className="bg-card p-4">
+                {/* Player Label */}
+                <div className="mb-4 flex items-center justify-between border-b-2 border-foreground/10 pb-2">
+                  <span className="text-xs font-bold text-cyan-400 tracking-wider">PLAYER 1</span>
+                  <div className="flex items-center gap-1">
+                    <Gem className="h-4 w-4 text-purple-500" />
+                    <span className="text-xs text-muted-foreground">READY</span>
+                  </div>
+                </div>
 
-            {/* Typewriter Tagline */}
-            <motion.div
-              variants={itemVariants}
-              className="min-h-[1.75rem]"
-            >
-              <p className="text-primary font-medium">
-                {displayText}
-                <motion.span
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-                  className="inline-block h-5 w-0.5 bg-primary ml-1"
-                />
-              </p>
-            </motion.div>
+                {/* Avatar Display */}
+                <motion.div
+                  style={{ y: avatarY }}
+                  className="relative aspect-square overflow-hidden border-4 border-foreground/20 bg-gradient-to-br from-muted to-muted/50"
+                >
+                  {/* Pixel character placeholder */}
+                  <div className="flex h-full w-full flex-col items-center justify-center">
+                    {/* Simple pixel art style avatar using divs */}
+                    <div className="relative">
+                      {/* Head */}
+                      <div className="w-16 h-16 bg-primary border-4 border-foreground relative">
+                        {/* Eyes */}
+                        <div className="absolute top-4 left-2 w-3 h-3 bg-foreground" />
+                        <div className="absolute top-4 right-2 w-3 h-3 bg-foreground" />
+                        {/* Smile */}
+                        <div className="absolute bottom-3 left-4 w-6 h-2 bg-foreground" />
+                      </div>
+                      {/* Body */}
+                      <div className="w-20 h-12 bg-secondary border-4 border-foreground -ml-2 mt-0" />
+                      {/* Arms */}
+                      <div className="absolute top-16 -left-4 w-4 h-10 bg-primary border-4 border-foreground" />
+                      <div className="absolute top-16 -right-4 w-4 h-10 bg-primary border-4 border-foreground" />
+                    </div>
+                    <p className="mt-6 text-xs text-muted-foreground font-mono">LV. 5 DEVELOPER</p>
+                  </div>
 
-            {/* Location & Contact */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground"
-            >
-              <span className="flex items-center gap-1.5">
-                <MapPin className="h-4 w-4 text-primary" />
-                Surabaya, Indonesia
-              </span>
-              <a
-                href="mailto:marioclaudius10@gmail.com"
-                className="flex items-center gap-1.5 transition-colors hover:text-primary"
-              >
-                <Mail className="h-4 w-4" />
-                marioclaudius10@gmail.com
-              </a>
-              <a
-                href="https://github.com/Messes72"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 transition-colors hover:text-primary"
-              >
-                <Github className="h-4 w-4" />
-                Messes72
-              </a>
-            </motion.div>
+                  {/* Scanlines effect */}
+                  <div className="absolute inset-0 pointer-events-none opacity-10" style={{
+                    background: `repeating-linear-gradient(
+                      0deg,
+                      transparent,
+                      transparent 2px,
+                      rgba(0,0,0,0.3) 2px,
+                      rgba(0,0,0,0.3) 4px
+                    )`,
+                  }} />
+                </motion.div>
+
+                {/* HP/MP Bars */}
+                <div className="mt-4 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-red-500 w-8">HP</span>
+                    <PixelBar value={100} max={100} color="bg-gradient-to-r from-red-500 to-red-400" height="h-4" />
+                    <span className="text-xs font-mono text-red-500">100/100</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-blue-500 w-8">MP</span>
+                    <PixelBar value={85} max={100} color="bg-gradient-to-r from-blue-500 to-blue-400" height="h-4" />
+                    <span className="text-xs font-mono text-blue-500">85/100</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-green-500 w-8">XP</span>
+                    <PixelBar value={65} max={100} color="bg-gradient-to-r from-green-500 to-green-400" height="h-4" />
+                    <span className="text-xs font-mono text-green-500">65%</span>
+                  </div>
+                </div>
+              </div>
+            </PixelBorder>
+
+            {/* Character Info Card */}
+            <PixelBorder color="purple" className="bg-card">
+              <div className="p-4">
+                <h3 className="text-xs font-bold text-purple-400 mb-4 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
+                  Character Data
+                </h3>
+                <div className="space-y-3 font-mono text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">NAME:</span>
+                    <span className="font-bold text-foreground">MARIO CLAUDIUS HADINATA</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">CLASS:</span>
+                    <span className="font-bold text-yellow-500">FULL-STACK DEV</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">LEVEL:</span>
+                    <span className="font-bold text-cyan-400">LV. 5</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">LOCATION:</span>
+                    <span className="font-bold text-foreground flex items-center gap-1">
+                      <MapPin className="h-3 w-3 text-primary" />
+                      SURABAYA, ID
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </PixelBorder>
+          </motion.div>
+
+          {/* Right Column - Stats & Quests */}
+          <div className="space-y-6">
+            {/* Stats Panel */}
+            <PixelBorder color="cyan" className="bg-card">
+              <div className="p-4">
+                <h3 className="text-xs font-bold text-cyan-400 mb-6 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
+                  Base Stats
+                </h3>
+                <div className="space-y-5">
+                  {rpgStats.map((stat, index) => (
+                    <StatItem key={stat.name} stat={stat} index={index} />
+                  ))}
+                </div>
+              </div>
+            </PixelBorder>
+
+            {/* Quests Completed Panel */}
+            <PixelBorder color="gold" className="bg-card">
+              <div className="p-4">
+                <h3 className="text-xs font-bold text-yellow-500 mb-4 uppercase tracking-wider border-b-2 border-foreground/10 pb-2 flex items-center gap-2">
+                  <Trophy className="h-4 w-4" />
+                  Quests Completed
+                </h3>
+                <div className="space-y-4">
+                  {quests.map((quest, index) => (
+                    <QuestItem key={quest.id} quest={quest} index={index} />
+                  ))}
+                </div>
+              </div>
+            </PixelBorder>
 
             {/* Bio Description */}
-            <motion.div variants={itemVariants} className="space-y-4 text-muted-foreground">
-              <p>
-                A passionate Informatics student at Universitas Kristen Petra with a strong
-                foundation in web development. Currently maintaining a GPA of{" "}
-                <span className="font-semibold text-foreground">3.38/4.00</span>{" "}
-                and expected to graduate in 2026.
-              </p>
-              <p>
-                Recently completed a 6-month internship at{" "}
-                <span className="font-semibold text-foreground">PT Cross Network Indonesia</span>{" "}
-                (Jan - Jun 2025), where I contributed to developing a Hospital Management
-                Application using <span className="text-primary">Svelte</span> and{" "}
-                <span className="text-primary">Tailwind CSS</span>.
-              </p>
-            </motion.div>
-
-            {/* Education */}
-            <motion.div
-              variants={itemVariants}
-              className="flex items-start gap-3 rounded-xl border border-border bg-muted/50 p-4"
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <GraduationCap className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <p className="font-semibold text-foreground">Universitas Kristen Petra</p>
-                <p className="text-sm text-muted-foreground">Informatika</p>
-                <p className="text-xs text-muted-foreground">Expected Graduation: 2026 • GPA: 3.38/4.00</p>
-              </div>
-            </motion.div>
-
-            {/* Experience Highlight */}
-            <motion.div
-              variants={itemVariants}
-              className="flex items-start gap-3 rounded-xl border border-border bg-muted/50 p-4"
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/10">
-                <Code2 className="h-5 w-5 text-secondary" />
-              </div>
-              <div>
-                <p className="font-semibold text-foreground">PT Cross Network Indonesia</p>
-                <p className="text-sm text-muted-foreground">Internship (Jan - Jun 2025)</p>
-                <p className="text-xs text-muted-foreground">
-                  Built Hospital Management App with Svelte + Tailwind
+            <PixelBorder color="purple" className="bg-card">
+              <div className="p-4">
+                <h3 className="text-xs font-bold text-purple-400 mb-3 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
+                  Character Bio
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  A passionate Full-Stack Developer currently grinding through Informatics at
+                  Universitas Kristen Petra. Recently completed the Internship Quest at{" "}
+                  <span className="text-foreground font-semibold">PT Cross Network Indonesia</span>,
+                  where I built Hospital Management systems using Svelte & Tailwind CSS.
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                  Always looking for new side quests to level up my skills!
                 </p>
               </div>
-            </motion.div>
-
-            {/* Soft Skills */}
-            <motion.div variants={itemVariants}>
-              <p className="mb-3 text-sm font-medium text-muted-foreground">Soft Skills</p>
-              <div className="flex flex-wrap gap-2">
-                {softSkills.map((skill) => (
-                  <Badge
-                    key={skill.name}
-                    variant="outline"
-                    className={`${skill.color} px-3 py-1.5 text-xs font-medium transition-all hover:scale-105`}
-                  >
-                    {skill.name}
-                  </Badge>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
+            </PixelBorder>
+          </div>
         </div>
+
+        {/* Bottom decoration - decorative pixels */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-12 flex justify-center gap-2"
+        >
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.1,
+              }}
+              className="w-3 h-3 bg-primary/50"
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
