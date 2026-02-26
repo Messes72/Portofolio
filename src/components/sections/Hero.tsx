@@ -179,7 +179,7 @@ function FloatingShape({
 function AnimatedGradient() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Primary gradient orb */}
+      {/* Primary gradient orb - blue toned */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/30 to-secondary/20 blur-3xl"
         animate={{
