@@ -3,7 +3,7 @@ import projectsData from './projects.json';
 import skillsData from './skills.json';
 
 // Export typed data
-export const projects: Project[] = projectsData;
+export const projects = projectsData as Project[];
 export const skills: SkillsData = skillsData;
 
 // Helper functions

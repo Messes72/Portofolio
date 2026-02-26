@@ -30,7 +30,7 @@ function TextReveal({
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -39,7 +39,7 @@ function TextReveal({
       opacity: 0,
       y: 20,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         damping: 12,
         stiffness: 100,
       },
@@ -80,7 +80,7 @@ function MagneticButton({
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
     >
       <Link href={href}>
         <Button
