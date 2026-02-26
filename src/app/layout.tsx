@@ -15,9 +15,17 @@ export const metadata: Metadata = {
   authors: [{ name: "Mario Claudius Hadinata" }],
   openGraph: {
     title: "Mario Claudius Hadinata | Full Stack Developer",
-    description: "Portfolio website showcasing web development projects and skills.",
+    description: "Portfolio website showcasing web development projects and skills. Experienced in React, Next.js, TypeScript, and modern web technologies.",
     type: "website",
+    images: ["/og-image.jpg"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mario Claudius Hadinata | Full Stack Developer",
+    description: "Portfolio website showcasing web development projects and skills. Experienced in React, Next.js, TypeScript, and modern web technologies.",
+    images: ["/og-image.jpg"],
+  },
+  robots: "index, follow",
 };
 
 export default function RootLayout({
