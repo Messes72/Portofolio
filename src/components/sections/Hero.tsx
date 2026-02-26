@@ -280,7 +280,7 @@ export function Hero() {
       {/* Animated gradient background */}
       <AnimatedGradient />
 
-      {/* Floating geometric shapes */}
+      {/* Floating geometric shapes - circles, squares, triangles with parallax effect */}
       <div className="absolute inset-0 pointer-events-none">
         <FloatingShape
           type="circle"
