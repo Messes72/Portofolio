@@ -1,16 +1,254 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, Github, MapPin, Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { motion, AnimatePresence } from "framer-motion"
+import { Mail, Github, MapPin, Radio, Signal, Satellite, Zap } from "lucide-react"
+import { PixelCard } from "@/components/pixel/PixelCard"
+import { PixelButton } from "@/components/pixel/PixelButton"
+import { PixelBadge } from "@/components/pixel/PixelBadge"
+import { cn } from "@/lib/utils"
 
 const contactInfo = {
   email: "marioclaudius10@gmail.com",
   github: "https://github.com/Messes72",
   location: "Surabaya, Indonesia",
+}
+
+// Pixel art styled communication channel
+function CommChannel({
+  icon: Icon,
+  label,
+  value,
+  href,
+  delay = 0,
+}: {
+  icon: React.ElementType
+  label: string
+  value: string
+  href?: string
+  delay?: number
+}) {
+  const content = (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.3 }}
+      className={cn(
+        "flex items-center gap-4 p-4",
+        "bg-[#0a0a0f] border-2 border-[#22c55e]/50",
+        "hover:border-[#22c55e] hover:bg-[#0f1f0f]",
+        "transition-colors duration-200"
+      )}
+      style={{
+        boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(34,197,94,0.1)",
+      }}
+    >
+      {/* Pixel icon container */}
+      <div className="relative flex-shrink-0">
+        <div
+          className="flex h-12 w-12 items-center justify-center bg-[#1a1a2e]"
+          style={{
+            boxShadow: "-2px 0 0 0 #22c55e, 2px 0 0 0 #22c55e, 0 -2px 0 0 #22c55e, 0 2px 0 0 #22c55e",
+          }}
+        >
+          <Icon className="h-5 w-5 text-[#22c55e]" />
+        </div>
+        {/* Glow effect */}
+        <div className="absolute inset-0 animate-pulse opacity-50">
+          <div
+            className="h-full w-full"
+            style={{
+              boxShadow: "0 0 10px #22c55e, 0 0 20px #22c55e",
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-2">
+          <PixelBadge variant="green" size="sm" animate={false}>
+            {label}
+          </PixelBadge>
+        </div>
+        <p className="mt-1 truncate font-vt323 text-lg text-[#22c55e] crt-glow">{value}</p>
+      </div>
+
+      {/* Signal indicator */}
+      <div className="flex flex-col items-end gap-0.5">
+        {[1, 2, 3].map((bar) => (
+          <motion.div
+            key={bar}
+            className="w-1 bg-[#22c55e]"
+            style={{ height: `${bar * 4}px` }}
+            animate={{ opacity: [0.3, 1, 0.3] }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              delay: bar * 0.2,
+            }}
+          />
+        ))}
+      </div>
+    </motion.div>
+  )
+
+  if (href) {
+    return (
+      <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="block">
+        {content}
+      </a>
+    )
+  }
+
+  return content
+}
+
+// Blinking cursor component
+function BlinkingCursor() {
+  return (
+    <motion.span
+      className="inline-block w-2 h-4 bg-[#22c55e] ml-1"
+      animate={{ opacity: [1, 0] }}
+      transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+    />
+  )
+}
+
+// Terminal input field
+function TerminalInput({
+  label,
+  name,
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  required = false,
+  isTextarea = false,
+}: {
+  label: string
+  name: string
+  type?: string
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  placeholder: string
+  required?: boolean
+  isTextarea?: boolean
+}) {
+  const baseClasses = cn(
+    "w-full bg-[#0a0a0f] border-2 border-[#22c55e]/30",
+    "text-[#22c55e] font-vt323 text-lg",
+    "focus:border-[#22c55e] focus:outline-none",
+    "placeholder:text-[#22c55e]/30",
+    "transition-colors duration-200"
+  )
+
+  return (
+    <div className="space-y-2">
+      <label className="flex items-center font-pixel text-xs text-[#22c55e]/70 uppercase tracking-wider">
+        <span className="text-[#22c55e]">&gt;</span>
+        <span className="ml-2">{label}:</span>
+        {!value && <BlinkingCursor />}
+      </label>
+
+      {isTextarea ? (
+        <textarea
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          required={required}
+          rows={5}
+          className={cn(baseClasses, "p-3 resize-none", "focus:shadow-[0_0_10px_rgba(34,197,94,0.3)]")}
+          style={{
+            boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(34,197,94,0.05)",
+          }}
+        />
+      ) : (
+        <input
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          required={required}
+          className={cn(baseClasses, "h-12 px-3", "focus:shadow-[0_0_10px_rgba(34,197,94,0.3)]")}
+          style={{
+            boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(34,197,94,0.05)",
+          }}
+        />
+      )}
+    </div>
+  )
+}
+
+// Signal wave animation
+function SignalWaves() {
+  return (
+    <div className="absolute right-4 top-4 flex items-center gap-1">
+      {[0, 1, 2, 3].map((i) => (
+        <motion.div
+          key={i}
+          className="w-0.5 bg-[#22c55e]"
+          style={{ height: `${(i + 1) * 6}px` }}
+          animate={{
+            opacity: [0.2, 1, 0.2],
+            scaleY: [0.8, 1.2, 0.8],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            delay: i * 0.15,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+// Pixel satellite decoration
+function PixelSatellite({ className }: { className?: string }) {
+  return (
+    <motion.div
+      className={cn("absolute", className)}
+      animate={{
+        y: [0, -10, 0],
+        rotate: [0, 5, -5, 0],
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    >
+      <div className="relative">
+        {/* Satellite body */}
+        <div
+          className="w-8 h-8 bg-[#4a4a6a]"
+          style={{
+            boxShadow: "-2px 0 0 0 #2a2a4a, 2px 0 0 0 #2a2a4a, 0 -2px 0 0 #2a2a4a, 0 2px 0 0 #2a2a4a",
+          }}
+        />
+        {/* Solar panels */}
+        <div
+          className="absolute top-1 -left-4 w-3 h-6 bg-[#1e3a5f]"
+          style={{
+            boxShadow: "-1px 0 0 0 #0d2137, 1px 0 0 0 #0d2137, 0 -1px 0 0 #0d2137, 0 1px 0 0 #0d2137",
+          }}
+        />
+        <div
+          className="absolute top-1 -right-4 w-3 h-6 bg-[#1e3a5f]"
+          style={{
+            boxShadow: "-1px 0 0 0 #0d2137, 1px 0 0 0 #0d2137, 0 -1px 0 0 #0d2137, 0 1px 0 0 #0d2137",
+          }}
+        />
+        {/* Antenna */}
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0.5 h-3 bg-[#8a8a9a]" />
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#ef4444] animate-pulse" />
+      </div>
+    </motion.div>
+  )
 }
 
 export function Contact() {
@@ -26,209 +264,304 @@ export function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // Simulate transmission delay
+    await new Promise((resolve) => setTimeout(resolve, 1500))
 
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData({ name: "", email: "", message: "" })
 
-    // Reset success message after 3 seconds
-    setTimeout(() => setIsSubmitted(false), 3000)
+    // Reset success message after 4 seconds
+    setTimeout(() => setIsSubmitted(false), 4000)
   }
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   return (
-    <section id="contact" className="w-full py-16 lg:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative w-full py-16 lg:py-24 overflow-hidden">
+      {/* Retro grid background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            linear-gradient(to right, rgba(34, 197, 94, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(34, 197, 94, 0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      {/* Scanlines overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          background: `
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 2px,
+              rgba(0, 0, 0, 0.3) 2px,
+              rgba(0, 0, 0, 0.3) 4px
+            )
+          `,
+        }}
+      />
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Get In Touch
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Have a project in mind? Let&apos;s work together to bring your ideas to life.
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12 text-center"
+        >
+          {/* Transmission header */}
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Radio className="h-6 w-6 text-[#22c55e] animate-pulse" />
+            <h2 className="font-pixel text-2xl sm:text-3xl text-[#22c55e] crt-glow tracking-wider">
+              TRANSMISSION
+            </h2>
+            <Radio className="h-6 w-6 text-[#22c55e] animate-pulse" />
+          </div>
+
+          {/* Subtitle with blinking cursor */}
+          <p className="font-vt323 text-xl text-[#22c55e]/70">
+            Send a message to Player 1
+            <BlinkingCursor />
           </p>
-        </div>
+
+          {/* Decorative line */}
+          <div className="mt-6 flex items-center justify-center gap-2">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#22c55e]/50" />
+            <Signal className="h-4 w-4 text-[#22c55e]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#22c55e]/50" />
+          </div>
+        </motion.div>
 
         <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
-          {/* Contact Info Card */}
-          <Card className="h-fit">
-            <CardHeader>
-              <CardTitle>Contact Information</CardTitle>
-              <CardDescription>
-                Feel free to reach out through any of these channels.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Email */}
-              <a
+          {/* Communication Channels Panel */}
+          <PixelCard
+            variant="secondary"
+            showScanlines
+            header={
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Satellite className="h-4 w-4 text-[#22c55e]" />
+                  <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider">
+                    Comm Channels
+                  </span>
+                </div>
+                <PixelBadge variant="green" size="sm" animate={false}>
+                  ONLINE
+                </PixelBadge>
+              </div>
+            }
+          >
+            <div className="space-y-4">
+              <CommChannel
+                icon={Mail}
+                label="EMAIL"
+                value={contactInfo.email}
                 href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                  <Mail className="h-5 w-5 text-primary" />
-                </div>
-                <span>{contactInfo.email}</span>
-              </a>
-
-              {/* GitHub */}
-              <a
+                delay={0.1}
+              />
+              <CommChannel
+                icon={Github}
+                label="GITHUB"
+                value="github.com/Messes72"
                 href={contactInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-foreground"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                  <Github className="h-5 w-5 text-primary" />
-                </div>
-                <span>github.com/Messes72</span>
-              </a>
+                delay={0.2}
+              />
+              <CommChannel
+                icon={MapPin}
+                label="LOCATION"
+                value={contactInfo.location}
+                delay={0.3}
+              />
+            </div>
 
-              {/* Location */}
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                  <MapPin className="h-5 w-5 text-primary" />
-                </div>
-                <span>{contactInfo.location}</span>
-              </div>
-
-              {/* Social Links */}
-              <div className="border-t pt-6">
-                <p className="mb-4 text-sm font-medium text-muted-foreground">
-                  Follow me on
-                </p>
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    asChild
-                    className="h-10 w-10 rounded-full"
-                  >
-                    <a
-                      href={contactInfo.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub Profile"
-                    >
-                      <Github className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    asChild
-                    className="h-10 w-10 rounded-full"
-                  >
-                    <a
-                      href={`mailto:${contactInfo.email}`}
-                      aria-label="Send Email"
-                    >
-                      <Mail className="h-4 w-4" />
-                    </a>
-                  </Button>
+            {/* Connection status */}
+            <div className="mt-6 pt-4 border-t-2 border-[#22c55e]/20">
+              <div className="flex items-center justify-between font-vt323 text-sm">
+                <span className="text-[#22c55e]/60">SIGNAL STRENGTH</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#22c55e]">98%</span>
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <div
+                        key={i}
+                        className="w-1.5 bg-[#22c55e]"
+                        style={{ height: `${i * 3}px` }}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              <div className="mt-2 flex items-center justify-between font-vt323 text-sm">
+                <span className="text-[#22c55e]/60">LATENCY</span>
+                <span className="text-[#22c55e]">24ms</span>
+              </div>
+            </div>
 
-          {/* Contact Form Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Send a Message</CardTitle>
-              <CardDescription>
-                Fill out the form below and I&apos;ll get back to you as soon as possible.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="h-11"
-                  />
+            {/* Satellite decoration */}
+            <PixelSatellite className="right-4 bottom-4 opacity-30" />
+          </PixelCard>
+
+          {/* Transmission Console */}
+          <PixelCard
+            variant="secondary"
+            showScanlines
+            className="relative"
+            header={
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Zap className="h-4 w-4 text-[#22c55e]" />
+                  <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider">
+                    Transmission Console
+                  </span>
                 </div>
+                <SignalWaves />
+              </div>
+            }
+          >
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <TerminalInput
+                label="SENDER_NAME"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Enter your callsign..."
+                required
+              />
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="your.email@example.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="h-11"
-                  />
-                </div>
+              <TerminalInput
+                label="SENDER_EMAIL"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="your.email@network.com"
+                required
+              />
 
-                <div className="space-y-2">
-                  <label
-                    htmlFor="message"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell me about your project..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="resize-none"
-                  />
-                </div>
+              <TerminalInput
+                label="TRANSMISSION_DATA"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Enter message payload..."
+                required
+                isTextarea
+              />
 
-                <Button
+              {/* Transmit button */}
+              <div className="pt-2">
+                <PixelButton
                   type="submit"
+                  variant="yellow"
+                  size="lg"
                   disabled={isSubmitting}
                   className="w-full"
                 >
-                  {isSubmitting ? (
-                    "Sending..."
-                  ) : (
-                    <>
-                      <Send className="mr-2 h-4 w-4" />
-                      Send Message
-                    </>
-                  )}
-                </Button>
+                  <AnimatePresence mode="wait">
+                    {isSubmitting ? (
+                      <motion.span
+                        key="sending"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <span className="animate-pulse">TRANSMITTING</span>
+                        <motion.span
+                          animate={{ opacity: [0, 1, 0] }}
+                          transition={{ duration: 0.5, repeat: Infinity }}
+                        >
+                          ...
+                        </motion.span>
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="transmit"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <Radio className="h-4 w-4" />
+                        TRANSMIT SIGNAL
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </PixelButton>
+              </div>
 
+              {/* Success message */}
+              <AnimatePresence>
                 {isSubmitted && (
-                  <p className="text-center text-sm text-green-600 dark:text-green-400">
-                    Message sent successfully! I&apos;ll get back to you soon.
-                  </p>
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="text-center"
+                  >
+                    <div
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#22c55e]/20 border-2 border-[#22c55e]"
+                      style={{
+                        boxShadow: "0 0 20px rgba(34, 197, 94, 0.3), inset 0 0 20px rgba(34, 197, 94, 0.1)",
+                      }}
+                    >
+                      <Signal className="h-4 w-4 text-[#22c55e]" />
+                      <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider">
+                        TRANSMISSION COMPLETE
+                      </span>
+                    </div>
+                  </motion.div>
                 )}
-              </form>
-            </CardContent>
-          </Card>
+              </AnimatePresence>
+
+              {/* Console footer */}
+              <div className="pt-4 border-t-2 border-[#22c55e]/20">
+                <div className="flex items-center justify-between font-vt323 text-xs text-[#22c55e]/50">
+                  <span>SECURE CHANNEL</span>
+                  <span>ENC: AES-256</span>
+                  <span>STATUS: READY</span>
+                </div>
+              </div>
+            </form>
+          </PixelCard>
         </div>
+
+        {/* Bottom decorative elements */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-12 flex items-center justify-center gap-4"
+        >
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#22c55e]/30 to-transparent" />
+          <div className="flex gap-1">
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-2 h-2 bg-[#22c55e]/40"
+                animate={{
+                  opacity: [0.3, 1, 0.3],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
+          </div>
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#22c55e]/30 to-transparent" />
+        </motion.div>
       </div>
     </section>
   )
