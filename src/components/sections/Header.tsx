@@ -28,6 +28,17 @@ export function Header() {
   const [activeSection, setActiveSection] = useState("#");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Handle Escape key to close mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
   // Handle scroll for background blur and active section
   useEffect(() => {
     const handleScroll = () => {
@@ -68,16 +79,26 @@ export function Header() {
   };
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-background/80 backdrop-blur-md border-b shadow-sm"
-          : "bg-transparent"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center justify-between h-16">
+    <>
+      {/* Skip to content link for keyboard navigation */}
+      <a
+        href="#main-content"
+        className="fixed top-0 left-0 z-[100] -translate-y-full focus:translate-y-0 bg-primary text-primary-foreground px-4 py-2 text-sm font-medium transition-transform focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+        onClick={(e) => handleNavClick(e, "#about")}
+      >
+        Skip to content
+      </a>
+      <header
+        role="banner"
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled
+            ? "bg-background/80 backdrop-blur-md border-b shadow-sm"
+            : "bg-transparent"
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-between h-16" role="navigation" aria-label="Main navigation">
           {/* Logo */}
           <Link
             href="/"
