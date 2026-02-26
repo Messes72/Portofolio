@@ -60,6 +60,7 @@ export function AnimatedSection({
         delay: delay,
       }}
       className={className}
+      style={{ willChange: "transform, opacity" }}
     >
       {children}
     </motion.div>

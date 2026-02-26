@@ -1,7 +1,45 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getProjectById, projects } from "@/lib/data";
+
+// Generate metadata for each project page
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectById(slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found | Mario Claudius Hadinata",
+      description: "The requested project could not be found.",
+    };
+  }
+
+  return {
+    title: `${project.title} | Mario Claudius Hadinata`,
+    description: project.tagline,
+    keywords: [...project.techStack, project.category, "portfolio", "project"],
+    authors: [{ name: "Mario Claudius Hadinata" }],
+    openGraph: {
+      title: `${project.title} | Mario Claudius Hadinata`,
+      description: project.tagline,
+      type: "article",
+      images: [
+        {
+          url: project.thumbnail,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.tagline,
+      images: [project.thumbnail],
+    },
+  };
+}
 
 // Generate static params for all projects (required for static export)
 export function generateStaticParams() {

@@ -83,7 +83,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div className="relative aspect-video overflow-hidden">
             <Image
               src={project.thumbnail}
-              alt={project.title}
+              alt={`${project.title} - ${project.tagline}`}
               fill
               className="object-cover transition-transform duration-500 ease-out
                 group-hover:scale-105"
@@ -95,9 +95,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full
                   bg-background/90 backdrop-blur-sm border border-border/50
                   ${status.textColor}`}
+                aria-label={`Project status: ${status.label}`}
               >
                 <span
                   className={`w-2 h-2 rounded-full ${status.dotColor}`}
+                  aria-hidden="true"
                 />
                 <span className="text-xs font-medium">{status.label}</span>
               </div>
@@ -162,7 +164,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div className="relative aspect-video overflow-hidden">
             <Image
               src={project.thumbnail}
-              alt={project.title}
+              alt={`${project.title} - ${project.tagline}`}
               fill
               className="object-cover transition-transform duration-500 ease-out
                 group-hover:scale-110"
