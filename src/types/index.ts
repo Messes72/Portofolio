@@ -34,4 +34,5 @@ export interface SkillsData {
   backend: Skill[];
   mobile: Skill[];
   tools: Skill[];
+  languages: Skill[];
 }
