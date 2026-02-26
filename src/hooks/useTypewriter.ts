@@ -1,3 +1,8 @@
+/**
+ * Custom hook for typewriter text animation effect
+ * Supports configurable speed, delay, and looping
+ */
+
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
