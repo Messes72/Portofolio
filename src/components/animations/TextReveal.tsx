@@ -18,7 +18,7 @@ const containerVariants = {
       delayChildren: 0,
     },
   },
-};
+} as const;
 
 const childVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -27,10 +27,10 @@ const childVariants = {
     y: 0,
     transition: {
       duration: 0.3,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   },
-};
+} as const;
 
 export function TextReveal({
   text,
