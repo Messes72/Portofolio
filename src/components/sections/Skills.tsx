@@ -2,15 +2,14 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import skillsData from "@/lib/data/skills.json";
 import {
-  Code2,
-  Server,
-  Smartphone,
-  Wrench,
-  Languages,
-  type LucideIcon,
+  Sword,
+  Shield,
+  Zap,
+  Backpack,
+  Brain,
+  Star,
 } from "lucide-react";
 
 interface Skill {
@@ -22,129 +21,204 @@ interface Skill {
 interface SkillCategory {
   key: string;
   title: string;
-  icon: LucideIcon;
+  subtitle: string;
+  icon: React.ElementType;
   skills: Skill[];
+  color: string;
+  borderColor: string;
+  glowColor: string;
 }
 
-// Map skill icons to Lucide icons or use emoji fallbacks
-const getSkillIcon = (iconName: string): string => {
-  const iconMap: Record<string, string> = {
-    react: "React",
-    svelte: "Svelte",
+// Map skill names to display names
+const getSkillDisplayName = (iconName: string): string => {
+  const nameMap: Record<string, string> = {
+    react: "REACT",
+    svelte: "SVELTE",
     htmlcss: "HTML/CSS",
-    tailwind: "Tailwind",
-    javascript: "JS",
-    nodejs: "Node.js",
+    tailwind: "TAILWIND",
+    javascript: "JAVASCRIPT",
+    nodejs: "NODE.JS",
     php: "PHP",
-    laravel: "Laravel",
-    python: "Python",
-    flutter: "Flutter",
-    android: "Android",
-    firebase: "Firebase",
-    git: "Git",
-    figma: "Figma",
-    supabase: "Supabase",
-    laragon: "Laragon",
+    laravel: "LARAVEL",
+    python: "PYTHON",
+    flutter: "FLUTTER",
+    android: "ANDROID",
+    firebase: "FIREBASE",
+    git: "GIT",
+    figma: "FIGMA",
+    supabase: "SUPABASE",
+    laragon: "LARAGON",
     xampp: "XAMPP",
-    java: "Java",
+    java: "JAVA",
   };
-  return iconMap[iconName] || iconName;
+  return nameMap[iconName] || iconName.toUpperCase();
 };
 
-// Get color based on skill level
-const getSkillLevelColor = (level: number): string => {
-  if (level >= 80) return "bg-blue-500"; // Expert
-  if (level >= 60) return "bg-indigo-500"; // Proficient
-  if (level >= 40) return "bg-amber-500"; // Intermediate
-  return "bg-gray-400"; // Beginner
+// Convert percentage to RPG level (1-5)
+const getSkillLevel = (level: number): number => {
+  if (level >= 90) return 5;
+  if (level >= 70) return 4;
+  if (level >= 50) return 3;
+  if (level >= 30) return 2;
+  return 1;
 };
 
-const getSkillLevelText = (level: number): string => {
-  if (level >= 80) return "Expert";
-  if (level >= 60) return "Proficient";
-  if (level >= 40) return "Intermediate";
-  return "Beginner";
+// Get mastery title based on level
+const getMasteryTitle = (level: number): string => {
+  if (level >= 90) return "MASTER";
+  if (level >= 70) return "EXPERT";
+  if (level >= 50) return "ADEPT";
+  return "NOVICE";
 };
 
-const getSkillLevelTextColor = (level: number): string => {
-  if (level >= 80) return "text-blue-600 dark:text-blue-400";
-  if (level >= 60) return "text-indigo-600 dark:text-indigo-400";
-  if (level >= 40) return "text-amber-600 dark:text-amber-400";
-  return "text-gray-500 dark:text-gray-400";
+// Category color schemes
+const categoryColors: Record<string, { bg: string; border: string; glow: string; text: string }> = {
+  frontend: { bg: "#06b6d4", border: "#22d3ee", glow: "rgba(6, 182, 212, 0.5)", text: "text-cyan-400" },
+  backend: { bg: "#a855f7", border: "#c084fc", glow: "rgba(168, 85, 247, 0.5)", text: "text-purple-400" },
+  mobile: { bg: "#ec4899", border: "#f472b6", glow: "rgba(236, 72, 153, 0.5)", text: "text-pink-400" },
+  tools: { bg: "#eab308", border: "#facc15", glow: "rgba(234, 179, 8, 0.5)", text: "text-yellow-400" },
+  languages: { bg: "#22c55e", border: "#4ade80", glow: "rgba(34, 197, 94, 0.5)", text: "text-green-400" },
 };
 
-// Skill Bar Component with animation
-function SkillBar({ skill, delay = 0 }: { skill: Skill; delay?: number }) {
+// Pixel XP Bar Component with segmented display
+function PixelXPBar({ level, categoryKey, delay = 0 }: { level: number; categoryKey: string; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const [isHovered, setIsHovered] = useState(false);
+  const rpgLevel = getSkillLevel(level);
+  const colors = categoryColors[categoryKey];
 
-  const progressColor = getSkillLevelColor(skill.level);
-  const levelText = getSkillLevelText(skill.level);
-  const textColor = getSkillLevelTextColor(skill.level);
+  // Calculate filled segments (10 segments total)
+  const filledSegments = Math.ceil((level / 100) * 10);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
-      className="group relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="flex items-center gap-2"
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.3, delay }}
     >
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <motion.span
-            className={`inline-flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-xs font-semibold ${textColor} transition-all duration-300`}
-            whileHover={{ scale: 1.1 }}
-            animate={isHovered ? { scale: 1.1, boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" } : {}}
-          >
-            {getSkillIcon(skill.icon)}
-          </motion.span>
-          <span className="font-medium text-zinc-900 dark:text-zinc-100">
-            {skill.name}
-          </span>
-        </div>
-        <span className={`text-sm font-medium ${textColor}`}>{skill.level}%</span>
+      {/* XP Bar Container */}
+      <div className="flex-1 flex gap-[2px] h-3">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <motion.div
+            key={index}
+            className="flex-1 border border-zinc-700"
+            style={{
+              backgroundColor: index < filledSegments && isInView ? colors.bg : "transparent",
+              borderColor: index < filledSegments && isInView ? colors.border : "#3f3f46",
+              boxShadow: index < filledSegments && isInView ? `0 0 4px ${colors.glow}` : "none",
+            }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{
+              duration: 0.1,
+              delay: delay + (index * 0.05),
+              ease: "easeOut"
+            }}
+          />
+        ))}
       </div>
 
-      {/* Progress Bar Container */}
-      <div
-        className="h-2.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"
-        role="progressbar"
-        aria-valuenow={skill.level}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label={`${skill.name} proficiency: ${skill.level}%`}
-      >
-        <motion.div
-          className={`h-full ${progressColor} rounded-full`}
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-          transition={{ duration: 1, delay: delay + 0.2, ease: "easeOut" }}
-        />
-      </div>
-
-      {/* Tooltip */}
+      {/* Level Badge */}
       <motion.div
-        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-        animate={isHovered ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 10, scale: 0.95 }}
-        transition={{ duration: 0.2 }}
-        className="absolute -top-10 left-1/2 -translate-x-1/2 z-10 px-3 py-1.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs rounded-lg whitespace-nowrap shadow-lg pointer-events-none"
+        className="px-1.5 py-0.5 text-[10px] font-bold border border-zinc-600 bg-zinc-900"
+        style={{
+          color: colors.border,
+          fontFamily: "monospace",
+          letterSpacing: "0.05em"
+        }}
+        initial={{ opacity: 0, x: -10 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.3, delay: delay + 0.5 }}
       >
-        <span className="font-medium">{levelText}</span>
-        <span className="mx-1.5 text-zinc-400">|</span>
-        <span>{skill.level}% Proficiency</span>
-        {/* Arrow */}
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zinc-900 dark:bg-zinc-100 rotate-45" />
+        Lv.{rpgLevel}
       </motion.div>
     </motion.div>
   );
 }
 
-// Skill Category Card
-function SkillCategoryCard({
+// Skill Item Component
+function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKey: string; delay?: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [isHovered, setIsHovered] = useState(false);
+  const colors = categoryColors[categoryKey];
+  const masteryTitle = getMasteryTitle(skill.level);
+
+  return (
+    <motion.div
+      ref={ref}
+      className="relative p-3 border border-zinc-800 bg-zinc-900/80 hover:border-zinc-600 transition-colors cursor-pointer group"
+      style={{
+        imageRendering: "pixelated",
+      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Hover Glow Effect */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={isHovered ? { opacity: 0.1 } : { opacity: 0 }}
+        style={{ backgroundColor: colors.bg }}
+      />
+
+      {/* Skill Header */}
+      <div className="flex items-center justify-between mb-2">
+        <span
+          className="text-xs font-bold tracking-wider uppercase"
+          style={{
+            color: isHovered ? colors.border : "#e4e4e7",
+            fontFamily: "monospace",
+            transition: "color 0.2s"
+          }}
+        >
+          {getSkillDisplayName(skill.icon)}
+        </span>
+        <span
+          className="text-[10px] px-1.5 py-0.5 border"
+          style={{
+            color: colors.border,
+            borderColor: colors.border,
+            fontFamily: "monospace"
+          }}
+        >
+          {masteryTitle}
+        </span>
+      </div>
+
+      {/* XP Bar */}
+      <PixelXPBar level={skill.level} categoryKey={categoryKey} delay={delay + 0.1} />
+
+      {/* Tooltip */}
+      <motion.div
+        className="absolute -top-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-[10px] whitespace-nowrap pointer-events-none"
+        style={{
+          backgroundColor: "#18181b",
+          border: `1px solid ${colors.border}`,
+          color: colors.border,
+          fontFamily: "monospace",
+        }}
+        initial={{ opacity: 0, y: 5 }}
+        animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 5 }}
+        transition={{ duration: 0.15 }}
+      >
+        XP: {skill.level}/100
+        {/* Pixel Arrow */}
+        <div
+          className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
+          style={{ backgroundColor: "#18181b", borderRight: `1px solid ${colors.border}`, borderBottom: `1px solid ${colors.border}` }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// Category Card Component
+function CategoryCard({
   category,
   index,
 }: {
@@ -154,36 +228,85 @@ function SkillCategoryCard({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const Icon = category.icon;
+  const colors = categoryColors[category.key];
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.15 }}
     >
-      <Card className="h-full border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-        <CardHeader className="pb-2">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800">
-              <Icon className="w-5 h-5 text-zinc-700 dark:text-zinc-300" />
-            </div>
-            <CardTitle className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-              {category.title}
-            </CardTitle>
+      {/* Category Card Container */}
+      <div
+        className="h-full border-2 p-4 bg-zinc-950"
+        style={{
+          borderColor: colors.border,
+          boxShadow: `0 0 20px ${colors.glow}, inset 0 0 20px rgba(0,0,0,0.5)`
+        }}
+      >
+        {/* Category Header */}
+        <div className="flex items-center gap-3 mb-4 pb-3 border-b border-zinc-800">
+          <div
+            className="p-2 border"
+            style={{
+              borderColor: colors.border,
+              backgroundColor: "rgba(0,0,0,0.5)"
+            }}
+          >
+            <Icon className="w-5 h-5" style={{ color: colors.border }} />
           </div>
-        </CardHeader>
-        <CardContent className="space-y-4 pt-2">
+          <div>
+            <h3
+              className="text-sm font-bold tracking-widest uppercase"
+              style={{
+                color: colors.border,
+                fontFamily: "monospace",
+                letterSpacing: "0.1em",
+                textShadow: `0 0 10px ${colors.glow}`
+              }}
+            >
+              {category.title}
+            </h3>
+            <p
+              className="text-[10px] uppercase tracking-wider"
+              style={{ color: "#71717a", fontFamily: "monospace" }}
+            >
+              {category.subtitle}
+            </p>
+          </div>
+        </div>
+
+        {/* Skills Grid */}
+        <div className="space-y-2">
           {category.skills.map((skill, skillIndex) => (
-            <SkillBar
+            <SkillItem
               key={skill.name}
               skill={skill}
-              delay={index * 0.1 + skillIndex * 0.1}
+              categoryKey={category.key}
+              delay={index * 0.1 + skillIndex * 0.08}
             />
           ))}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </motion.div>
+  );
+}
+
+// Pixel Star Rating Component
+function PixelStars({ count, color }: { count: number; color: string }) {
+  return (
+    <div className="flex gap-0.5">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <Star
+          key={i}
+          className="w-3 h-3"
+          fill={i < count ? color : "transparent"}
+          stroke={color}
+          strokeWidth={1.5}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -195,42 +318,82 @@ export function Skills() {
   const categories: SkillCategory[] = [
     {
       key: "frontend",
-      title: "Frontend",
-      icon: Code2,
+      title: "OFFENSIVE",
+      subtitle: "Combat Skills",
+      icon: Sword,
       skills: skillsData.frontend,
+      color: categoryColors.frontend.bg,
+      borderColor: categoryColors.frontend.border,
+      glowColor: categoryColors.frontend.glow,
     },
     {
       key: "backend",
-      title: "Backend",
-      icon: Server,
+      title: "DEFENSIVE",
+      subtitle: "Support Skills",
+      icon: Shield,
       skills: skillsData.backend,
+      color: categoryColors.backend.bg,
+      borderColor: categoryColors.backend.border,
+      glowColor: categoryColors.backend.glow,
     },
     {
       key: "mobile",
-      title: "Mobile",
-      icon: Smartphone,
+      title: "MOBILITY",
+      subtitle: "Movement Skills",
+      icon: Zap,
       skills: skillsData.mobile,
+      color: categoryColors.mobile.bg,
+      borderColor: categoryColors.mobile.border,
+      glowColor: categoryColors.mobile.glow,
     },
     {
       key: "tools",
-      title: "Tools",
-      icon: Wrench,
+      title: "UTILITY",
+      subtitle: "Tools & Items",
+      icon: Backpack,
       skills: skillsData.tools,
+      color: categoryColors.tools.bg,
+      borderColor: categoryColors.tools.border,
+      glowColor: categoryColors.tools.glow,
     },
     {
       key: "languages",
-      title: "Languages",
-      icon: Languages,
+      title: "KNOWLEDGE",
+      subtitle: "Intellect Skills",
+      icon: Brain,
       skills: skillsData.languages,
+      color: categoryColors.languages.bg,
+      borderColor: categoryColors.languages.border,
+      glowColor: categoryColors.languages.glow,
     },
+  ];
+
+  // Legend data
+  const legendItems = [
+    { title: "MASTER", level: "90%+", stars: 4, color: "#22d3ee" },
+    { title: "EXPERT", level: "70-89%", stars: 3, color: "#c084fc" },
+    { title: "ADEPT", level: "50-69%", stars: 2, color: "#facc15" },
+    { title: "NOVICE", level: "<50%", stars: 1, color: "#a1a1aa" },
   ];
 
   return (
     <section
       id="skills"
-      className="py-20 md:py-32 bg-zinc-50 dark:bg-black"
+      className="py-20 md:py-32 bg-zinc-950 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background Grid Pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #22d3ee 1px, transparent 1px),
+            linear-gradient(to bottom, #22d3ee 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
         <motion.div
           ref={ref}
@@ -239,57 +402,142 @@ export function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.4 }}
-            className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-200 dark:bg-zinc-800 rounded-full"
+          {/* Pixel Decorative Border Top */}
+          <motion.div
+            className="flex justify-center mb-6"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            What I Know
-          </motion.span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-zinc-50 mb-4">
-            Skills & Technologies
-          </h2>
-          <p className="max-w-2xl mx-auto text-lg text-zinc-600 dark:text-zinc-400">
-            Technologies and tools I work with to bring ideas to life
-          </p>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-cyan-400" />
+              <div className="w-16 h-0.5 bg-cyan-400" />
+              <div className="w-3 h-3 border-2 border-cyan-400" />
+              <div className="w-16 h-0.5 bg-cyan-400" />
+              <div className="w-2 h-2 bg-cyan-400" />
+            </div>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="mb-4"
+          >
+            <span
+              className="text-xs tracking-[0.3em] uppercase text-zinc-500"
+              style={{ fontFamily: "monospace" }}
+            >
+              Character Stats
+            </span>
+          </motion.div>
+
+          {/* Main Title */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-zinc-100 mb-4 tracking-wider"
+            style={{
+              fontFamily: "monospace",
+              letterSpacing: "0.15em",
+              textShadow: "0 0 20px rgba(34, 211, 238, 0.3)"
+            }}
+          >
+            ABILITIES
+          </motion.h2>
+
+          {/* Menu Style Subtitle */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-sm text-zinc-400 max-w-md mx-auto"
+            style={{ fontFamily: "monospace" }}
+          >
+            &gt; Select your skill to view details_
+          </motion.p>
+
+          {/* Pixel Decorative Border Bottom */}
+          <motion.div
+            className="flex justify-center mt-6"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-cyan-400" />
+              <div className="w-24 h-0.5 bg-cyan-400" />
+              <div className="w-2 h-2 bg-cyan-400" />
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* Skills Legend */}
+        {/* Skill Mastery Legend */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-12"
         >
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-500" />
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">Expert (80%+)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-indigo-500" />
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">Proficient (60-79%)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-amber-500" />
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">Intermediate (40-59%)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-gray-400" />
-            <span className="text-sm text-zinc-600 dark:text-zinc-400">Beginner (&lt;40%)</span>
+          <div
+            className="max-w-3xl mx-auto border border-zinc-800 p-4 bg-zinc-900/50"
+            style={{ fontFamily: "monospace" }}
+          >
+            <div className="text-center mb-3">
+              <span className="text-xs tracking-widest uppercase text-zinc-500">Skill Mastery Levels</span>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {legendItems.map((item) => (
+                <div key={item.title} className="flex items-center gap-2 justify-center">
+                  <PixelStars count={item.stars} color={item.color} />
+                  <div className="text-xs">
+                    <span style={{ color: item.color }} className="font-bold">{item.title}</span>
+                    <span className="text-zinc-600 ml-1">({item.level})</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Skills Grid - Like Inventory Screen */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((category, index) => (
-            <SkillCategoryCard
+            <CategoryCard
               key={category.key}
               category={category}
               index={index}
             />
           ))}
         </div>
+
+        {/* Bottom Decorative Element */}
+        <motion.div
+          className="flex justify-center mt-16"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
+          <div className="flex items-center gap-1">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-2 h-2 bg-cyan-400"
+                animate={{
+                  opacity: [0.3, 1, 0.3],
+                  scale: [0.8, 1, 0.8]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: i * 0.2
+                }}
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
