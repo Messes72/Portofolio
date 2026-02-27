@@ -2,117 +2,218 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { Moon, Sun, Monitor, Check } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Moon, Sun, Monitor } from "lucide-react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 // Use useLayoutEffect on client, useEffect on server
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type ThemeMode = "system" | "dark" | "light";
 
-const themeOptions: { value: ThemeMode; label: string; icon: React.ElementType }[] = [
-  { value: "light", label: "Light", icon: Sun },
-  { value: "dark", label: "Dark", icon: Moon },
-  { value: "system", label: "System", icon: Monitor },
+interface ThemeOption {
+  value: ThemeMode;
+  label: string;
+  icon: React.ElementType;
+}
+
+const themeOptions: ThemeOption[] = [
+  { value: "light", label: "LIGHT", icon: Sun },
+  { value: "dark", label: "DARK", icon: Moon },
+  { value: "system", label: "AUTO", icon: Monitor },
 ];
 
+// Pixel border using box-shadow technique
+const pixelBorder = {
+  boxShadow: `
+    -3px 0 0 0 #00F5FF,
+     3px 0 0 0 #00F5FF,
+     0 -3px 0 0 #00F5FF,
+     0 3px 0 0 #00F5FF,
+    -3px -3px 0 0 #00F5FF,
+     3px -3px 0 0 #00F5FF,
+    -3px 3px 0 0 #00F5FF,
+     3px 3px 0 0 #00F5FF
+  `,
+};
+
+// Active/pressed pixel border (offset down)
+const pixelBorderPressed = {
+  boxShadow: `
+    -3px 0 0 0 #00F5FF,
+     3px 0 0 0 #00F5FF,
+     0 -3px 0 0 #00F5FF,
+     0 0px 0 0 #00F5FF,
+    -3px -3px 0 0 #00F5FF,
+     3px -3px 0 0 #00F5FF,
+    -3px 0px 0 0 #00F5FF,
+     3px 0px 0 0 #00F5FF
+  `,
+};
+
 export function ThemeToggle() {
-  const { theme, setTheme, systemTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   // Handle hydration mismatch using layout effect
   useIsomorphicLayoutEffect(() => {
     setMounted(true);
   }, []);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (!target.closest("[data-theme-toggle]")) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [isOpen]);
-
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
-      <div className="flex items-center gap-2">
-        <Sun className="h-4 w-4 text-muted-foreground" />
-        <div className="h-5 w-9 rounded-full bg-muted" />
-        <Moon className="h-4 w-4 text-muted-foreground" />
+      <div className="flex items-center">
+        <div className="h-10 w-[120px] bg-muted" style={pixelBorder} />
       </div>
     );
   }
 
-  // Determine current mode
   const currentMode: ThemeMode = (theme as ThemeMode) || "system";
-  const currentOption = themeOptions.find((opt) => opt.value === currentMode) || themeOptions[2];
-  const Icon = currentOption.icon;
 
   const handleSelect = (mode: ThemeMode) => {
     setTheme(mode);
-    setIsOpen(false);
   };
 
   return (
-    <div className="relative" data-theme-toggle>
-      {/* Toggle Button */}
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-        aria-label={`Theme: ${currentOption.label}. Click to change.`}
-        aria-expanded={isOpen}
-        aria-haspopup="listbox"
-      >
-        <Icon className="h-4 w-4 text-foreground" />
-        <span className="text-xs font-medium text-muted-foreground min-w-[3rem] text-left">
-          {currentOption.label}
-        </span>
-      </motion.button>
+    <div
+      className="inline-flex bg-[#240946] p-1"
+      style={pixelBorder}
+      role="group"
+      aria-label="Theme selection"
+    >
+      {themeOptions.map((option) => {
+        const Icon = option.icon;
+        const isSelected = currentMode === option.value;
 
-      {/* Dropdown Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
-            className="absolute top-full right-0 mt-2 w-32 bg-popover border border-border rounded-lg shadow-lg overflow-hidden z-50"
-            role="listbox"
-            aria-label="Theme options"
+        return (
+          <PixelThemeButton
+            key={option.value}
+            option={option}
+            isSelected={isSelected}
+            onClick={() => handleSelect(option.value)}
+            prefersReducedMotion={prefersReducedMotion}
           >
-            {themeOptions.map((option) => {
-              const OptionIcon = option.icon;
-              const isSelected = currentMode === option.value;
-              return (
-                <motion.button
-                  key={option.value}
-                  onClick={() => handleSelect(option.value)}
-                  className={`w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors ${
-                    isSelected
-                      ? "bg-accent text-accent-foreground"
-                      : "text-popover-foreground hover:bg-muted"
-                  }`}
-                  role="option"
-                  aria-selected={isSelected}
-                >
-                  <OptionIcon className="h-4 w-4" />
-                  <span className="flex-1 text-left">{option.label}</span>
-                  {isSelected && <Check className="h-3 w-3" />}
-                </motion.button>
-              );
-            })}
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Icon className="h-3.5 w-3.5" />
+            <span className="sr-only">{option.label}</span>
+          </PixelThemeButton>
+        );
+      })}
     </div>
   );
 }
+
+interface PixelThemeButtonProps {
+  option: ThemeOption;
+  isSelected: boolean;
+  onClick: () => void;
+  prefersReducedMotion: boolean;
+  children: React.ReactNode;
+}
+
+function PixelThemeButton({
+  option,
+  isSelected,
+  onClick,
+  prefersReducedMotion,
+  children,
+}: PixelThemeButtonProps) {
+  // Base classes
+  const baseClasses = cn(
+    "relative flex items-center justify-center",
+    "w-8 h-8",
+    "font-pixel text-[8px] uppercase tracking-wider",
+    "cursor-pointer select-none",
+    "border-0 outline-none",
+    "transition-colors duration-150"
+  );
+
+  // Dynamic colors based on selection
+  const colorClasses = isSelected
+    ? "bg-[#00F5FF] text-black"
+    : "bg-[#240946] text-[#00F5FF] hover:bg-[#3d1a6e]";
+
+  if (prefersReducedMotion) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className={cn(baseClasses, colorClasses)}
+        aria-pressed={isSelected}
+        aria-label={option.label}
+        title={option.label}
+      >
+        {children}
+      </button>
+    );
+  }
+
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      className={cn(baseClasses, colorClasses, "will-change-transform")}
+      aria-pressed={isSelected}
+      aria-label={option.label}
+      title={option.label}
+      whileHover={{
+        scale: isSelected ? 1 : 1.05,
+      }}
+      whileTap={{
+        y: 2,
+        scale: 0.95,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 500,
+        damping: 30,
+      }}
+    >
+      {/* Selection indicator glow effect */}
+      {isSelected && (
+        <motion.div
+          className="absolute inset-0 bg-[#00F5FF]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+          style={{
+            boxShadow: "0 0 8px 2px rgba(0, 245, 255, 0.5)",
+          }}
+        />
+      )}
+
+      {/* Icon container with z-index to appear above glow */}
+      <motion.span
+        className="relative z-10 flex items-center justify-center"
+        animate={{
+          y: isSelected ? 1 : 0,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 30,
+        }}
+      >
+        {children}
+      </motion.span>
+
+      {/* Pixel indicator arrow above selected button */}
+      {isSelected && (
+        <motion.div
+          className="absolute -top-1.5 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: 2 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 2 }}
+          transition={{ duration: 0.15 }}
+        >
+          <div className="w-0 h-0 border-l-[3px] border-r-[3px] border-t-[4px] border-l-transparent border-r-transparent border-t-[#00F5FF]" />
+        </motion.div>
+      )}
+    </motion.button>
+  );
+}
+
+export default ThemeToggle;
