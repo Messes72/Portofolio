@@ -1,8 +1,129 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Github, Mail, MapPin, ArrowDown } from "lucide-react";
 import Link from "next/link";
+import { useRef } from "react";
+
+// Floating Pixel Decorations with Parallax
+function FloatingPixels() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+
+  const pixels = [
+    { x: "10%", y: "30%", color: "#FF006E", size: 16, yTransform: y1 },
+    { x: "85%", y: "20%", color: "#00F5FF", size: 12, yTransform: y2 },
+    { x: "75%", y: "70%", color: "#FFD60A", size: 20, yTransform: y3 },
+    { x: "15%", y: "80%", color: "#39FF14", size: 14, yTransform: y2 },
+    { x: "90%", y: "50%", color: "#9D4EDD", size: 10, yTransform: y1 },
+    { x: "5%", y: "60%", color: "#FF006E", size: 8, yTransform: y3 },
+    { x: "50%", y: "90%", color: "#00F5FF", size: 6, yTransform: y1 },
+  ];
+
+  return (
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {pixels.map((pixel, index) => (
+        <motion.div
+          key={index}
+          className="absolute"
+          style={{
+            left: pixel.x,
+            top: pixel.y,
+            y: pixel.yTransform,
+          }}
+          animate={{
+            rotate: [0, 90, 180, 270, 360],
+          }}
+          transition={{
+            duration: 10 + index * 2,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <div
+            style={{
+              width: pixel.size,
+              height: pixel.size,
+              backgroundColor: pixel.color,
+              boxShadow: `0 0 ${pixel.size}px ${pixel.color}40`,
+            }}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+// Retro Grid Floor Effect
+function RetroGridFloor() {
+  return (
+    <div
+      className="absolute bottom-0 left-0 right-0 h-1/2 pointer-events-none opacity-20"
+      style={{
+        background: `
+          linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0, 245, 255, 0.03) 50%,
+            rgba(0, 245, 255, 0.1) 100%
+          )
+        `,
+      }}
+      aria-hidden="true"
+    >
+      {/* Horizontal grid lines */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 39px,
+              rgba(0, 245, 255, 0.3) 40px
+            )
+          `,
+        }}
+      />
+      {/* Perspective grid lines */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            linear-gradient(
+              90deg,
+              transparent 48%,
+              rgba(0, 245, 255, 0.2) 49%,
+              rgba(0, 245, 255, 0.2) 51%,
+              transparent 52%
+            ),
+            linear-gradient(
+              80deg,
+              transparent 48%,
+              rgba(0, 245, 255, 0.15) 49%,
+              rgba(0, 245, 255, 0.15) 51%,
+              transparent 52%
+            ),
+            linear-gradient(
+              100deg,
+              transparent 48%,
+              rgba(0, 245, 255, 0.15) 49%,
+              rgba(0, 245, 255, 0.15) 51%,
+              transparent 52%
+            )
+          `,
+        }}
+      />
+    </div>
+  );
+}
 
 // Pixel Star Component - Individual twinkling star
 function PixelStar({
@@ -27,8 +148,8 @@ function PixelStar({
         imageRendering: "pixelated",
       }}
       animate={{
-        opacity: [0.2, 1, 0.2],
-        scale: [1, 1.2, 1],
+        opacity: [0.4, 1, 0.4],
+        scale: [1, 1.3, 1],
       }}
       transition={{
         duration: 2,
@@ -200,7 +321,7 @@ function GlitchText({
   );
 }
 
-// Pixel Button Component
+// Enhanced Pixel Button Component - Arcade Style
 function PixelButton({
   children,
   href = "#about",
@@ -210,27 +331,47 @@ function PixelButton({
   href?: string;
   variant?: "primary" | "secondary";
 }) {
-  const baseStyles =
-    "relative inline-flex items-center gap-2 px-6 py-3 font-pixel text-sm tracking-wider transition-all duration-100";
-  const variantStyles =
-    variant === "primary"
-      ? "bg-[#FF006E] text-white border-4 border-[#FF006E] hover:bg-[#FF1493] hover:border-[#FF1493]"
-      : "bg-transparent text-[#00F5FF] border-4 border-[#00F5FF] hover:bg-[#00F5FF]/20";
+  const isPrimary = variant === "primary";
+  const bgColor = isPrimary ? "#FF006E" : "transparent";
+  const borderColor = isPrimary ? "#FF006E" : "#00F5FF";
+  const textColor = isPrimary ? "white" : "#00F5FF";
+  const shadowColor = isPrimary ? "#990044" : "#00F5FF40";
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02, y: -2 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ y: -4 }}
+      whileTap={{ y: 0 }}
       transition={{ duration: 0.1, ease: "linear" }}
     >
-      <Link href={href} className={`${baseStyles} ${variantStyles} pixel-btn`}>
+      <Link
+        href={href}
+        className="relative inline-flex items-center gap-3 px-8 py-4 font-pixel text-sm tracking-wider"
+        style={{
+          backgroundColor: bgColor,
+          color: textColor,
+          boxShadow: `
+            -4px 0 0 0 ${borderColor},
+            4px 0 0 0 ${borderColor},
+            0 -4px 0 0 ${borderColor},
+            0 4px 0 0 ${borderColor},
+            0 8px 0 0 ${shadowColor},
+            4px 8px 0 0 ${shadowColor},
+            -4px 8px 0 0 ${shadowColor},
+            inset -4px -4px 0 0 rgba(0, 0, 0, 0.2),
+            inset 4px 4px 0 0 rgba(255, 255, 255, 0.2)
+          `,
+          margin: "0 4px",
+          marginBottom: 8,
+          imageRendering: "pixelated",
+        }}
+      >
         {children}
       </Link>
     </motion.div>
   );
 }
 
-// Pixel Badge Component
+// Pixel Badge Component - Arcade Style with Stronger Blink
 function PixelBadge({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
@@ -239,10 +380,47 @@ function PixelBadge({ children }: { children: React.ReactNode }) {
       transition={{ duration: 0.3, ease: "linear" as const, delay: 0.2 }}
       className="mb-8"
     >
-      <span className="inline-flex items-center gap-2 px-4 py-2 font-vt323 text-lg text-[#00F5FF] border-2 border-[#00F5FF] bg-[#00F5FF]/10 crt-glow">
-        <span className="w-2 h-2 bg-[#FF006E] animate-blink" />
+      <motion.span
+        className="inline-flex items-center gap-3 px-5 py-3 font-pixel text-sm text-[#0D0221] bg-[#00F5FF] crt-glow"
+        style={{
+          boxShadow: `
+            -4px 0 0 0 #00F5FF,
+            4px 0 0 0 #00F5FF,
+            0 -4px 0 0 #00F5FF,
+            0 4px 0 0 #00F5FF,
+            -4px -4px 0 0 #FFD60A,
+            4px -4px 0 0 #FFD60A,
+            -4px 4px 0 0 #FFD60A,
+            4px 4px 0 0 #FFD60A,
+            inset -4px -4px 0 0 rgba(0, 0, 0, 0.2),
+            inset 4px 4px 0 0 rgba(255, 255, 255, 0.3)
+          `,
+          margin: 4,
+        }}
+        animate={{
+          opacity: [1, 1, 0.3, 1, 1, 0.3, 1],
+        }}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: "linear",
+          times: [0, 0.4, 0.5, 0.6, 0.9, 0.95, 1],
+        }}
+      >
+        <motion.span
+          className="w-3 h-3 bg-[#FF006E]"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [1, 0.5, 1],
+          }}
+          transition={{
+            duration: 0.5,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
         {children}
-      </span>
+      </motion.span>
     </motion.div>
   );
 }
@@ -344,9 +522,15 @@ export function Hero() {
       <PixelCloud x="20%" y="70%" delay={6} duration={10} />
       <PixelCloud x="80%" y="60%" delay={2} duration={14} />
 
+      {/* Retro Grid Floor Effect */}
+      <RetroGridFloor />
+
+      {/* Floating Pixel Decorations */}
+      <FloatingPixels />
+
       {/* Grid Pattern Overlay */}
       <div
-        className="absolute inset-0 opacity-5 pointer-events-none"
+        className="absolute inset-0 opacity-10 pointer-events-none"
         style={{
           backgroundImage: `
             linear-gradient(to right, #00F5FF 1px, transparent 1px),
@@ -360,8 +544,38 @@ export function Hero() {
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* Pixel Badge */}
-          <PixelBadge>PLAYER 1 READY</PixelBadge>
+          {/* Pixel Border Container for Main Content */}
+          <div
+            className="relative p-8 sm:p-12"
+            style={{
+              backgroundColor: "rgba(13, 2, 33, 0.8)",
+              boxShadow: `
+                -4px 0 0 0 #FF006E,
+                4px 0 0 0 #FF006E,
+                0 -4px 0 0 #FF006E,
+                0 4px 0 0 #FF006E,
+                -8px 0 0 0 #9D4EDD,
+                8px 0 0 0 #9D4EDD,
+                0 -8px 0 0 #9D4EDD,
+                0 8px 0 0 #9D4EDD,
+                -12px 0 0 0 #0D0221,
+                12px 0 0 0 #0D0221,
+                0 -12px 0 0 #0D0221,
+                0 12px 0 0 #0D0221,
+                inset -4px -4px 0 0 rgba(0, 0, 0, 0.5),
+                inset 4px 4px 0 0 rgba(255, 255, 255, 0.05)
+              `,
+              margin: 12,
+            }}
+          >
+            {/* Corner Decorations */}
+            <div className="absolute -top-3 -left-3 w-6 h-6 bg-[#FFD60A]" />
+            <div className="absolute -top-3 -right-3 w-6 h-6 bg-[#FFD60A]" />
+            <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-[#FFD60A]" />
+            <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-[#FFD60A]" />
+
+            {/* Pixel Badge */}
+            <PixelBadge>PLAYER 1 READY</PixelBadge>
 
           {/* Main headline with glitch effect */}
           <h1 className="mb-6">
@@ -397,26 +611,78 @@ export function Hero() {
             />
           </motion.div>
 
-          {/* Stats Row */}
+          {/* Stats Row - Game HUD Style */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.8, duration: 0.3, ease: "linear" }}
-            className="flex flex-wrap items-center justify-center gap-6 mb-10 font-vt323 text-[#B8B8D1]"
+            className="mb-10"
           >
-            <div className="flex items-center gap-2">
-              <span className="text-[#FFD60A]">LVL:</span>
-              <span>SENIOR</span>
-            </div>
-            <span className="text-[#FF006E]">|</span>
-            <div className="flex items-center gap-2">
-              <span className="text-[#FFD60A]">EXP:</span>
-              <span>3+ YEARS</span>
-            </div>
-            <span className="text-[#FF006E]">|</span>
-            <div className="flex items-center gap-2">
-              <span className="text-[#FFD60A]">GPA:</span>
-              <span>3.38/4.00</span>
+            <div
+              className="inline-flex flex-wrap items-center justify-center gap-2 px-6 py-4 font-vt323 text-lg bg-[#0D0221]"
+              style={{
+                boxShadow: `
+                  -4px 0 0 0 #FFD60A,
+                  4px 0 0 0 #FFD60A,
+                  0 -4px 0 0 #FFD60A,
+                  0 4px 0 0 #FFD60A,
+                  inset -4px -4px 0 0 rgba(0, 0, 0, 0.5),
+                  inset 4px 4px 0 0 rgba(255, 255, 255, 0.1)
+                `,
+              }}
+            >
+              {/* LVL Stat */}
+              <div className="flex items-center gap-2 px-3">
+                <span className="text-[#FF006E] font-pixel text-sm">LVL</span>
+                <span className="text-[#FFD60A]">:</span>
+                <motion.span
+                  className="text-white font-pixel"
+                  animate={{ opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                >
+                  SENIOR
+                </motion.span>
+              </div>
+
+              {/* Pixel Separator */}
+              <div className="flex gap-1">
+                <div className="w-1 h-1 bg-[#00F5FF]" />
+                <div className="w-1 h-1 bg-[#00F5FF]" />
+                <div className="w-1 h-1 bg-[#00F5FF]" />
+              </div>
+
+              {/* EXP Stat */}
+              <div className="flex items-center gap-2 px-3">
+                <span className="text-[#FF006E] font-pixel text-sm">EXP</span>
+                <span className="text-[#FFD60A]">:</span>
+                <motion.span
+                  className="text-white font-pixel"
+                  animate={{ opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.3 }}
+                >
+                  3+ YEARS
+                </motion.span>
+              </div>
+
+              {/* Pixel Separator */}
+              <div className="flex gap-1">
+                <div className="w-1 h-1 bg-[#00F5FF]" />
+                <div className="w-1 h-1 bg-[#00F5FF]" />
+                <div className="w-1 h-1 bg-[#00F5FF]" />
+              </div>
+
+              {/* GPA Stat */}
+              <div className="flex items-center gap-2 px-3">
+                <span className="text-[#FF006E] font-pixel text-sm">GPA</span>
+                <span className="text-[#FFD60A]">:</span>
+                <motion.span
+                  className="text-white font-pixel"
+                  animate={{ opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.6 }}
+                >
+                  3.38/4.00
+                </motion.span>
+              </div>
             </div>
           </motion.div>
 
@@ -450,31 +716,32 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.2, duration: 0.3 }}
-            className="mt-12 flex flex-wrap items-center justify-center gap-6 font-vt323 text-sm text-[#B8B8D1]"
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-[#39FF14] animate-blink" />
-              <span className="text-[#39FF14]">Open for opportunities</span>
-            </div>
-            <span className="text-[#FF006E]">*</span>
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-[#FFD60A]" />
-              <span>Surabaya, Indonesia</span>
-            </div>
-            <span className="text-[#FF006E]">*</span>
-            <a
-              href="mailto:marioclaudius10@gmail.com"
-              className="flex items-center gap-2 hover:text-[#00F5FF] transition-colors"
+            {/* Contact Info */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.2, duration: 0.3 }}
+              className="mt-12 flex flex-wrap items-center justify-center gap-6 font-vt323 text-sm text-[#B8B8D1]"
             >
-              <Mail className="w-4 h-4 text-[#FFD60A]" />
-              <span>marioclaudius10@gmail.com</span>
-            </a>
-          </motion.div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-[#39FF14] animate-blink" />
+                <span className="text-[#39FF14]">Open for opportunities</span>
+              </div>
+              <span className="text-[#FF006E]">*</span>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#FFD60A]" />
+                <span>Surabaya, Indonesia</span>
+              </div>
+              <span className="text-[#FF006E]">*</span>
+              <a
+                href="mailto:marioclaudius10@gmail.com"
+                className="flex items-center gap-2 hover:text-[#00F5FF] transition-colors"
+              >
+                <Mail className="w-4 h-4 text-[#FFD60A]" />
+                <span>marioclaudius10@gmail.com</span>
+              </a>
+            </motion.div>
+          </div>{/* End Pixel Container */}
         </div>
       </div>
 
