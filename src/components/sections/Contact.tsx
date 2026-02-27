@@ -15,7 +15,7 @@ const contactInfo = {
   location: "Surabaya, Indonesia",
 }
 
-// Pixel art styled communication channel
+// Pixel art styled communication channel - THEME: Golden Yellow
 function CommChannel({
   icon: Icon,
   label,
@@ -37,30 +37,30 @@ function CommChannel({
       transition={{ delay, duration: 0.3 }}
       className={cn(
         "flex items-center gap-4 p-4",
-        "bg-[#0a0a0f] border-2 border-[#22c55e]/50",
-        "hover:border-[#22c55e] hover:bg-[#0f1f0f]",
+        "bg-[#240946] border-2 border-[#FFD60A]/50",
+        "hover:border-[#FFD60A] hover:bg-[#2a0a50]",
         "transition-colors duration-200"
       )}
       style={{
-        boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(34,197,94,0.1)",
+        boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(255,214,10,0.1)",
       }}
     >
       {/* Pixel icon container */}
       <div className="relative flex-shrink-0">
         <div
-          className="flex h-12 w-12 items-center justify-center bg-[#1a1a2e]"
+          className="flex h-12 w-12 items-center justify-center bg-[#0D0221]"
           style={{
-            boxShadow: "-2px 0 0 0 #22c55e, 2px 0 0 0 #22c55e, 0 -2px 0 0 #22c55e, 0 2px 0 0 #22c55e",
+            boxShadow: "-2px 0 0 0 #FFD60A, 2px 0 0 0 #FFD60A, 0 -2px 0 0 #FFD60A, 0 2px 0 0 #FFD60A",
           }}
         >
-          <Icon className="h-5 w-5 text-[#22c55e]" />
+          <Icon className="h-5 w-5 text-[#FFD60A]" />
         </div>
         {/* Glow effect */}
         <div className="absolute inset-0 animate-pulse opacity-50">
           <div
             className="h-full w-full"
             style={{
-              boxShadow: "0 0 10px #22c55e, 0 0 20px #22c55e",
+              boxShadow: "0 0 10px #FFD60A, 0 0 20px #FFD60A",
             }}
           />
         </div>
@@ -68,11 +68,11 @@ function CommChannel({
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <PixelBadge variant="green" size="sm" animate={false}>
+          <PixelBadge variant="yellow" size="sm" animate={false}>
             {label}
           </PixelBadge>
         </div>
-        <p className="mt-1 truncate font-vt323 text-lg text-[#22c55e] crt-glow">{value}</p>
+        <p className="mt-1 truncate font-vt323 text-lg text-[#FFD60A] crt-glow">{value}</p>
       </div>
 
       {/* Signal indicator */}
@@ -80,7 +80,7 @@ function CommChannel({
         {[1, 2, 3].map((bar) => (
           <motion.div
             key={bar}
-            className="w-1 bg-[#22c55e]"
+            className="w-1 bg-[#FFD60A]"
             style={{ height: `${bar * 4}px` }}
             animate={{ opacity: [0.3, 1, 0.3] }}
             transition={{
@@ -109,7 +109,7 @@ function CommChannel({
 function BlinkingCursor() {
   return (
     <motion.span
-      className="inline-block w-2 h-4 bg-[#22c55e] ml-1"
+      className="inline-block w-2 h-4 bg-[#FFD60A] ml-1"
       animate={{ opacity: [1, 0] }}
       transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
     />
@@ -137,17 +137,17 @@ function TerminalInput({
   isTextarea?: boolean
 }) {
   const baseClasses = cn(
-    "w-full bg-[#0a0a0f] border-2 border-[#22c55e]/30",
-    "text-[#22c55e] font-vt323 text-lg",
-    "focus:border-[#22c55e] focus:outline-none",
-    "placeholder:text-[#22c55e]/30",
+    "w-full bg-[#0a0a0f] border-2 border-[#FFD60A]/30",
+    "text-[#FFD60A] font-vt323 text-lg",
+    "focus:border-[#FFD60A] focus:outline-none",
+    "placeholder:text-[#FFD60A]/30",
     "transition-colors duration-200"
   )
 
   return (
     <div className="space-y-2">
-      <label className="flex items-center font-pixel text-xs text-[#22c55e]/70 uppercase tracking-wider">
-        <span className="text-[#22c55e]">&gt;</span>
+      <label className="flex items-center font-pixel text-xs text-[#FFD60A]/70 uppercase tracking-wider">
+        <span className="text-[#FFD60A]">&gt;</span>
         <span className="ml-2">{label}:</span>
         {!value && <BlinkingCursor />}
       </label>
@@ -160,9 +160,9 @@ function TerminalInput({
           placeholder={placeholder}
           required={required}
           rows={5}
-          className={cn(baseClasses, "p-3 resize-none", "focus:shadow-[0_0_10px_rgba(34,197,94,0.3)]")}
+          className={cn(baseClasses, "p-3 resize-none", "focus:shadow-[0_0_10px_rgba(255,214,10,0.3)]")}
           style={{
-            boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(34,197,94,0.05)",
+            boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(255,214,10,0.05)",
           }}
         />
       ) : (
@@ -173,9 +173,9 @@ function TerminalInput({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
-          className={cn(baseClasses, "h-12 px-3", "focus:shadow-[0_0_10px_rgba(34,197,94,0.3)]")}
+          className={cn(baseClasses, "h-12 px-3", "focus:shadow-[0_0_10px_rgba(255,214,10,0.3)]")}
           style={{
-            boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(34,197,94,0.05)",
+            boxShadow: "inset -2px -2px 0 0 rgba(0,0,0,0.5), inset 2px 2px 0 0 rgba(255,214,10,0.05)",
           }}
         />
       )}
@@ -190,7 +190,7 @@ function SignalWaves() {
       {[0, 1, 2, 3].map((i) => (
         <motion.div
           key={i}
-          className="w-0.5 bg-[#22c55e]"
+          className="w-0.5 bg-[#FFD60A]"
           style={{ height: `${(i + 1) * 6}px` }}
           animate={{
             opacity: [0.2, 1, 0.2],
@@ -344,24 +344,24 @@ export function Contact() {
         >
           {/* Transmission header */}
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Radio className="h-6 w-6 text-[#22c55e] animate-pulse" />
-            <h2 className="font-pixel text-2xl sm:text-3xl text-[#22c55e] crt-glow tracking-wider">
+            <Radio className="h-6 w-6 text-[#FFD60A] animate-pulse" />
+            <h2 className="font-pixel text-2xl sm:text-3xl text-[#FFD60A] crt-glow tracking-wider">
               TRANSMISSION
             </h2>
-            <Radio className="h-6 w-6 text-[#22c55e] animate-pulse" />
+            <Radio className="h-6 w-6 text-[#FFD60A] animate-pulse" />
           </div>
 
           {/* Subtitle with blinking cursor */}
-          <p className="font-vt323 text-xl text-[#22c55e]/70">
+          <p className="font-vt323 text-xl text-[#FFD60A]/70">
             Send a message to Player 1
             <BlinkingCursor />
           </p>
 
           {/* Decorative line */}
           <div className="mt-6 flex items-center justify-center gap-2">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#22c55e]/50" />
-            <Signal className="h-4 w-4 text-[#22c55e]" />
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#22c55e]/50" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#FFD60A]/50" />
+            <Signal className="h-4 w-4 text-[#FFD60A]" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#FFD60A]/50" />
           </div>
         </motion.div>
 
@@ -373,8 +373,8 @@ export function Contact() {
             header={
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Satellite className="h-4 w-4 text-[#22c55e]" />
-                  <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider">
+                  <Satellite className="h-4 w-4 text-[#FFD60A]" />
+                  <span className="font-pixel text-xs text-[#FFD60A] uppercase tracking-wider">
                     Comm Channels
                   </span>
                 </div>
@@ -408,16 +408,16 @@ export function Contact() {
             </div>
 
             {/* Connection status */}
-            <div className="mt-6 pt-4 border-t-2 border-[#22c55e]/20">
+            <div className="mt-6 pt-4 border-t-2 border-[#FFD60A]/20">
               <div className="flex items-center justify-between font-vt323 text-sm">
-                <span className="text-[#22c55e]/60">SIGNAL STRENGTH</span>
+                <span className="text-[#FFD60A]/60">SIGNAL STRENGTH</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#22c55e]">98%</span>
+                  <span className="text-[#FFD60A]">98%</span>
                   <div className="flex gap-0.5">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div
                         key={i}
-                        className="w-1.5 bg-[#22c55e]"
+                        className="w-1.5 bg-[#FFD60A]"
                         style={{ height: `${i * 3}px` }}
                       />
                     ))}
@@ -425,8 +425,8 @@ export function Contact() {
                 </div>
               </div>
               <div className="mt-2 flex items-center justify-between font-vt323 text-sm">
-                <span className="text-[#22c55e]/60">LATENCY</span>
-                <span className="text-[#22c55e]">24ms</span>
+                <span className="text-[#FFD60A]/60">LATENCY</span>
+                <span className="text-[#FFD60A]">24ms</span>
               </div>
             </div>
 
@@ -442,8 +442,8 @@ export function Contact() {
             header={
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-[#22c55e]" />
-                  <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider">
+                  <Zap className="h-4 w-4 text-[#FFD60A]" />
+                  <span className="font-pixel text-xs text-[#FFD60A] uppercase tracking-wider">
                     Transmission Console
                   </span>
                 </div>
@@ -534,17 +534,17 @@ export function Contact() {
                     data-testid="transmission-success"
                   >
                     <div
-                      className="inline-flex items-center gap-2 px-4 py-3 bg-[#22c55e]/20 border-2 border-[#22c55e]"
+                      className="inline-flex items-center gap-2 px-4 py-3 bg-[#FFD60A]/20 border-2 border-[#FFD60A]"
                       style={{
                         boxShadow: "0 0 20px rgba(34, 197, 94, 0.3), inset 0 0 20px rgba(34, 197, 94, 0.1)",
                       }}
                     >
-                      <CheckCircle className="h-5 w-5 text-[#22c55e]" />
+                      <CheckCircle className="h-5 w-5 text-[#FFD60A]" />
                       <div className="text-left">
-                        <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider block">
+                        <span className="font-pixel text-xs text-[#FFD60A] uppercase tracking-wider block">
                           SIGNAL SENT
                         </span>
-                        <span className="font-vt323 text-sm text-[#22c55e]/80">
+                        <span className="font-vt323 text-sm text-[#FFD60A]/80">
                           Transmission complete! Message delivered.
                         </span>
                       </div>
@@ -554,11 +554,11 @@ export function Contact() {
               </AnimatePresence>
 
               {/* Console footer */}
-              <div className="pt-4 border-t-2 border-[#22c55e]/20">
-                <div className="flex items-center justify-between font-vt323 text-xs text-[#22c55e]/50">
+              <div className="pt-4 border-t-2 border-[#FFD60A]/20">
+                <div className="flex items-center justify-between font-vt323 text-xs text-[#FFD60A]/50">
                   <span>SECURE CHANNEL</span>
                   <span>ENC: AES-256</span>
-                  <span className={isSubmitted ? "text-[#22c55e]" : ""}>
+                  <span className={isSubmitted ? "text-[#FFD60A]" : ""}>
                     STATUS: {isSubmitted ? "SENT ✓" : isSubmitting ? "SENDING..." : "READY"}
                   </span>
                 </div>
@@ -574,12 +574,12 @@ export function Contact() {
           viewport={{ once: true }}
           className="mt-12 flex items-center justify-center gap-4"
         >
-          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#22c55e]/30 to-transparent" />
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#FFD60A]/30 to-transparent" />
           <div className="flex gap-1">
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
-                className="w-2 h-2 bg-[#22c55e]/40"
+                className="w-2 h-2 bg-[#FFD60A]/40"
                 animate={{
                   opacity: [0.3, 1, 0.3],
                   scale: [1, 1.2, 1],
@@ -592,7 +592,7 @@ export function Contact() {
               />
             ))}
           </div>
-          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#22c55e]/30 to-transparent" />
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#FFD60A]/30 to-transparent" />
         </motion.div>
       </div>
     </section>

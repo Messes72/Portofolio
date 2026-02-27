@@ -149,10 +149,10 @@ export function Footer() {
       <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex flex-col items-center justify-center gap-8 max-w-2xl mx-auto">
           {/* Pixel Decorations - Top Left */}
-          <PixelDecoration className="absolute top-8 left-8 text-cyan-400 hidden sm:block" />
+          <PixelDecoration className="absolute top-8 left-8 text-[#00F5FF] hidden sm:block" />
 
           {/* Pixel Decorations - Top Right */}
-          <PixelDecoration className="absolute top-8 right-8 text-pink-400 hidden sm:block" />
+          <PixelDecoration className="absolute top-8 right-8 text-[#FF006E] hidden sm:block" />
 
           {/* GAME OVER Header */}
           <motion.div
@@ -166,7 +166,7 @@ export function Footer() {
               className="text-4xl sm:text-5xl md:text-6xl font-black tracking-wider"
               style={{
                 fontFamily: "'Press Start 2P', monospace",
-                color: hasContinued ? "#39FF14" : "#FF4444",
+                color: hasContinued ? "#39FF14" : "#FF006E",
                 textShadow: hasContinued
                   ? `4px 4px 0px #1a6b0e, -2px -2px 0px #7fff7f, 0 0 20px rgba(57, 255, 20, 0.5)`
                   : `4px 4px 0px #8B0000, -2px -2px 0px #FF8888, 0 0 20px rgba(255, 68, 68, 0.5)`,
@@ -182,7 +182,7 @@ export function Footer() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-cyan-400"
+            className="text-[#00F5FF]"
           >
             <Gamepad2 className="w-12 h-12 sm:w-16 sm:h-16" strokeWidth={1.5} />
           </motion.div>
@@ -197,10 +197,10 @@ export function Footer() {
                 className="text-center"
               >
                 <p
-                  className="text-xl sm:text-2xl font-bold tracking-widest text-cyan-400"
+                  className="text-xl sm:text-2xl font-bold tracking-widest text-[#00F5FF]"
                   style={{
                     fontFamily: "'Press Start 2P', monospace",
-                    textShadow: "0 0 10px rgba(34, 211, 238, 0.8)",
+                    textShadow: "0 0 10px rgba(0, 245, 255, 0.8)",
                   }}
                 >
                   CONTINUE?
@@ -216,7 +216,7 @@ export function Footer() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
-              className="text-4xl sm:text-5xl font-bold text-green-400"
+              className="text-4xl sm:text-5xl font-bold text-[#39FF14]"
               style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
@@ -306,7 +306,7 @@ export function Footer() {
               {/* Credits Display */}
               <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-8 text-sm">
                 <span
-                  className="text-cyan-400"
+                  className="text-[#00F5FF]"
                   style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
                 >
                   <span className="text-white/60">CREDITS:</span> 2025
@@ -321,10 +321,10 @@ export function Footer() {
                 <span className="text-white/50">DEVELOPED BY:</span>
               </p>
               <p
-                className="text-green-400 text-sm sm:text-base tracking-wider"
+                className="text-[#39FF14] text-sm sm:text-base tracking-wider"
                 style={{
                   fontFamily: "'Press Start 2P', monospace",
-                  textShadow: "0 0 10px rgba(34, 197, 94, 0.5)",
+                  textShadow: "0 0 10px rgba(57, 255, 20, 0.5)",
                 }}
               >
                 MARIO CLAUDIUS HADINATA
@@ -332,10 +332,10 @@ export function Footer() {
 
               {/* Thank You Message */}
               <motion.p
-                className="text-pink-400 text-xs sm:text-sm mt-4"
+                className="text-[#FF006E] text-xs sm:text-sm mt-4"
                 style={{
                   fontFamily: "'Press Start 2P', monospace",
-                  textShadow: "0 0 10px rgba(236, 72, 153, 0.5)",
+                  textShadow: "0 0 10px rgba(255, 0, 110, 0.5)",
                 }}
                 animate={
                   prefersReducedMotion
@@ -359,11 +359,11 @@ export function Footer() {
                   onClick={() => setShowHighScoreEasterEgg(!showHighScoreEasterEgg)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400/50 rounded px-2 py-1"
+                  className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#FFD60A]/50 rounded px-2 py-1"
                   aria-label="Click to reveal easter egg"
                 >
                   <p
-                    className="text-white/30 text-[10px] hover:text-yellow-400/50 transition-colors"
+                    className="text-white/30 text-[10px] hover:text-[#FFD60A]/50 transition-colors"
                     style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
                   >
                     HIGH SCORE: 999999
@@ -378,21 +378,21 @@ export function Footer() {
                       animate={{ opacity: 1, y: 0, height: "auto" }}
                       exit={{ opacity: 0, y: -10, height: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="mt-4 p-4 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded border border-purple-500/30"
+                      className="mt-4 p-4 bg-gradient-to-r from-[#9D4EDD]/50 to-[#FF006E]/50 rounded border border-[#9D4EDD]/30"
                     >
                       <p
-                        className="text-yellow-400 text-xs mb-2"
+                        className="text-[#FFD60A] text-xs mb-2"
                         style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
                       >
                         🎉 SECRET UNLOCKED! 🎉
                       </p>
                       <p
-                        className="text-cyan-400 text-xs"
+                        className="text-[#00F5FF] text-xs"
                         style={{ fontFamily: "var(--font-vt323)", fontSize: "14px" }}
                       >
                         You found the hidden easter egg!<br/>
                         Thanks for exploring my portfolio.<br/>
-                        <span className="text-pink-400">Made with ❤️ and lots of ☕</span>
+                        <span className="text-[#FF006E]">Made with ❤️ and lots of ☕</span>
                       </p>
                     </motion.div>
                   )}
