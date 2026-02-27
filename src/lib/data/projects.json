@@ -4,7 +4,7 @@
     "title": "Aplikasi Rumah Sakit Bantarangin",
     "tagline": "Sistem informasi manajemen rumah sakit berbasis web dan mobile",
     "description": "Aplikasi sistem informasi manajemen rumah sakit yang dikembangkan selama internship di PT Cross Network Indonesia. Sistem ini mencakup modul pendaftaran pasien, manajemen jadwal dokter, rekam medis elektronik, dan integrasi dengan perangkat mobile untuk akses real-time. Dibangun menggunakan Svelte untuk frontend, dengan desain responsif menggunakan Tailwind CSS.",
-    "thumbnail": "/images/projects/rumah-sakit-bantarangin/thumbnail.webp",
+    "thumbnail": "/images/projects/rumah-sakit-bantarangin/thumbnail.svg",
     "screenshots": [
       "/images/projects/rumah-sakit-bantarangin/screenshot-1.webp",
       "/images/projects/rumah-sakit-bantarangin/screenshot-2.webp",
@@ -37,7 +37,7 @@
     "title": "Portfolio Website",
     "tagline": "Website portfolio personal dengan animasi modern",
     "description": "Website portfolio modern yang menampilkan proyek-proyek development dengan desain interaktif dan animasi yang halus. Dibangun menggunakan Next.js dengan TypeScript, Tailwind CSS untuk styling, dan Framer Motion untuk animasi. Dilengkapi dengan dark/light mode toggle dan smooth scrolling.",
-    "thumbnail": "/images/projects/portfolio-website/thumbnail.webp",
+    "thumbnail": "/images/projects/portfolio-website/thumbnail.svg",
     "screenshots": [
       "/images/projects/portfolio-website/screenshot-1.webp",
       "/images/projects/portfolio-website/screenshot-2.webp"
@@ -69,7 +69,7 @@
     "title": "E-Commerce Mobile App",
     "tagline": "Aplikasi e-commerce cross-platform dengan Flutter",
     "description": "Aplikasi e-commerce mobile yang dikembangkan menggunakan Flutter untuk platform Android. Aplikasi mencakup fitur katalog produk, keranjang belanja, checkout, dan integrasi dengan Firebase untuk autentikasi dan database real-time. Desain UI mengikuti prinsip Material Design.",
-    "thumbnail": "/images/projects/e-commerce-app/thumbnail.webp",
+    "thumbnail": "/images/projects/e-commerce-app/thumbnail.svg",
     "screenshots": [
       "/images/projects/e-commerce-app/screenshot-1.webp",
       "/images/projects/e-commerce-app/screenshot-2.webp",
@@ -102,7 +102,7 @@
     "title": "Content Management System",
     "tagline": "CMS sederhana untuk manajemen konten website",
     "description": "Content Management System yang dibangun menggunakan Laravel dan PHP. Sistem ini memungkinkan admin untuk mengelola konten website seperti artikel, kategori, dan media. Dilengkapi dengan autentikasi berbasis role, WYSIWYG editor, dan manajemen media.",
-    "thumbnail": "/images/projects/laravel-cms/thumbnail.webp",
+    "thumbnail": "/images/projects/laravel-cms/thumbnail.svg",
     "screenshots": [
       "/images/projects/laravel-cms/screenshot-1.webp",
       "/images/projects/laravel-cms/screenshot-2.webp"
