@@ -110,13 +110,13 @@ const getMasteryTitle = (level: number): string => {
   return "NOVICE";
 };
 
-// Category color schemes - Unified pixel theme palette
+// Category color schemes - Fantasy nature palette
 const categoryColors: Record<string, { bg: string; border: string; glow: string; text: string }> = {
-  frontend: { bg: "#00F5FF", border: "#00F5FF", glow: "rgba(0, 245, 255, 0.5)", text: "text-[#00F5FF]" },
-  backend: { bg: "#9D4EDD", border: "#9D4EDD", glow: "rgba(157, 78, 221, 0.5)", text: "text-[#9D4EDD]" },
-  mobile: { bg: "#FF006E", border: "#FF006E", glow: "rgba(255, 0, 110, 0.5)", text: "text-[#FF006E]" },
-  tools: { bg: "#FFD60A", border: "#FFD60A", glow: "rgba(255, 214, 10, 0.5)", text: "text-[#FFD60A]" },
-  languages: { bg: "#39FF14", border: "#39FF14", glow: "rgba(57, 255, 20, 0.5)", text: "text-[#39FF14]" },
+  frontend: { bg: "#4FC3F7", border: "#4FC3F7", glow: "rgba(79, 195, 247, 0.3)", text: "text-[#4FC3F7]" },
+  backend: { bg: "#8D6E63", border: "#8D6E63", glow: "rgba(141, 110, 99, 0.3)", text: "text-[#8D6E63]" },
+  mobile: { bg: "#F48FB1", border: "#F48FB1", glow: "rgba(244, 143, 177, 0.3)", text: "text-[#F48FB1]" },
+  tools: { bg: "#FFD54F", border: "#FFD54F", glow: "rgba(255, 213, 79, 0.3)", text: "text-[#FFD54F]" },
+  languages: { bg: "#7CB342", border: "#7CB342", glow: "rgba(124, 179, 66, 0.3)", text: "text-[#7CB342]" },
 };
 
 // Pixel XP Bar Component with segmented display
@@ -423,26 +423,35 @@ export function Skills() {
     },
   ];
 
-  // Legend data - Theme Palette
+  // Legend data - Fantasy Theme Palette
   const legendItems = [
-    { title: "MASTER", level: "90%+", stars: 4, color: "#00F5FF" },
-    { title: "EXPERT", level: "70-89%", stars: 3, color: "#9D4EDD" },
-    { title: "ADEPT", level: "50-69%", stars: 2, color: "#FFD60A" },
-    { title: "NOVICE", level: "<50%", stars: 1, color: "#71717a" },
+    { title: "MASTER", level: "90%+", stars: 4, color: "#7CB342" },
+    { title: "EXPERT", level: "70-89%", stars: 3, color: "#4FC3F7" },
+    { title: "ADEPT", level: "50-69%", stars: 2, color: "#FFD54F" },
+    { title: "NOVICE", level: "<50%", stars: 1, color: "#8D6E63" },
   ];
 
   return (
     <section
       id="skills"
-      className="py-20 md:py-32 bg-[#0D0221] relative overflow-hidden"
+      className="py-20 md:py-32 relative overflow-hidden"
+      style={{
+        background: "linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #FFF8E7 100%)",
+      }}
     >
-      {/* Background Grid Pattern */}
+      {/* Decorative grass pattern */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        style={{
+          background: "linear-gradient(180deg, transparent 0%, rgba(124, 179, 66, 0.1) 100%)",
+        }}
+      />
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #00F5FF 1px, transparent 1px),
-            linear-gradient(to bottom, #00F5FF 1px, transparent 1px)
+            linear-gradient(to right, #7CB342 1px, transparent 1px),
+            linear-gradient(to bottom, #7CB342 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
         }}
@@ -465,11 +474,11 @@ export function Skills() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-cyan-400" />
-              <div className="w-16 h-0.5 bg-cyan-400" />
-              <div className="w-3 h-3 border-2 border-cyan-400" />
-              <div className="w-16 h-0.5 bg-cyan-400" />
-              <div className="w-2 h-2 bg-cyan-400" />
+              <div className="w-2 h-2 bg-[#7CB342]" />
+              <div className="w-16 h-0.5 bg-[#7CB342]" />
+              <div className="w-3 h-3 border-2 border-[#7CB342]" />
+              <div className="w-16 h-0.5 bg-[#7CB342]" />
+              <div className="w-2 h-2 bg-[#7CB342]" />
             </div>
           </motion.div>
 
@@ -480,10 +489,7 @@ export function Skills() {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="mb-4"
           >
-            <span
-              className="text-xs tracking-[0.3em] uppercase text-zinc-500"
-              style={{ fontFamily: "monospace" }}
-            >
+            <span className="text-xs tracking-[0.3em] uppercase text-[#6D4C41] font-vt323">
               Character Stats
             </span>
           </motion.div>
@@ -493,11 +499,9 @@ export function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-2xl md:text-3xl lg:text-4xl font-bold text-zinc-100 mb-4 tracking-wider"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#3E2723] mb-4 tracking-wider font-pixel"
             style={{
-              fontFamily: "monospace",
               letterSpacing: "0.15em",
-              textShadow: "0 0 20px rgba(34, 211, 238, 0.3)"
             }}
           >
             ABILITIES
