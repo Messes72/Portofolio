@@ -5,11 +5,14 @@ import { Github, Mail, MapPin, ArrowDown } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
 import {
-  PixelClouds,
+  PixelCloud,
   PixelSun,
-  PixelBirds,
-  PixelButterflies,
-  PixelSparkles,
+  PixelBird,
+  PixelButterfly,
+  PixelSparkle,
+  BirdFlock,
+  ButterflySwarm,
+  FloatingSparkles,
 } from "@/components/animations";
 
 // Fantasy Nature Background
@@ -103,10 +106,10 @@ function FantasyBackground() {
       </motion.div>
 
       {/* Nature decorations */}
-      <PixelClouds />
-      <PixelBirds />
-      <PixelButterflies />
-      <PixelSparkles />
+      <PixelCloud size="md" />
+      <BirdFlock />
+      <ButterflySwarm />
+      <FloatingSparkles />
     </div>
   );
 }
@@ -212,8 +215,8 @@ function PixelStar({
   );
 }
 
-// Pixel Cloud Component - Floating pixel cloud
-function PixelCloud({
+// Local Pixel Cloud Component - Floating pixel cloud
+function LocalPixelCloud({
   x,
   y,
   delay,

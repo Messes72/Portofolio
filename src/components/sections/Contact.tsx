@@ -59,7 +59,7 @@ function NatureContactCard({
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <PixelBadge variant="default" size="sm" animate={false}>
+          <PixelBadge variant="green" size="sm" animate={false}>
             {label}
           </PixelBadge>
         </div>
@@ -281,8 +281,8 @@ export function Contact() {
         <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
           {/* Contact Info Panel */}
           <PixelCard
-            variant="default"
-            className="bg-[#FFF8E7]"
+            variant="highlight"
+            className="bg-[#FFF8E7] border-[#7CB342]"
             header={
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -291,7 +291,7 @@ export function Contact() {
                     Contact Info
                   </span>
                 </div>
-                <PixelBadge variant="default" size="sm" animate={false}>
+                <PixelBadge variant="green" size="sm" animate={false}>
                   AVAILABLE
                 </PixelBadge>
               </div>
@@ -334,8 +334,8 @@ export function Contact() {
 
           {/* Message Form */}
           <PixelCard
-            variant="default"
-            className="bg-[#FFF8E7] relative"
+            variant="highlight"
+            className="bg-[#FFF8E7] relative border-[#7CB342]"
             header={
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -381,7 +381,7 @@ export function Contact() {
               <div className="pt-2">
                 <PixelButton
                   type="submit"
-                  variant="default"
+                  variant="green"
                   size="lg"
                   disabled={isSubmitting}
                   className="w-full"

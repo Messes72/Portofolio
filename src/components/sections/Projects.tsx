@@ -5,10 +5,11 @@ import Link from "next/link";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
 import { getFeaturedProjects } from "@/lib/data";
+import { Leaf, Flower } from "lucide-react";
 
 const featuredProjects = getFeaturedProjects(4);
 
-// Pixel decorative elements
+// Pixel decorative elements - nature style
 function PixelDecoration({ className = "" }: { className?: string }) {
   return (
     <div className={`flex gap-1 ${className}`}>
@@ -19,14 +20,14 @@ function PixelDecoration({ className = "" }: { className?: string }) {
   );
 }
 
-// Retro game corner decoration
-function PixelCorner({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
-  const baseClasses = "absolute w-4 h-4 border-4 border-current";
+// Wood corner decoration
+function WoodCorner({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
+  const baseClasses = "absolute w-4 h-4 border-4";
   const positionClasses = {
-    tl: "-top-2 -left-2 border-r-0 border-b-0",
-    tr: "-top-2 -right-2 border-l-0 border-b-0",
-    bl: "-bottom-2 -left-2 border-r-0 border-t-0",
-    br: "-bottom-2 -right-2 border-l-0 border-t-0",
+    tl: "-top-2 -left-2 border-r-0 border-b-0 border-[#8D6E63]",
+    tr: "-top-2 -right-2 border-l-0 border-b-0 border-[#8D6E63]",
+    bl: "-bottom-2 -left-2 border-r-0 border-t-0 border-[#8D6E63]",
+    br: "-bottom-2 -right-2 border-l-0 border-t-0 border-[#8D6E63]",
   };
 
   return (
@@ -37,53 +38,119 @@ function PixelCorner({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
   );
 }
 
+// Floating leaf component
+function FloatingLeaf({ delay = 0, className = "" }: { delay?: number; className?: string }) {
+  return (
+    <motion.div
+      className={`absolute pointer-events-none ${className}`}
+      animate={{
+        y: [0, -15, 0],
+        rotate: [0, 10, -10, 0],
+      }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
+    >
+      <Leaf className="w-5 h-5 text-[#7CB342]/60" />
+    </motion.div>
+  );
+}
+
+// Floating flower component
+function FloatingFlower({ delay = 0, className = "" }: { delay?: number; className?: string }) {
+  return (
+    <motion.div
+      className={`absolute pointer-events-none ${className}`}
+      animate={{
+        y: [0, -10, 0],
+        rotate: [0, 5, -5, 0],
+      }}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay,
+      }}
+    >
+      <Flower className="w-4 h-4 text-[#F48FB1]/60" />
+    </motion.div>
+  );
+}
+
 export function Projects() {
   return (
     <section
       id="projects"
-      className="relative w-full overflow-hidden bg-slate-950 py-20 md:py-32"
+      className="relative w-full overflow-hidden py-20 md:py-32"
+      style={{
+        background: "linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #FFF8E7 100%)",
+      }}
     >
-      {/* Pixel grid background pattern */}
+      {/* Decorative grass foreground at bottom */}
       <div
-        className="absolute inset-0 opacity-5"
+        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: "8px 8px",
+          background: "linear-gradient(180deg, transparent 0%, rgba(124, 179, 66, 0.2) 100%)",
         }}
       />
 
-      {/* Retro scanline effect */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-10"
-        style={{
-          background:
-            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)",
-        }}
-      />
+      {/* Floating clouds */}
+      <motion.div
+        className="absolute top-16 left-10 opacity-40"
+        animate={{ x: [0, 20, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <svg width="60" height="30" viewBox="0 0 60 30" fill="white">
+          <rect x="5" y="15" width="10" height="10" />
+          <rect x="15" y="8" width="10" height="10" />
+          <rect x="25" y="8" width="10" height="10" />
+          <rect x="35" y="15" width="10" height="10" />
+          <rect x="15" y="18" width="20" height="10" fill="white" />
+        </svg>
+      </motion.div>
+      <motion.div
+        className="absolute top-32 right-16 opacity-30"
+        animate={{ x: [0, -15, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+      >
+        <svg width="50" height="25" viewBox="0 0 50 25" fill="white">
+          <rect x="5" y="12" width="8" height="8" />
+          <rect x="13" y="6" width="8" height="8" />
+          <rect x="21" y="6" width="8" height="8" />
+          <rect x="29" y="12" width="8" height="8" />
+        </svg>
+      </motion.div>
 
-      {/* Pixel decoration corners */}
-      <div className="absolute top-8 left-8 text-primary/30">
+      {/* Floating decorations */}
+      <FloatingLeaf delay={0} className="top-24 left-[15%]" />
+      <FloatingLeaf delay={1.5} className="top-40 right-[20%]" />
+      <FloatingLeaf delay={3} className="bottom-32 left-[10%]" />
+      <FloatingFlower delay={0.5} className="top-36 left-[25%]" />
+      <FloatingFlower delay={2} className="bottom-40 right-[15%]" />
+
+      {/* Pixel decoration corners - nature colored */}
+      <div className="absolute top-8 left-8 text-[#7CB342]/40">
         <div className="flex flex-col gap-1">
           <PixelDecoration />
           <PixelDecoration />
         </div>
       </div>
-      <div className="absolute top-8 right-8 text-primary/30">
+      <div className="absolute top-8 right-8 text-[#7CB342]/40">
         <div className="flex flex-col gap-1 items-end">
           <PixelDecoration />
           <PixelDecoration />
         </div>
       </div>
-      <div className="absolute bottom-8 left-8 text-primary/30">
+      <div className="absolute bottom-8 left-8 text-[#7CB342]/40">
         <div className="flex flex-col gap-1">
           <PixelDecoration />
           <PixelDecoration />
         </div>
       </div>
-      <div className="absolute bottom-8 right-8 text-primary/30">
+      <div className="absolute bottom-8 right-8 text-[#7CB342]/40">
         <div className="flex flex-col gap-1 items-end">
           <PixelDecoration />
           <PixelDecoration />
@@ -91,14 +158,22 @@ export function Projects() {
       </div>
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header - Game Cartridge Collection Style */}
+        {/* Section Header - Nature Treasure Collection Style */}
         <AnimatedSection className="mb-16 text-center">
-          {/* Pixel border container */}
-          <div className="relative inline-block p-8">
-            <PixelCorner position="tl" />
-            <PixelCorner position="tr" />
-            <PixelCorner position="bl" />
-            <PixelCorner position="br" />
+          {/* Wood border container */}
+          <div
+            className="relative inline-block p-8"
+            style={{
+              backgroundColor: "rgba(255, 248, 231, 0.9)",
+              boxShadow:
+                "-4px 0 0 0 #8D6E63, 4px 0 0 0 #8D6E63, 0 -4px 0 0 #8D6E63, 0 4px 0 0 #8D6E63",
+              margin: 4,
+            }}
+          >
+            <WoodCorner position="tl" />
+            <WoodCorner position="tr" />
+            <WoodCorner position="bl" />
+            <WoodCorner position="br" />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -107,14 +182,13 @@ export function Projects() {
               transition={{ duration: 0.3 }}
               className="mb-4 flex items-center justify-center gap-2"
             >
-              <PixelDecoration className="text-[#FFD60A]" />
+              <PixelDecoration className="text-[#7CB342]" />
               <span
-                className="text-xs md:text-sm text-[#FFD60A] uppercase tracking-widest"
-                style={{ fontFamily: "var(--font-vt323)" }}
+                className="text-xs md:text-sm text-[#7CB342] uppercase tracking-widest font-vt323"
               >
-                SELECT GAME
+                Discover Treasures
               </span>
-              <PixelDecoration className="text-[#FFD60A]" />
+              <PixelDecoration className="text-[#7CB342]" />
             </motion.div>
 
             <motion.h2
@@ -122,11 +196,10 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl md:text-2xl lg:text-4xl text-white uppercase tracking-tight"
-              style={{ fontFamily: "var(--font-pixel)" }}
+              className="text-xl md:text-2xl lg:text-4xl text-[#3E2723] uppercase tracking-tight font-pixel"
             >
-              <span className="text-[#00F5FF]">CARTRIDGE</span>{" "}
-              <span className="text-[#FF006E]">COLLECTION</span>
+              <span className="text-[#4FC3F7]">PROJECT</span>{" "}
+              <span className="text-[#7CB342]">COLLECTION</span>
             </motion.h2>
 
             <motion.p
@@ -134,10 +207,9 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mx-auto mt-4 max-w-2xl text-lg md:text-xl text-[#a1a1aa]"
-              style={{ fontFamily: "var(--font-vt323)" }}
+              className="mx-auto mt-4 max-w-2xl text-lg md:text-xl text-[#6D4C41] font-vt323"
             >
-              Choose a project to play
+              Adventures I have embarked on
             </motion.p>
 
             {/* Blinking cursor animation */}
@@ -149,10 +221,9 @@ export function Projects() {
               className="mt-4 flex items-center justify-center gap-2"
             >
               <span
-                className="text-sm text-slate-500 uppercase"
-                style={{ fontFamily: "var(--font-vt323)" }}
+                className="text-sm text-[#8D6E63] uppercase font-vt323"
               >
-                Press START to begin
+                Scroll to explore
               </span>
               <motion.span
                 animate={{ opacity: [0, 1, 1, 0] }}
@@ -161,18 +232,18 @@ export function Projects() {
                   repeat: Infinity,
                   times: [0, 0.25, 0.75, 1],
                 }}
-                className="w-3 h-3 bg-primary"
+                className="w-3 h-3 bg-[#7CB342]"
               />
             </motion.div>
           </div>
         </AnimatedSection>
 
-        {/* Projects Grid - Game Cartridges */}
+        {/* Projects Grid - Treasure Collection */}
         <AnimatedSection delay={0.2}>
           <ProjectGrid projects={featuredProjects} />
         </AnimatedSection>
 
-        {/* View All Link - Arcade Button */}
+        {/* View All Link - Wood Button Style */}
         <AnimatedSection delay={0.4} className="mt-16 text-center">
           <Link href="/projects">
             <motion.button
@@ -180,15 +251,23 @@ export function Projects() {
               whileTap={{ scale: 0.98, y: 0 }}
               className="relative group"
             >
-              {/* Pixel button shadow */}
-              <div className="absolute inset-0 translate-x-1 translate-y-1 bg-slate-800 rounded-none" />
+              {/* Wood button shadow */}
+              <div
+                className="absolute inset-0 translate-x-1 translate-y-1 rounded-none"
+                style={{ backgroundColor: "#6D4C41" }}
+              />
               {/* Button face */}
-              <div className="relative px-8 py-4 bg-gradient-to-b from-primary to-primary/80 border-4 border-primary-foreground/20">
+              <div
+                className="relative px-8 py-4 border-4"
+                style={{
+                  background: "linear-gradient(to bottom, #7CB342, #558B2F)",
+                  borderColor: "#8D6E63",
+                }}
+              >
                 <span
-                  className="text-sm md:text-base text-white uppercase tracking-widest block"
-                  style={{ fontFamily: "var(--font-pixel)" }}
+                  className="text-sm md:text-base text-white uppercase tracking-widest block font-pixel"
                 >
-                  VIEW ALL GAMES
+                  VIEW ALL PROJECTS
                 </span>
                 {/* Decorative pixels on button */}
                 <div className="absolute top-1 left-1 w-1 h-1 bg-white/50" />
@@ -196,11 +275,6 @@ export function Projects() {
                 <div className="absolute bottom-1 left-1 w-1 h-1 bg-black/30" />
                 <div className="absolute bottom-1 right-1 w-1 h-1 bg-black/30" />
               </div>
-              {/* Hover glow effect */}
-              <motion.div
-                className="absolute -inset-2 bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"
-                style={{ zIndex: -1 }}
-              />
             </motion.button>
           </Link>
         </AnimatedSection>

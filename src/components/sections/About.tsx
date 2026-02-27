@@ -311,11 +311,11 @@ export function About() {
 
                 {/* Avatar Display */}
                 <motion.div
-                  style={{ y: avatarY }}
-                  className="relative aspect-square overflow-hidden border-4 border-[#8D6E63]/30"
                   style={{
+                    y: avatarY,
                     background: "linear-gradient(135deg, #B0E0E6 0%, #87CEEB 100%)",
                   }}
+                  className="relative aspect-square overflow-hidden border-4 border-[#8D6E63]/30"
                 >
                   {/* Fantasy character placeholder */}
                   <div className="flex h-full w-full flex-col items-center justify-center">
