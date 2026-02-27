@@ -107,14 +107,14 @@ export function Projects() {
               transition={{ duration: 0.3 }}
               className="mb-4 flex items-center justify-center gap-2"
             >
-              <PixelDecoration className="text-yellow-400" />
+              <PixelDecoration className="text-[#FFD60A]" />
               <span
-                className="text-xs md:text-sm text-yellow-400 uppercase tracking-widest"
+                className="text-xs md:text-sm text-[#FFD60A] uppercase tracking-widest"
                 style={{ fontFamily: "var(--font-vt323)" }}
               >
                 SELECT GAME
               </span>
-              <PixelDecoration className="text-yellow-400" />
+              <PixelDecoration className="text-[#FFD60A]" />
             </motion.div>
 
             <motion.h2
@@ -125,8 +125,8 @@ export function Projects() {
               className="text-xl md:text-2xl lg:text-4xl text-white uppercase tracking-tight"
               style={{ fontFamily: "var(--font-pixel)" }}
             >
-              <span className="text-cyan-400">CARTRIDGE</span>{" "}
-              <span className="text-pink-400">COLLECTION</span>
+              <span className="text-[#00F5FF]">CARTRIDGE</span>{" "}
+              <span className="text-[#FF006E]">COLLECTION</span>
             </motion.h2>
 
             <motion.p
@@ -134,7 +134,7 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="mx-auto mt-4 max-w-2xl text-lg md:text-xl text-slate-400"
+              className="mx-auto mt-4 max-w-2xl text-lg md:text-xl text-[#a1a1aa]"
               style={{ fontFamily: "var(--font-vt323)" }}
             >
               Choose a project to play
