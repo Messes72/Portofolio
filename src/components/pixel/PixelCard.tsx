@@ -9,7 +9,7 @@ export interface PixelCardProps {
   header?: React.ReactNode;
   className?: string;
   showScanlines?: boolean;
-  variant?: "default" | "primary" | "secondary";
+  variant?: "default" | "primary" | "secondary" | "accent" | "highlight";
 }
 
 export function PixelCard({
@@ -22,9 +22,11 @@ export function PixelCard({
   const prefersReducedMotion = useReducedMotion();
 
   const variantStyles = {
-    default: "bg-[#1a1a2e] border-[#4a4a6a]",
-    primary: "bg-[#2d1b4e] border-[#a855f7]",
-    secondary: "bg-[#1e3a3a] border-[#22c55e]",
+    default: "bg-[#240946] border-[#00F5FF]",
+    primary: "bg-[#240946] border-[#FF006E]",
+    secondary: "bg-[#240946] border-[#FFD60A]",
+    accent: "bg-[#240946] border-[#9D4EDD]",
+    highlight: "bg-[#240946] border-[#39FF14]",
   };
 
   // 8-bit pixel border with inner highlight
@@ -54,9 +56,11 @@ export function PixelCard({
         <div
           className={cn(
             "px-6 py-3 mb-4 -mx-6 -mt-0",
-            variant === "default" && "bg-[#2a2a4a] border-b-4 border-[#4a4a6a]",
-            variant === "primary" && "bg-[#4a2a7a] border-b-4 border-[#a855f7]",
-            variant === "secondary" && "bg-[#2a5a4a] border-b-4 border-[#22c55e]"
+            variant === "default" && "bg-[#1A0B2E] border-b-4 border-[#00F5FF]",
+            variant === "primary" && "bg-[#1A0B2E] border-b-4 border-[#FF006E]",
+            variant === "secondary" && "bg-[#1A0B2E] border-b-4 border-[#FFD60A]",
+            variant === "accent" && "bg-[#1A0B2E] border-b-4 border-[#9D4EDD]",
+            variant === "highlight" && "bg-[#1A0B2E] border-b-4 border-[#39FF14]"
           )}
         >
           {header}

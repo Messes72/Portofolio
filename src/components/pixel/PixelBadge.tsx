@@ -9,14 +9,14 @@ const pixelBadgeVariants = cva(
   {
     variants: {
       variant: {
-        pink: "bg-[#FF6B9D] text-white",
-        cyan: "bg-[#00D9FF] text-black",
-        yellow: "bg-[#FFD93D] text-black",
-        purple: "bg-[#A855F7] text-white",
-        green: "bg-[#22C55E] text-black",
-        red: "bg-[#EF4444] text-white",
-        blue: "bg-[#3B82F6] text-white",
-        orange: "bg-[#F97316] text-black",
+        pink: "bg-[#FF006E] text-white",
+        cyan: "bg-[#00F5FF] text-black",
+        yellow: "bg-[#FFD60A] text-black",
+        purple: "bg-[#9D4EDD] text-white",
+        green: "bg-[#39FF14] text-black",
+        red: "bg-[#FF006E] text-white",
+        blue: "bg-[#00F5FF] text-black",
+        orange: "bg-[#FFD60A] text-black",
       },
       size: {
         sm: "px-2 py-0.5 text-[8px]",

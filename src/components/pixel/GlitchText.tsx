@@ -30,19 +30,19 @@ export function GlitchText({
 
   const variantColors = {
     default: {
-      primary: "#00D9FF",
-      secondary: "#FF6B9D",
-      shadow: "#FFD93D",
+      primary: "#00F5FF",
+      secondary: "#FF006E",
+      shadow: "#FFD60A",
     },
     cyber: {
-      primary: "#22C55E",
-      secondary: "#A855F7",
-      shadow: "#00D9FF",
+      primary: "#39FF14",
+      secondary: "#9D4EDD",
+      shadow: "#00F5FF",
     },
     retro: {
-      primary: "#FFD93D",
-      secondary: "#FF6B9D",
-      shadow: "#A855F7",
+      primary: "#FFD60A",
+      secondary: "#FF006E",
+      shadow: "#9D4EDD",
     },
   };
 

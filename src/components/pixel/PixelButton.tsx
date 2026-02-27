@@ -10,11 +10,11 @@ const pixelButtonVariants = cva(
   {
     variants: {
       variant: {
-        pink: "bg-[#FF6B9D] text-white",
-        cyan: "bg-[#00D9FF] text-black",
-        yellow: "bg-[#FFD93D] text-black",
-        purple: "bg-[#A855F7] text-white",
-        green: "bg-[#22C55E] text-black",
+        pink: "bg-[#FF006E] text-white",
+        cyan: "bg-[#00F5FF] text-black",
+        yellow: "bg-[#FFD60A] text-black",
+        purple: "bg-[#9D4EDD] text-white",
+        green: "bg-[#39FF14] text-black",
       },
       size: {
         sm: "px-3 py-1 text-xs",

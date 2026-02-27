@@ -107,8 +107,8 @@ export function RetroBackground({
           className="absolute inset-0"
           style={{
             background: `
-              linear-gradient(to right, rgba(168, 85, 247, ${gridOpacity}) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(168, 85, 247, ${gridOpacity}) 1px, transparent 1px)
+              linear-gradient(to right, rgba(157, 78, 221, ${gridOpacity}) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(157, 78, 221, ${gridOpacity}) 1px, transparent 1px)
             `,
             backgroundSize: "50px 50px",
             perspective: "1000px",
@@ -120,7 +120,7 @@ export function RetroBackground({
             className="absolute left-0 right-0 h-px"
             style={{
               top: "50%",
-              background: `linear-gradient(to right, transparent, rgba(168, 85, 247, 0.5), transparent)`,
+              background: `linear-gradient(to right, transparent, rgba(157, 78, 221, 0.5), transparent)`,
             }}
           />
         </div>
