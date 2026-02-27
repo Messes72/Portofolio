@@ -2,24 +2,42 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun, Monitor, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Use useLayoutEffect on client, useEffect on server
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-// Theme cycle: system -> dark -> light -> system
-const themeCycle = ["system", "dark", "light"] as const;
-type ThemeMode = (typeof themeCycle)[number];
+type ThemeMode = "system" | "dark" | "light";
+
+const themeOptions: { value: ThemeMode; label: string; icon: React.ElementType }[] = [
+  { value: "light", label: "Light", icon: Sun },
+  { value: "dark", label: "Dark", icon: Moon },
+  { value: "system", label: "System", icon: Monitor },
+];
 
 export function ThemeToggle() {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Handle hydration mismatch using layout effect
   useIsomorphicLayoutEffect(() => {
     setMounted(true);
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-theme-toggle]")) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [isOpen]);
 
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
@@ -32,104 +50,69 @@ export function ThemeToggle() {
     );
   }
 
-  // Determine current mode (normalize to system, dark, or light)
+  // Determine current mode
   const currentMode: ThemeMode = (theme as ThemeMode) || "system";
+  const currentOption = themeOptions.find((opt) => opt.value === currentMode) || themeOptions[2];
+  const Icon = currentOption.icon;
 
-  // Get effective theme (for system mode, use system preference)
-  const effectiveTheme = currentMode === "system" ? systemTheme : currentMode;
-  const isDark = effectiveTheme === "dark";
-
-  // Cycle to next theme
-  const handleToggle = () => {
-    const currentIndex = themeCycle.indexOf(currentMode);
-    const nextIndex = (currentIndex + 1) % themeCycle.length;
-    setTheme(themeCycle[nextIndex]);
-  };
-
-  // Get label for current mode
-  const getModeLabel = () => {
-    switch (currentMode) {
-      case "system":
-        return "System";
-      case "dark":
-        return "Dark";
-      case "light":
-        return "Light";
-    }
+  const handleSelect = (mode: ThemeMode) => {
+    setTheme(mode);
+    setIsOpen(false);
   };
 
   return (
-    <div className="flex items-center gap-2">
-      {/* Sun icon - active in light mode */}
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={currentMode === "light" ? "sun-active" : "sun-inactive"}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Sun
-            className={`h-4 w-4 transition-colors ${
-              currentMode === "light" ? "text-amber-500" : "text-muted-foreground"
-            }`}
-          />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Toggle button */}
+    <div className="relative" data-theme-toggle>
+      {/* Toggle Button */}
       <motion.button
-        onClick={handleToggle}
+        onClick={() => setIsOpen(!isOpen)}
         whileTap={{ scale: 0.95 }}
-        transition={{ duration: 0.1 }}
-        className="relative flex items-center justify-center h-6 w-14 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-        aria-label={`Theme: ${getModeLabel()}. Click to change.`}
+        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+        aria-label={`Theme: ${currentOption.label}. Click to change.`}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
       >
-        {/* Track indicator */}
-        <motion.div
-          className="absolute h-5 w-5 rounded-full bg-primary shadow-md"
-          animate={{
-            x: currentMode === "system" ? -14 : currentMode === "dark" ? 0 : 14,
-          }}
-          transition={{ type: "spring", stiffness: 500, damping: 30 }}
-        />
-
-        {/* Icons inside track */}
-        <div className="relative z-10 flex items-center justify-between w-full px-1">
-          <Monitor className="h-3 w-3 text-muted-foreground" />
-          <Moon className="h-3 w-3 text-muted-foreground" />
-          <Sun className="h-3 w-3 text-muted-foreground" />
-        </div>
+        <Icon className="h-4 w-4 text-foreground" />
+        <span className="text-xs font-medium text-muted-foreground min-w-[3rem] text-left">
+          {currentOption.label}
+        </span>
       </motion.button>
 
-      {/* Moon icon - active in dark mode */}
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={currentMode === "dark" ? "moon-active" : "moon-inactive"}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Moon
-            className={`h-4 w-4 transition-colors ${
-              currentMode === "dark" ? "text-indigo-400" : "text-muted-foreground"
-            }`}
-          />
-        </motion.div>
+      {/* Dropdown Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full right-0 mt-2 w-32 bg-popover border border-border rounded-lg shadow-lg overflow-hidden z-50"
+            role="listbox"
+            aria-label="Theme options"
+          >
+            {themeOptions.map((option) => {
+              const OptionIcon = option.icon;
+              const isSelected = currentMode === option.value;
+              return (
+                <motion.button
+                  key={option.value}
+                  onClick={() => handleSelect(option.value)}
+                  className={`w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors ${
+                    isSelected
+                      ? "bg-accent text-accent-foreground"
+                      : "text-popover-foreground hover:bg-muted"
+                  }`}
+                  role="option"
+                  aria-selected={isSelected}
+                >
+                  <OptionIcon className="h-4 w-4" />
+                  <span className="flex-1 text-left">{option.label}</span>
+                  {isSelected && <Check className="h-3 w-3" />}
+                </motion.button>
+              );
+            })}
+          </motion.div>
+        )}
       </AnimatePresence>
-
-      {/* Current mode label */}
-      <motion.span
-        key={getModeLabel()}
-        initial={{ opacity: 0, y: -5 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 5 }}
-        transition={{ duration: 0.15 }}
-        className="text-xs font-medium text-muted-foreground min-w-[3rem]"
-      >
-        {getModeLabel()}
-      </motion.span>
     </div>
   );
 }
