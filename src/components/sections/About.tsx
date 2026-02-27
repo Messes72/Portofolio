@@ -18,10 +18,10 @@ import {
 
 // RPG Stats configuration
 const rpgStats = [
-  { name: "STR", label: "Hardworking", value: 85, color: "bg-red-500", icon: Swords },
-  { name: "INT", label: "Communication", value: 78, color: "bg-blue-500", icon: Brain },
-  { name: "CHA", label: "Team Player", value: 82, color: "bg-purple-500", icon: Users },
-  { name: "XP", label: "Eager to Learn", value: 92, color: "bg-green-500", icon: Star },
+  { name: "STR", label: "Hardworking", value: 85, color: "bg-[#FF006E]", icon: Swords },
+  { name: "INT", label: "Communication", value: 78, color: "bg-[#00F5FF]", icon: Brain },
+  { name: "CHA", label: "Team Player", value: 82, color: "bg-[#9D4EDD]", icon: Users },
+  { name: "XP", label: "Eager to Learn", value: 92, color: "bg-[#39FF14]", icon: Star },
 ];
 
 // Quests (Education & Experience)
@@ -49,9 +49,9 @@ const quests = [
 // Pixel border style component
 const PixelBorder = ({ children, className = "", color = "cyan" }: { children: React.ReactNode; className?: string; color?: "cyan" | "purple" | "gold" }) => {
   const colorMap = {
-    cyan: "border-cyan-400 shadow-[4px_4px_0px_0px_rgba(34,211,238,0.5)]",
-    purple: "border-purple-400 shadow-[4px_4px_0px_0px_rgba(192,132,252,0.5)]",
-    gold: "border-yellow-400 shadow-[4px_4px_0px_0px_rgba(250,204,21,0.5)]",
+    cyan: "border-[#00F5FF] shadow-[4px_4px_0px_0px_rgba(0,245,255,0.5)]",
+    purple: "border-[#9D4EDD] shadow-[4px_4px_0px_0px_rgba(157,78,221,0.5)]",
+    gold: "border-[#FFD60A] shadow-[4px_4px_0px_0px_rgba(255,214,10,0.5)]",
   };
 
   return (
@@ -118,7 +118,7 @@ const StatItem = ({ stat, index }: { stat: typeof rpgStats[0]; index: number }) 
         <div className="flex-1">
           <div className="flex items-center justify-between">
             <span className="font-bold text-sm tracking-wider text-foreground">{stat.name}</span>
-            <span className="font-mono text-lg font-bold text-yellow-500">{displayValue}</span>
+            <span className="font-mono text-lg font-bold text-[#FFD60A]">{displayValue}</span>
           </div>
           <span className="text-xs text-muted-foreground">{stat.label}</span>
         </div>
@@ -141,7 +141,7 @@ const QuestItem = ({ quest, index }: { quest: typeof quests[0]; index: number })
       className="relative border-2 border-foreground/10 bg-card p-4 hover:border-primary/50 transition-colors"
     >
       {/* Quest complete badge */}
-      <div className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center bg-yellow-500 border-2 border-foreground">
+      <div className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center bg-[#FFD60A] border-2 border-foreground">
         <Trophy className="h-3 w-3 text-black" />
       </div>
 
@@ -151,7 +151,7 @@ const QuestItem = ({ quest, index }: { quest: typeof quests[0]; index: number })
         </div>
         <div className="flex-1 min-w-0">
           <h4 className="font-bold text-foreground text-sm">{quest.title}</h4>
-          <p className="text-xs text-yellow-500 font-medium">{quest.subtitle}</p>
+          <p className="text-xs text-[#FFD60A] font-medium">{quest.subtitle}</p>
           <p className="text-xs text-muted-foreground mt-1">{quest.details}</p>
         </div>
       </div>
@@ -205,11 +205,11 @@ export function About() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 border-4 border-cyan-400 bg-card px-6 py-3 shadow-[4px_4px_0px_0px_rgba(34,211,238,0.5)]"
             >
-              <Crown className="h-6 w-6 text-yellow-500" />
+              <Crown className="h-6 w-6 text-[#FFD60A]" />
               <h2 className="text-2xl font-bold tracking-wider text-foreground uppercase">
                 Player Profile
               </h2>
-              <Crown className="h-6 w-6 text-yellow-500" />
+              <Crown className="h-6 w-6 text-[#FFD60A]" />
             </motion.div>
             <p className="mt-4 text-sm text-muted-foreground uppercase tracking-widest">
               Press START to view stats
@@ -233,7 +233,7 @@ export function About() {
               <div className="bg-card p-4">
                 {/* Player Label */}
                 <div className="mb-4 flex items-center justify-between border-b-2 border-foreground/10 pb-2">
-                  <span className="text-xs font-bold text-cyan-400 tracking-wider">PLAYER 1</span>
+                  <span className="text-xs font-bold text-[#00F5FF] tracking-wider">PLAYER 1</span>
                   <div className="flex items-center gap-1">
                     <Gem className="h-4 w-4 text-purple-500" />
                     <span className="text-xs text-muted-foreground">READY</span>
@@ -281,19 +281,19 @@ export function About() {
                 {/* HP/MP Bars */}
                 <div className="mt-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-red-500 w-8">HP</span>
-                    <PixelBar value={100} max={100} color="bg-gradient-to-r from-red-500 to-red-400" height="h-4" />
-                    <span className="text-xs font-mono text-red-500">100/100</span>
+                    <span className="text-xs font-bold text-[#FF006E] w-8">HP</span>
+                    <PixelBar value={100} max={100} color="bg-gradient-to-r from-[#FF006E] to-[#FF4D9E]" height="h-4" />
+                    <span className="text-xs font-mono text-[#FF006E]">100/100</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-blue-500 w-8">MP</span>
-                    <PixelBar value={85} max={100} color="bg-gradient-to-r from-blue-500 to-blue-400" height="h-4" />
-                    <span className="text-xs font-mono text-blue-500">85/100</span>
+                    <span className="text-xs font-bold text-[#00F5FF] w-8">MP</span>
+                    <PixelBar value={85} max={100} color="bg-gradient-to-r from-[#00F5FF] to-[#4DFFFF]" height="h-4" />
+                    <span className="text-xs font-mono text-[#00F5FF]">85/100</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-green-500 w-8">XP</span>
-                    <PixelBar value={65} max={100} color="bg-gradient-to-r from-green-500 to-green-400" height="h-4" />
-                    <span className="text-xs font-mono text-green-500">65%</span>
+                    <span className="text-xs font-bold text-[#39FF14] w-8">XP</span>
+                    <PixelBar value={65} max={100} color="bg-gradient-to-r from-[#39FF14] to-[#7FFF4D]" height="h-4" />
+                    <span className="text-xs font-mono text-[#39FF14]">65%</span>
                   </div>
                 </div>
               </div>
@@ -302,7 +302,7 @@ export function About() {
             {/* Character Info Card */}
             <PixelBorder color="purple" className="bg-card">
               <div className="p-4">
-                <h3 className="text-xs font-bold text-purple-400 mb-4 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
+                <h3 className="text-xs font-bold text-[#9D4EDD] mb-4 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
                   Character Data
                 </h3>
                 <div className="space-y-3 font-mono text-sm">
@@ -312,11 +312,11 @@ export function About() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">CLASS:</span>
-                    <span className="font-bold text-yellow-500">FULL-STACK DEV</span>
+                    <span className="font-bold text-[#FFD60A]">FULL-STACK DEV</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">LEVEL:</span>
-                    <span className="font-bold text-cyan-400">LV. 5</span>
+                    <span className="font-bold text-[#00F5FF]">LV. 5</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">LOCATION:</span>
@@ -335,7 +335,7 @@ export function About() {
             {/* Stats Panel */}
             <PixelBorder color="cyan" className="bg-card">
               <div className="p-4">
-                <h3 className="text-xs font-bold text-cyan-400 mb-6 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
+                <h3 className="text-xs font-bold text-[#00F5FF] mb-6 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
                   Base Stats
                 </h3>
                 <div className="space-y-5">
@@ -349,7 +349,7 @@ export function About() {
             {/* Quests Completed Panel */}
             <PixelBorder color="gold" className="bg-card">
               <div className="p-4">
-                <h3 className="text-xs font-bold text-yellow-500 mb-4 uppercase tracking-wider border-b-2 border-foreground/10 pb-2 flex items-center gap-2">
+                <h3 className="text-xs font-bold text-[#FFD60A] mb-4 uppercase tracking-wider border-b-2 border-foreground/10 pb-2 flex items-center gap-2">
                   <Trophy className="h-4 w-4" />
                   Quests Completed
                 </h3>
@@ -364,7 +364,7 @@ export function About() {
             {/* Bio Description */}
             <PixelBorder color="purple" className="bg-card">
               <div className="p-4">
-                <h3 className="text-xs font-bold text-purple-400 mb-3 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
+                <h3 className="text-xs font-bold text-[#9D4EDD] mb-3 uppercase tracking-wider border-b-2 border-foreground/10 pb-2">
                   Character Bio
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">

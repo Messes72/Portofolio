@@ -110,13 +110,13 @@ const getMasteryTitle = (level: number): string => {
   return "NOVICE";
 };
 
-// Category color schemes
+// Category color schemes - Unified pixel theme palette
 const categoryColors: Record<string, { bg: string; border: string; glow: string; text: string }> = {
-  frontend: { bg: "#06b6d4", border: "#22d3ee", glow: "rgba(6, 182, 212, 0.5)", text: "text-cyan-400" },
-  backend: { bg: "#a855f7", border: "#c084fc", glow: "rgba(168, 85, 247, 0.5)", text: "text-purple-400" },
-  mobile: { bg: "#ec4899", border: "#f472b6", glow: "rgba(236, 72, 153, 0.5)", text: "text-pink-400" },
-  tools: { bg: "#eab308", border: "#facc15", glow: "rgba(234, 179, 8, 0.5)", text: "text-yellow-400" },
-  languages: { bg: "#22c55e", border: "#4ade80", glow: "rgba(34, 197, 94, 0.5)", text: "text-green-400" },
+  frontend: { bg: "#00F5FF", border: "#00F5FF", glow: "rgba(0, 245, 255, 0.5)", text: "text-[#00F5FF]" },
+  backend: { bg: "#9D4EDD", border: "#9D4EDD", glow: "rgba(157, 78, 221, 0.5)", text: "text-[#9D4EDD]" },
+  mobile: { bg: "#FF006E", border: "#FF006E", glow: "rgba(255, 0, 110, 0.5)", text: "text-[#FF006E]" },
+  tools: { bg: "#FFD60A", border: "#FFD60A", glow: "rgba(255, 214, 10, 0.5)", text: "text-[#FFD60A]" },
+  languages: { bg: "#39FF14", border: "#39FF14", glow: "rgba(57, 255, 20, 0.5)", text: "text-[#39FF14]" },
 };
 
 // Pixel XP Bar Component with segmented display
@@ -423,26 +423,26 @@ export function Skills() {
     },
   ];
 
-  // Legend data
+  // Legend data - Theme Palette
   const legendItems = [
-    { title: "MASTER", level: "90%+", stars: 4, color: "#22d3ee" },
-    { title: "EXPERT", level: "70-89%", stars: 3, color: "#c084fc" },
-    { title: "ADEPT", level: "50-69%", stars: 2, color: "#facc15" },
-    { title: "NOVICE", level: "<50%", stars: 1, color: "#a1a1aa" },
+    { title: "MASTER", level: "90%+", stars: 4, color: "#00F5FF" },
+    { title: "EXPERT", level: "70-89%", stars: 3, color: "#9D4EDD" },
+    { title: "ADEPT", level: "50-69%", stars: 2, color: "#FFD60A" },
+    { title: "NOVICE", level: "<50%", stars: 1, color: "#71717a" },
   ];
 
   return (
     <section
       id="skills"
-      className="py-20 md:py-32 bg-zinc-950 relative overflow-hidden"
+      className="py-20 md:py-32 bg-[#0D0221] relative overflow-hidden"
     >
       {/* Background Grid Pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #22d3ee 1px, transparent 1px),
-            linear-gradient(to bottom, #22d3ee 1px, transparent 1px)
+            linear-gradient(to right, #00F5FF 1px, transparent 1px),
+            linear-gradient(to bottom, #00F5FF 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
         }}
