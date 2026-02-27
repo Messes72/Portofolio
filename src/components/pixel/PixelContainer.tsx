@@ -10,11 +10,11 @@ const pixelContainerVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-[#00F5FF]",
-        accent: "border-[#FF006E]",
-        highlight: "border-[#FFD60A]",
-        purple: "border-[#9D4EDD]",
-        green: "border-[#39FF14]",
+        default: "border-[#4FC3F7]",    // water-blue
+        accent: "border-[#F48FB1]",     // flower-pink
+        highlight: "border-[#FFD54F]", // sun-yellow
+        purple: "border-[#8D6E63]",     // earth-brown
+        green: "border-[#7CB342]",     // grass-green
       },
       size: {
         sm: "p-4",
@@ -49,13 +49,13 @@ export function PixelContainer({
 }: PixelContainerProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  // Map variant to color for glow and borders
+  // Map variant to nature colors for glow and borders
   const variantColors = {
-    default: "#00F5FF",
-    accent: "#FF006E",
-    highlight: "#FFD60A",
-    purple: "#9D4EDD",
-    green: "#39FF14",
+    default: "#4FC3F7",    // water-blue
+    accent: "#F48FB1",     // flower-pink
+    highlight: "#FFD54F",  // sun-yellow
+    purple: "#8D6E63",     // earth-brown
+    green: "#7CB342",      // grass-green
   };
 
   const color = variantColors[variant || "default"];
@@ -92,7 +92,7 @@ export function PixelContainer({
   const containerContent = (
     <div
       className={cn(
-        "bg-[#240946]",
+        "bg-[#FFF8E7]",
         pixelContainerVariants({ variant, size }),
         className
       )}

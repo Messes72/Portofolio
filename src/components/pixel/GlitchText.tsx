@@ -30,19 +30,19 @@ export function GlitchText({
 
   const variantColors = {
     default: {
-      primary: "#00F5FF",
-      secondary: "#FF006E",
-      shadow: "#FFD60A",
+      primary: "#4FC3F7",    // water-blue
+      secondary: "#F48FB1", // flower-pink
+      shadow: "#3E2723",    // text-dark
     },
     cyber: {
-      primary: "#39FF14",
-      secondary: "#9D4EDD",
-      shadow: "#00F5FF",
+      primary: "#7CB342",    // grass-green
+      secondary: "#FFD54F", // sun-yellow
+      shadow: "#3E2723",    // text-dark
     },
     retro: {
-      primary: "#FFD60A",
-      secondary: "#FF006E",
-      shadow: "#9D4EDD",
+      primary: "#8D6E63",    // earth-brown
+      secondary: "#4FC3F7",  // water-blue
+      shadow: "#3E2723",    // text-dark
     },
   };
 

@@ -50,27 +50,27 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  // Map variant to pixel colors
+  // Map variant to nature colors
   const variantColors = {
     default: {
-      primary: "#00F5FF",
-      text: "#F8F9FA",
+      primary: "#4FC3F7",    // water-blue
+      text: "#3E2723",       // text-dark
     },
     accent: {
-      primary: "#FF006E",
-      text: "#F8F9FA",
+      primary: "#F48FB1",    // flower-pink
+      text: "#3E2723",       // text-dark
     },
     highlight: {
-      primary: "#FFD60A",
-      text: "#F8F9FA",
+      primary: "#FFD54F",    // sun-yellow
+      text: "#3E2723",       // text-dark
     },
     purple: {
-      primary: "#9D4EDD",
-      text: "#F8F9FA",
+      primary: "#8D6E63",    // earth-brown
+      text: "#3E2723",       // text-dark
     },
     green: {
-      primary: "#39FF14",
-      text: "#F8F9FA",
+      primary: "#7CB342",    // grass-green
+      text: "#3E2723",       // text-dark
     },
   };
 
