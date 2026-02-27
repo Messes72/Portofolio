@@ -15,10 +15,9 @@ export function getProjectsByCategory(category: Project['category']): Project[] 
   return projects.filter((project) => project.category === category);
 }
 
-export function getFeaturedProjects(limit: number = 3): Project[] {
-  return projects
-    .filter((project) => project.status === 'live')
-    .slice(0, limit);
+export function getFeaturedProjects(limit: number = 4): Project[] {
+  // Return all projects (not just 'live' ones) to show complete portfolio
+  return projects.slice(0, limit);
 }
 
 export function getAllSkillCategories(): string[] {
