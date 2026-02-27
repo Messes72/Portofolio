@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0D0221"/>
+  <rect x="40" y="40" width="720" height="420" fill="#1a1a2e" rx="8"/>
+  <rect x="50" y="50" width="700" height="60" fill="#00F5FF" rx="4"/>
+  <text x="70" y="88" font-family="Arial, sans-serif" font-size="28" fill="black" font-weight="bold">Article Editor</text>
+  <rect x="680" y="60" width="60" height="40" fill="#39FF14" rx="4"/>
+  <text x="690" y="85" font-family="Arial, sans-serif" font-size="14" fill="black">Save</text>
+  <rect x="50" y="120" width="700" height="60" fill="#0D0221" rx="4"/>
+  <text x="70" y="155" font-family="Arial, sans-serif" font-size="14" fill="#00F5FF">Title</text>
+  <text x="70" y="175" font-family="Arial, sans-serif" font-size="16" fill="white">Getting Started with Laravel Framework</text>
+  <rect x="50" y="190" width="700" height="60" fill="#0D0221" rx="4"/>
+  <text x="70" y="225" font-family="Arial, sans-serif" font-size="14" fill="#00F5FF">Category</text>
+  <text x="70" y="245" font-family="Arial, sans-serif" font-size="16" fill="white">Tutorial</text>
+  <rect x="50" y="260" width="700" height="180" fill="#0D0221" rx="4"/>
+  <text x="70" y="295" font-family="Arial, sans-serif" font-size="14" fill="#00F5FF">Content</text>
+  <text x="70" y="320" font-family="Arial, sans-serif" font-size="14" fill="white">Laravel is a powerful PHP framework...</text>
+  <text x="70" y="345" font-family="Arial, sans-serif" font-size="14" fill="white">It provides elegant syntax and tools for...</text>
+  <text x="70" y="370" font-family="Arial, sans-serif" font-size="14" fill="white">building modern web applications...</text>
+  <rect x="50" y="380" width="700" height="60" fill="#9D4EDD" rx="4"/>
+  <text x="70" y="415" font-family="Arial, sans-serif" font-size="14" fill="white">📝 WYSIWYG Editor Toolbar | Bold | Italic | Link | Image</text>
+</svg>
