@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0D0221"/>
+  <rect x="40" y="40" width="720" height="420" fill="#1a1a2e" rx="8"/>
+  <rect x="50" y="50" width="700" height="60" fill="#FF006E" rx="4"/>
+  <text x="70" y="88" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="bold">Laravel CMS Dashboard</text>
+  <rect x="50" y="120" width="180" height="300" fill="#0D0221" rx="4"/>
+  <text x="70" y="150" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">📊 Dashboard</text>
+  <text x="70" y="180" font-family="Arial, sans-serif" font-size="14" fill="white">📝 Articles</text>
+  <text x="70" y="210" font-family="Arial, sans-serif" font-size="14" fill="white">🏷️ Categories</text>
+  <text x="70" y="240" font-family="Arial, sans-serif" font-size="14" fill="white">🖼️ Media Library</text>
+  <text x="70" y="270" font-family="Arial, sans-serif" font-size="14" fill="white">👥 Users</text>
+  <text x="70" y="300" font-family="Arial, sans-serif" font-size="14" fill="white">⚙️ Settings</text>
+  <rect x="250" y="120" width="500" height="100" fill="#00F5FF" rx="4"/>
+  <text x="270" y="155" font-family="Arial, sans-serif" font-size="18" fill="black">Total Articles</text>
+  <text x="270" y="185" font-family="Arial, sans-serif" font-size="28" fill="black" font-weight="bold">42</text>
+  <rect x="250" y="230" width="500" height="100" fill="#9D4EDD" rx="4"/>
+  <text x="270" y="265" font-family="Arial, sans-serif" font-size="18" fill="white">Categories</text>
+  <text x="270" y="295" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="bold">8</text>
+  <rect x="250" y="340" width="500" height="100" fill="#FFD60A" rx="4"/>
+  <text x="270" y="375" font-family="Arial, sans-serif" font-size="18" fill="black">Total Users</text>
+  <text x="270" y="405" font-family="Arial, sans-serif" font-size="28" fill="black" font-weight="bold">156</text>
+</svg>
