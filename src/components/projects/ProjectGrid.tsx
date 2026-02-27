@@ -13,13 +13,13 @@ type FilterCategory = "All" | "Web" | "Mobile" | "Full-Stack" | "Live" | "Develo
 
 const filters: FilterCategory[] = ["All", "Web", "Mobile", "Full-Stack", "Live", "Development"];
 
-// Theme colors for filter buttons
+// Theme colors for filter buttons - Nature palette
 const THEME_COLORS = {
-  cyan: "#00F5FF",
-  pink: "#FF006E",
-  purple: "#9D4EDD",
-  yellow: "#FFD60A",
-  green: "#39FF14",
+  cyan: "#4FC3F7",      // water-blue
+  pink: "#F48FB1",      // flower-pink
+  purple: "#8D6E63",    // earth-brown
+  yellow: "#FFD54F",    // sun-yellow
+  green: "#7CB342",     // grass-green
 };
 
 // Pixel filter button component - Enhanced Arcade Style
@@ -128,10 +128,10 @@ function EmptyState() {
         {/* Border frame */}
         <div className="relative border-4 border-slate-600 p-12 bg-slate-900">
           {/* Corner decorations */}
-          <div className="absolute top-2 left-2 w-4 h-4 border-t-4 border-l-4 border-[#FF006E]" />
-          <div className="absolute top-2 right-2 w-4 h-4 border-t-4 border-r-4 border-[#FF006E]" />
-          <div className="absolute bottom-2 left-2 w-4 h-4 border-b-4 border-l-4 border-[#FF006E]" />
-          <div className="absolute bottom-2 right-2 w-4 h-4 border-b-4 border-r-4 border-[#FF006E]" />
+          <div className="absolute top-2 left-2 w-4 h-4 border-t-4 border-l-4 border-[#F48FB1]" />
+          <div className="absolute top-2 right-2 w-4 h-4 border-t-4 border-r-4 border-[#F48FB1]" />
+          <div className="absolute bottom-2 left-2 w-4 h-4 border-b-4 border-l-4 border-[#F48FB1]" />
+          <div className="absolute bottom-2 right-2 w-4 h-4 border-b-4 border-r-4 border-[#F48FB1]" />
 
           <motion.p
             className="text-2xl md:text-3xl mb-4"

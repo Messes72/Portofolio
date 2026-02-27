@@ -29,13 +29,13 @@ import {
   FlameKindling,
 } from "lucide-react";
 
-// Strict theme color palette
+// Nature theme color palette
 const THEME_COLORS = {
-  cyan: "#00F5FF",
-  pink: "#FF006E",
-  purple: "#9D4EDD",
-  yellow: "#FFD60A",
-  green: "#39FF14",
+  cyan: "#4FC3F7",      // water-blue
+  pink: "#F48FB1",      // flower-pink
+  purple: "#8D6E63",    // earth-brown
+  yellow: "#FFD54F",    // sun-yellow
+  green: "#7CB342",     // grass-green
 };
 
 // Cartridge label colors by category - strict theme adherence
@@ -73,10 +73,10 @@ const categoryColors: Record<
   },
 };
 
-// Status badges - Arcade style with theme colors
+// Status badges - Nature theme colors
 const statusBadges: Record<string, { label: string; bg: string; textColor: string }> = {
-  live: { label: "NEW RELEASE", bg: "bg-[#39FF14]", textColor: "text-slate-950" },
-  "in-development": { label: "COMING SOON", bg: "bg-[#FFD60A]", textColor: "text-slate-950" },
+  live: { label: "NEW RELEASE", bg: "bg-[#7CB342]", textColor: "text-slate-950" },
+  "in-development": { label: "COMING SOON", bg: "bg-[#FFD54F]", textColor: "text-slate-950" },
   archived: { label: "CLASSIC", bg: "bg-slate-500", textColor: "text-white" },
 };
 
