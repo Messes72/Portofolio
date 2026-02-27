@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0D0221"/>
+  <rect x="40" y="40" width="720" height="420" fill="#1a1a2e" rx="8"/>
+  <rect x="50" y="50" width="700" height="60" fill="#9D4EDD" rx="4"/>
+  <text x="70" y="88" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="bold">Jadwal Dokter</text>
+  <rect x="50" y="120" width="700" height="50" fill="#0D0221" rx="4"/>
+  <text x="60" y="150" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Senin</text>
+  <text x="150" y="150" font-family="Arial, sans-serif" font-size="16" fill="white">Dr. Ahmad - 08:00-12:00</text>
+  <rect x="50" y="180" width="700" height="50" fill="#0D0221" rx="4"/>
+  <text x="60" y="210" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Selasa</text>
+  <text x="150" y="210" font-family="Arial, sans-serif" font-size="16" fill="white">Dr. Siti - 09:00-15:00</text>
+  <rect x="50" y="240" width="700" height="50" fill="#0D0221" rx="4"/>
+  <text x="60" y="270" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Rabu</text>
+  <text x="150" y="270" font-family="Arial, sans-serif" font-size="16" fill="white">Dr. Budi - 08:00-14:00</text>
+  <rect x="50" y="300" width="700" height="50" fill="#0D0221" rx="4"/>
+  <text x="60" y="330" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Kamis</text>
+  <text x="150" y="330" font-family="Arial, sans-serif" font-size="16" fill="white">Dr. Rina - 10:00-16:00</text>
+  <rect x="50" y="360" width="700" height="50" fill="#0D0221" rx="4"/>
+  <text x="60" y="390" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Jumat</text>
+  <text x="150" y="390" font-family="Arial, sans-serif" font-size="16" fill="white">Dr. Widodo - 08:00-12:00</text>
+</svg>
