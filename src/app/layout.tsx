@@ -58,8 +58,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${pressStart2P.variable} ${vt323.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <SmoothScroll>

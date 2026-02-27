@@ -52,97 +52,115 @@
 :root {
   --radius: 0;
 
-  /* Pixel Theme - Retro Neon Palette (ONLY colors used) */
-  --pixel-pink: #FF006E;
-  --pixel-cyan: #00F5FF;
-  --pixel-yellow: #FFD60A;
-  --pixel-purple: #9D4EDD;
-  --pixel-green: #39FF14;
-  --pixel-dark: #0D0221;
-  --pixel-surface: #240946;
-  --pixel-grid: #1A0B2E;
-  --pixel-text: #F8F9FA;
-  --pixel-muted: #B8B8D1;
+  /* Pixel Fantasy Theme - Nature Palette */
+  /* Sky Colors */
+  --sky-blue: #87CEEB;
+  --sky-light: #B0E0E6;
+  --sky-dark: #5DADE2;
+  --sky-rgb: 135, 206, 235;
 
-  /* Pixel RGB values for opacity */
-  --pixel-pink-rgb: 255, 0, 110;
-  --pixel-cyan-rgb: 0, 245, 255;
-  --pixel-yellow-rgb: 255, 214, 10;
-  --pixel-purple-rgb: 157, 78, 221;
-  --pixel-green-rgb: 57, 255, 20;
-  --pixel-dark-rgb: 13, 2, 33;
-  --pixel-surface-rgb: 36, 9, 70;
-  --pixel-grid-rgb: 26, 11, 46;
+  /* Grass Colors */
+  --grass-green: #7CB342;
+  --grass-light: #9CCC65;
+  --grass-dark: #558B2F;
+  --grass-rgb: 124, 179, 66;
 
-  /* shadcn theme mapping to pixel colors */
-  --background: 260 89% 7%;
-  --foreground: 220 14% 97%;
-  --card: 260 78% 15%;
-  --card-foreground: 220 14% 97%;
-  --popover: 260 78% 15%;
-  --popover-foreground: 220 14% 97%;
-  --primary: 328 100% 50%;
-  --primary-foreground: 220 14% 97%;
-  --secondary: 272 66% 59%;
-  --secondary-foreground: 220 14% 97%;
-  --muted: 260 78% 15%;
-  --muted-foreground: 240 15% 75%;
-  --accent: 185 100% 50%;
-  --accent-foreground: 260 89% 7%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 220 14% 97%;
-  --border: 260 60% 20%;
-  --input: 260 60% 20%;
-  --ring: 328 100% 50%;
-  --chart-1: 328 100% 50%;
-  --chart-2: 185 100% 50%;
-  --chart-3: 50 100% 52%;
-  --chart-4: 272 66% 59%;
-  --chart-5: 104 100% 54%;
-  --sidebar: 260 78% 15%;
-  --sidebar-foreground: 220 14% 97%;
-  --sidebar-primary: 328 100% 50%;
-  --sidebar-primary-foreground: 220 14% 97%;
-  --sidebar-accent: 260 78% 15%;
-  --sidebar-accent-foreground: 220 14% 97%;
-  --sidebar-border: 260 60% 20%;
-  --sidebar-ring: 328 100% 50%;
+  /* Sun Colors */
+  --sun-yellow: #FFD54F;
+  --sun-orange: #FFB74D;
+  --sun-gold: #FFC107;
+  --sun-rgb: 255, 213, 79;
+
+  /* Cloud/Card Colors */
+  --cloud-white: #FFF8E7;
+  --cloud-cream: #FFF3E0;
+  --cloud-pure: #FFFFFF;
+  --cloud-rgb: 255, 248, 231;
+
+  /* Nature Accents */
+  --water-blue: #4FC3F7;
+  --leaf-green: #66BB6A;
+  --flower-pink: #F48FB1;
+  --earth-brown: #8D6E63;
+  --wood-brown: #A1887F;
+  --stone-gray: #9E9E9E;
+
+  /* RGB values for opacity */
+  --sky-light-rgb: 176, 224, 230;
+  --grass-light-rgb: 156, 204, 101;
+  --sun-yellow-rgb: 255, 213, 79;
+  --earth-brown-rgb: 141, 110, 99;
+
+  /* shadcn theme mapping to fantasy colors */
+  --background: 197 71% 73%; /* sky-blue */
+  --foreground: 30 20% 25%; /* dark brown text */
+  --card: 40 100% 95%; /* cloud-white */
+  --card-foreground: 30 20% 25%;
+  --popover: 40 100% 95%;
+  --popover-foreground: 30 20% 25%;
+  --primary: 88 50% 47%; /* grass-green */
+  --primary-foreground: 40 100% 95%;
+  --secondary: 197 71% 73%; /* sky-blue */
+  --secondary-foreground: 30 20% 25%;
+  --muted: 30 20% 85%;
+  --muted-foreground: 30 10% 40%;
+  --accent: 45 100% 65%; /* sun-yellow */
+  --accent-foreground: 30 20% 25%;
+  --destructive: 0 70% 55%;
+  --destructive-foreground: 40 100% 95%;
+  --border: 30 25% 65%; /* earth-brown */
+  --input: 30 25% 65%;
+  --ring: 88 50% 47%; /* grass-green */
+  --chart-1: 88 50% 47%; /* grass */
+  --chart-2: 197 71% 73%; /* sky */
+  --chart-3: 45 100% 65%; /* sun */
+  --chart-4: 340 70% 76%; /* flower */
+  --chart-5: 199 91% 64%; /* water */
+  --sidebar: 40 100% 95%;
+  --sidebar-foreground: 30 20% 25%;
+  --sidebar-primary: 88 50% 47%;
+  --sidebar-primary-foreground: 40 100% 95%;
+  --sidebar-accent: 197 71% 73%;
+  --sidebar-accent-foreground: 30 20% 25%;
+  --sidebar-border: 30 25% 65%;
+  --sidebar-ring: 88 50% 47%;
 }
 
+/* Light theme is default - fantasy theme */
 .dark {
-  /* Dark Mode - Same Pixel Theme (pixel theme is naturally dark) */
-  --background: 260 89% 7%;
-  --foreground: 220 14% 97%;
-  --card: 260 78% 15%;
-  --card-foreground: 220 14% 97%;
-  --popover: 260 78% 15%;
-  --popover-foreground: 220 14% 97%;
-  --primary: 328 100% 50%;
-  --primary-foreground: 220 14% 97%;
-  --secondary: 272 66% 59%;
-  --secondary-foreground: 220 14% 97%;
-  --muted: 260 78% 15%;
-  --muted-foreground: 240 15% 75%;
-  --accent: 185 100% 50%;
-  --accent-foreground: 260 89% 7%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 220 14% 97%;
-  --border: 260 60% 20%;
-  --input: 260 60% 20%;
-  --ring: 328 100% 50%;
-  --chart-1: 328 100% 50%;
-  --chart-2: 185 100% 50%;
-  --chart-3: 50 100% 52%;
-  --chart-4: 272 66% 59%;
-  --chart-5: 104 100% 54%;
-  --sidebar: 260 78% 15%;
-  --sidebar-foreground: 220 14% 97%;
-  --sidebar-primary: 328 100% 50%;
-  --sidebar-primary-foreground: 220 14% 97%;
-  --sidebar-accent: 260 78% 15%;
-  --sidebar-accent-foreground: 220 14% 97%;
-  --sidebar-border: 260 60% 20%;
-  --sidebar-ring: 328 100% 50%;
+  /* Fantasy theme works in both modes - just slightly adjusted */
+  --background: 197 50% 65%;
+  --foreground: 30 20% 20%;
+  --card: 40 90% 92%;
+  --card-foreground: 30 20% 20%;
+  --popover: 40 90% 92%;
+  --popover-foreground: 30 20% 20%;
+  --primary: 88 45% 42%;
+  --primary-foreground: 40 100% 95%;
+  --secondary: 197 50% 65%;
+  --secondary-foreground: 30 20% 20%;
+  --muted: 30 15% 75%;
+  --muted-foreground: 30 10% 35%;
+  --accent: 45 95% 60%;
+  --accent-foreground: 30 20% 20%;
+  --destructive: 0 65% 50%;
+  --destructive-foreground: 40 100% 95%;
+  --border: 30 22% 55%;
+  --input: 30 22% 55%;
+  --ring: 88 45% 42%;
+  --chart-1: 88 45% 42%;
+  --chart-2: 197 50% 65%;
+  --chart-3: 45 95% 60%;
+  --chart-4: 340 65% 71%;
+  --chart-5: 199 86% 59%;
+  --sidebar: 40 90% 92%;
+  --sidebar-foreground: 30 20% 20%;
+  --sidebar-primary: 88 45% 42%;
+  --sidebar-primary-foreground: 40 100% 95%;
+  --sidebar-accent: 197 50% 65%;
+  --sidebar-accent-foreground: 30 20% 20%;
+  --sidebar-border: 30 22% 55%;
+  --sidebar-ring: 88 45% 42%;
 }
 
 @layer base {
@@ -151,6 +169,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(180deg, var(--sky-blue) 0%, var(--sky-light) 50%, var(--cloud-white) 100%);
+    min-height: 100vh;
   }
 
   /* Enhanced focus styles for keyboard navigation */
@@ -181,17 +201,54 @@
 }
 
 @layer utilities {
-  /* Pixel border utilities */
+  /* Pixel border utilities with earth tones */
   .pixel-border {
-    box-shadow: -4px 0 0 0 black, 4px 0 0 0 black, 0 -4px 0 0 black, 0 4px 0 0 black;
+    box-shadow:
+      -4px 0 0 0 var(--earth-brown),
+      4px 0 0 0 var(--earth-brown),
+      0 -4px 0 0 var(--earth-brown),
+      0 4px 0 0 var(--earth-brown);
+    margin: 4px;
+  }
+
+  .pixel-border-wood {
+    box-shadow:
+      -4px 0 0 0 var(--wood-brown),
+      4px 0 0 0 var(--wood-brown),
+      0 -4px 0 0 var(--wood-brown),
+      0 4px 0 0 var(--wood-brown);
+    margin: 4px;
+  }
+
+  .pixel-border-grass {
+    box-shadow:
+      -4px 0 0 0 var(--grass-green),
+      4px 0 0 0 var(--grass-green),
+      0 -4px 0 0 var(--grass-green),
+      0 4px 0 0 var(--grass-green);
     margin: 4px;
   }
 
   .pixel-border-3d {
-    box-shadow: inset -4px -4px 0 0 rgba(0,0,0,0.5), inset 4px 4px 0 0 rgba(255,255,255,0.3), -4px 0 0 0 black, 4px 0 0 0 black, 0 -4px 0 0 black, 0 4px 0 0 black;
+    box-shadow:
+      inset -4px -4px 0 0 rgba(141, 110, 99, 0.3),
+      inset 4px 4px 0 0 rgba(255, 255, 255, 0.5),
+      -4px 0 0 0 var(--earth-brown),
+      4px 0 0 0 var(--earth-brown),
+      0 -4px 0 0 var(--earth-brown),
+      0 4px 0 0 var(--earth-brown);
   }
 
-  /* Scanline overlay effect */
+  /* Soft shadow for fantasy theme */
+  .shadow-soft {
+    box-shadow: 0 4px 20px rgba(141, 110, 99, 0.15);
+  }
+
+  .shadow-cloud {
+    box-shadow: 0 8px 32px rgba(135, 206, 235, 0.3);
+  }
+
+  /* Scanline overlay - subtle for fantasy */
   .scanlines {
     position: relative;
   }
@@ -206,8 +263,8 @@
     pointer-events: none;
     background: repeating-linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.1) 0px,
-      rgba(0, 0, 0, 0.1) 1px,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
       transparent 1px,
       transparent 2px
     );
@@ -224,203 +281,487 @@
   }
 }
 
-/* Pixel Art Retro Animations */
+/* ============================================
+   FANTASY NATURE ANIMATIONS
+   ============================================ */
+
+/* Cloud floating animation */
+@keyframes float-cloud {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(20px) translateY(-5px);
+  }
+  50% {
+    transform: translateX(40px) translateY(0);
+  }
+  75% {
+    transform: translateX(20px) translateY(5px);
+  }
+}
+
+/* Slow cloud drift */
+@keyframes drift-cloud {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100%));
+  }
+}
+
+/* Sun ray rotation */
+@keyframes rotate-rays {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Gentle sway for leaves/grass */
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+/* Twinkle for stars/sparkles */
 @keyframes twinkle {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
-@keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-  20%, 24%, 55% { opacity: 0.4; }
+/* Bird flying */
+@keyframes fly {
+  0% {
+    transform: translateX(-100px) translateY(0);
+  }
+  25% {
+    transform: translateX(25vw) translateY(-20px);
+  }
+  50% {
+    transform: translateX(50vw) translateY(0);
+  }
+  75% {
+    transform: translateX(75vw) translateY(-15px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(0);
+  }
 }
 
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+/* Butterfly random hover */
+@keyframes flutter {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-20px) rotate(8deg);
+  }
 }
 
-@keyframes glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
+/* Wind lines */
+@keyframes wind {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
 }
 
-@keyframes float-pixel {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  25% { transform: translateY(-10px) translateX(5px); }
-  50% { transform: translateY(-5px) translateX(-5px); }
-  75% { transform: translateY(-15px) translateX(3px); }
+/* Pulse glow for sword/magic */
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px var(--sun-yellow));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px var(--sun-yellow)) drop-shadow(0 0 40px var(--sun-orange));
+  }
 }
 
-@keyframes typewriter-cursor {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+/* Bounce for character idle */
+@keyframes bounce-idle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
-/* Pixel Animation Classes */
+/* Grass wave */
+@keyframes grass-wave {
+  0%, 100% {
+    transform: skewX(0deg);
+  }
+  25% {
+    transform: skewX(2deg);
+  }
+  75% {
+    transform: skewX(-2deg);
+  }
+}
+
+/* Flower bloom */
+@keyframes bloom {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   ANIMATION UTILITY CLASSES
+   ============================================ */
+
+.animate-float-cloud {
+  animation: float-cloud 15s ease-in-out infinite;
+}
+
+.animate-drift-cloud {
+  animation: drift-cloud 60s linear infinite;
+}
+
+.animate-drift-cloud-slow {
+  animation: drift-cloud 90s linear infinite;
+}
+
+.animate-rotate-rays {
+  animation: rotate-rays 20s linear infinite;
+}
+
+.animate-sway {
+  animation: sway 3s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-sway-slow {
+  animation: sway 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
 .animate-twinkle {
   animation: twinkle 2s steps(3) infinite;
 }
 
-.animate-blink {
-  animation: blink 1s steps(1) infinite;
+.animate-twinkle-fast {
+  animation: twinkle 1s steps(3) infinite;
 }
 
-.animate-flicker {
-  animation: flicker 3s steps(10) infinite;
+.animate-fly {
+  animation: fly 20s linear infinite;
 }
 
-.animate-glitch {
-  animation: glitch 0.3s steps(2) infinite;
+.animate-flutter {
+  animation: flutter 4s ease-in-out infinite;
 }
 
-.animate-float-pixel {
-  animation: float-pixel 8s steps(10) infinite;
+.animate-wind {
+  animation: wind 8s linear infinite;
 }
 
-/* Pixel Button Styles */
-.pixel-btn {
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-bounce-idle {
+  animation: bounce-idle 2s ease-in-out infinite;
+}
+
+.animate-grass-wave {
+  animation: grass-wave 4s ease-in-out infinite;
+}
+
+.animate-bloom {
+  animation: bloom 0.6s ease-out forwards;
+}
+
+/* ============================================
+   FANTASY COLOR UTILITIES
+   ============================================ */
+
+/* Text colors */
+.text-sky { color: var(--sky-blue); }
+.text-sky-dark { color: var(--sky-dark); }
+.text-grass { color: var(--grass-green); }
+.text-grass-dark { color: var(--grass-dark); }
+.text-sun { color: var(--sun-yellow); }
+.text-sun-orange { color: var(--sun-orange); }
+.text-cloud { color: var(--cloud-white); }
+.text-earth { color: var(--earth-brown); }
+.text-wood { color: var(--wood-brown); }
+.text-water { color: var(--water-blue); }
+.text-leaf { color: var(--leaf-green); }
+.text-flower { color: var(--flower-pink); }
+
+/* Background colors */
+.bg-sky { background-color: var(--sky-blue); }
+.bg-sky-light { background-color: var(--sky-light); }
+.bg-sky-dark { background-color: var(--sky-dark); }
+.bg-grass { background-color: var(--grass-green); }
+.bg-grass-light { background-color: var(--grass-light); }
+.bg-grass-dark { background-color: var(--grass-dark); }
+.bg-sun { background-color: var(--sun-yellow); }
+.bg-sun-orange { background-color: var(--sun-orange); }
+.bg-cloud { background-color: var(--cloud-white); }
+.bg-cloud-cream { background-color: var(--cloud-cream); }
+.bg-earth { background-color: var(--earth-brown); }
+.bg-wood { background-color: var(--wood-brown); }
+.bg-water { background-color: var(--water-blue); }
+.bg-leaf { background-color: var(--leaf-green); }
+.bg-flower { background-color: var(--flower-pink); }
+
+/* Border colors */
+.border-sky { border-color: var(--sky-blue); }
+.border-grass { border-color: var(--grass-green); }
+.border-sun { border-color: var(--sun-yellow); }
+.border-cloud { border-color: var(--cloud-white); }
+.border-earth { border-color: var(--earth-brown); }
+.border-wood { border-color: var(--wood-brown); }
+.border-water { border-color: var(--water-blue); }
+
+/* Soft shadows */
+.shadow-earth {
+  box-shadow: 0 4px 0 0 var(--earth-brown);
+}
+
+.shadow-wood {
+  box-shadow: 0 4px 0 0 var(--wood-brown);
+}
+
+.shadow-grass {
+  box-shadow: 0 4px 0 0 var(--grass-green);
+}
+
+.shadow-sun {
+  box-shadow: 0 0 20px rgba(255, 213, 79, 0.5);
+}
+
+/* ============================================
+   FANTASY PIXEL COMPONENTS
+   ============================================ */
+
+/* Wood button style */
+.pixel-btn-wood {
   position: relative;
   image-rendering: pixelated;
+  background-color: var(--wood-brown);
+  color: var(--cloud-white);
   box-shadow:
-    0 4px 0 0 rgba(0, 0, 0, 0.3),
-    inset 0 -4px 0 0 rgba(0, 0, 0, 0.2),
-    inset 0 4px 0 0 rgba(255, 255, 255, 0.2);
+    0 4px 0 0 var(--earth-brown),
+    inset 0 -2px 0 0 rgba(0,0,0,0.2),
+    inset 0 2px 0 0 rgba(255,255,255,0.1);
   transition: all 0.1s steps(2);
 }
 
-.pixel-btn:hover {
+.pixel-btn-wood:hover {
   transform: translateY(-2px);
   box-shadow:
-    0 6px 0 0 rgba(0, 0, 0, 0.3),
-    inset 0 -4px 0 0 rgba(0, 0, 0, 0.2),
-    inset 0 4px 0 0 rgba(255, 255, 255, 0.2);
+    0 6px 0 0 var(--earth-brown),
+    inset 0 -2px 0 0 rgba(0,0,0,0.2),
+    inset 0 2px 0 0 rgba(255,255,255,0.1);
 }
 
-.pixel-btn:active {
+.pixel-btn-wood:active {
   transform: translateY(2px);
   box-shadow:
-    0 2px 0 0 rgba(0, 0, 0, 0.3),
-    inset 0 -4px 0 0 rgba(0, 0, 0, 0.2),
-    inset 0 4px 0 0 rgba(255, 255, 255, 0.2);
+    0 2px 0 0 var(--earth-brown),
+    inset 0 -2px 0 0 rgba(0,0,0,0.2),
+    inset 0 2px 0 0 rgba(255,255,255,0.1);
 }
 
-/* Retro CRT glow effect */
-.crt-glow {
-  text-shadow:
-    0 0 5px currentColor,
-    0 0 10px currentColor,
-    0 0 20px currentColor;
-}
-
-/* Pixel color utilities */
-.text-pixel-pink { color: var(--pixel-pink); }
-.text-pixel-cyan { color: var(--pixel-cyan); }
-.text-pixel-yellow { color: var(--pixel-yellow); }
-.text-pixel-purple { color: var(--pixel-purple); }
-.text-pixel-green { color: var(--pixel-green); }
-.text-pixel-text { color: var(--pixel-text); }
-.text-pixel-muted { color: var(--pixel-muted); }
-
-.bg-pixel-pink { background-color: var(--pixel-pink); }
-.bg-pixel-cyan { background-color: var(--pixel-cyan); }
-.bg-pixel-yellow { background-color: var(--pixel-yellow); }
-.bg-pixel-purple { background-color: var(--pixel-purple); }
-.bg-pixel-green { background-color: var(--pixel-green); }
-.bg-pixel-dark { background-color: var(--pixel-dark); }
-.bg-pixel-surface { background-color: var(--pixel-surface); }
-.bg-pixel-grid { background-color: var(--pixel-grid); }
-
-.border-pixel-pink { border-color: var(--pixel-pink); }
-.border-pixel-cyan { border-color: var(--pixel-cyan); }
-.border-pixel-yellow { border-color: var(--pixel-yellow); }
-.border-pixel-purple { border-color: var(--pixel-purple); }
-.border-pixel-green { border-color: var(--pixel-green); }
-
-/* Pixel glow effects by color */
-.glow-pink { box-shadow: 0 0 10px var(--pixel-pink), 0 0 20px var(--pixel-pink); }
-.glow-cyan { box-shadow: 0 0 10px var(--pixel-cyan), 0 0 20px var(--pixel-cyan); }
-.glow-yellow { box-shadow: 0 0 10px var(--pixel-yellow), 0 0 20px var(--pixel-yellow); }
-.glow-purple { box-shadow: 0 0 10px var(--pixel-purple), 0 0 20px var(--pixel-purple); }
-.glow-green { box-shadow: 0 0 10px var(--pixel-green), 0 0 20px var(--pixel-green); }
-
-/* Text glow by color */
-.text-glow-pink { text-shadow: 0 0 5px var(--pixel-pink), 0 0 10px var(--pixel-pink); }
-.text-glow-cyan { text-shadow: 0 0 5px var(--pixel-cyan), 0 0 10px var(--pixel-cyan); }
-.text-glow-yellow { text-shadow: 0 0 5px var(--pixel-yellow), 0 0 10px var(--pixel-yellow); }
-.text-glow-purple { text-shadow: 0 0 5px var(--pixel-purple), 0 0 10px var(--pixel-purple); }
-.text-glow-green { text-shadow: 0 0 5px var(--pixel-green), 0 0 10px var(--pixel-green); }
-
-/* Pixel border colors */
-.pixel-border-pink {
-  box-shadow:
-    -4px 0 0 0 var(--pixel-pink),
-     4px 0 0 0 var(--pixel-pink),
-     0 -4px 0 0 var(--pixel-pink),
-     0 4px 0 0 var(--pixel-pink);
-}
-
-.pixel-border-cyan {
-  box-shadow:
-    -4px 0 0 0 var(--pixel-cyan),
-     4px 0 0 0 var(--pixel-cyan),
-     0 -4px 0 0 var(--pixel-cyan),
-     0 4px 0 0 var(--pixel-cyan);
-}
-
-.pixel-border-yellow {
-  box-shadow:
-    -4px 0 0 0 var(--pixel-yellow),
-     4px 0 0 0 var(--pixel-yellow),
-     0 -4px 0 0 var(--pixel-yellow),
-     0 4px 0 0 var(--pixel-yellow);
-}
-
-.pixel-border-purple {
-  box-shadow:
-    -4px 0 0 0 var(--pixel-purple),
-     4px 0 0 0 var(--pixel-purple),
-     0 -4px 0 0 var(--pixel-purple),
-     0 4px 0 0 var(--pixel-purple);
-}
-
-.pixel-border-green {
-  box-shadow:
-    -4px 0 0 0 var(--pixel-green),
-     4px 0 0 0 var(--pixel-green),
-     0 -4px 0 0 var(--pixel-green),
-     0 4px 0 0 var(--pixel-green);
-}
-
-/* Pixel section backgrounds */
-.pixel-section {
+/* Grass button style */
+.pixel-btn-grass {
   position: relative;
-  background-color: var(--pixel-dark);
-  background-image:
-    linear-gradient(to right, rgba(var(--pixel-purple-rgb), 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(var(--pixel-purple-rgb), 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+  image-rendering: pixelated;
+  background-color: var(--grass-green);
+  color: var(--cloud-white);
+  box-shadow:
+    0 4px 0 0 var(--grass-dark),
+    inset 0 -2px 0 0 rgba(0,0,0,0.2),
+    inset 0 2px 0 0 rgba(255,255,255,0.2);
+  transition: all 0.1s steps(2);
 }
 
-/* Font utilities */
-.font-pixel { font-family: var(--font-pixel), monospace; }
-.font-vt323 { font-family: var(--font-vt323), monospace; }
+.pixel-btn-grass:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 0 0 var(--grass-dark),
+    inset 0 -2px 0 0 rgba(0,0,0,0.2),
+    inset 0 2px 0 0 rgba(255,255,255,0.2);
+}
 
-/* Pixel card base */
-.pixel-card {
-  background-color: var(--pixel-surface);
+.pixel-btn-grass:active {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 0 var(--grass-dark),
+    inset 0 -2px 0 0 rgba(0,0,0,0.2),
+    inset 0 2px 0 0 rgba(255,255,255,0.2);
+}
+
+/* Cloud card style */
+.pixel-card-cloud {
+  background-color: var(--cloud-white);
   border: 4px solid transparent;
   box-shadow:
-    inset -4px 0 0 0 rgba(255,255,255,0.05),
-    inset 0 -4px 0 0 rgba(0,0,0,0.3),
-    inset 4px 0 0 0 rgba(0,0,0,0.2),
-    inset 0 4px 0 0 rgba(255,255,255,0.03),
-    -4px 0 0 0 var(--pixel-cyan),
-     4px 0 0 0 var(--pixel-cyan),
-     0 -4px 0 0 var(--pixel-cyan),
-     0 4px 0 0 var(--pixel-cyan);
+    inset -2px 0 0 0 rgba(255,255,255,0.8),
+    inset 0 -2px 0 0 rgba(0,0,0,0.1),
+    inset 2px 0 0 0 rgba(0,0,0,0.05),
+    inset 0 2px 0 0 rgba(255,255,255,1),
+    -4px 0 0 0 var(--earth-brown),
+     4px 0 0 0 var(--earth-brown),
+     0 -4px 0 0 var(--earth-brown),
+     0 4px 0 0 var(--earth-brown);
 }
+
+/* Fantasy section background */
+.fantasy-section {
+  position: relative;
+  background: linear-gradient(180deg, var(--sky-blue) 0%, var(--sky-light) 30%, var(--cloud-cream) 100%);
+}
+
+/* Grass foreground */
+.grass-foreground {
+  background: linear-gradient(180deg, var(--grass-light) 0%, var(--grass-green) 50%, var(--grass-dark) 100%);
+  position: relative;
+}
+
+.grass-foreground::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--grass-green) 0px,
+    var(--grass-green) 8px,
+    var(--grass-light) 8px,
+    var(--grass-light) 12px,
+    var(--grass-dark) 12px,
+    var(--grass-dark) 16px
+  );
+  clip-path: polygon(
+    0% 100%,
+    2% 0%,
+    4% 100%,
+    6% 20%,
+    8% 100%,
+    10% 0%,
+    12% 100%,
+    14% 30%,
+    16% 100%,
+    18% 10%,
+    20% 100%,
+    22% 40%,
+    24% 100%,
+    26% 0%,
+    28% 100%,
+    30% 20%,
+    32% 100%,
+    34% 50%,
+    36% 100%,
+    38% 10%,
+    40% 100%,
+    42% 30%,
+    44% 100%,
+    46% 0%,
+    48% 100%,
+    50% 40%,
+    52% 100%,
+    54% 20%,
+    56% 100%,
+    58% 10%,
+    60% 100%,
+    62% 30%,
+    64% 100%,
+    66% 0%,
+    68% 100%,
+    70% 50%,
+    72% 100%,
+    74% 20%,
+    76% 100%,
+    78% 10%,
+    80% 100%,
+    82% 40%,
+    84% 100%,
+    86% 30%,
+    88% 100%,
+    90% 0%,
+    92% 100%,
+    94% 20%,
+    96% 100%,
+    98% 10%,
+    100% 100%
+  );
+}
+
+/* Sun glow effect */
+.sun-glow {
+  background: radial-gradient(circle, var(--sun-yellow) 0%, var(--sun-orange) 40%, transparent 70%);
+  filter: blur(2px);
+}
+
+/* Water shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.water-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--water-blue) 0%,
+    rgba(255,255,255,0.3) 50%,
+    var(--water-blue) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ============================================
+   FONT UTILITIES (already defined but repeated for clarity)
+   ============================================ */
+
+.font-pixel { font-family: var(--font-pixel), monospace; }
+.font-vt323 { font-family: var(--font-vt323), monospace; }
