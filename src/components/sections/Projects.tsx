@@ -6,7 +6,7 @@ import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
 import { getFeaturedProjects } from "@/lib/data";
 
-const featuredProjects = getFeaturedProjects(3);
+const featuredProjects = getFeaturedProjects(4);
 
 // Pixel decorative elements
 function PixelDecoration({ className = "" }: { className?: string }) {
