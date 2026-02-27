@@ -10,6 +10,20 @@ import {
   Backpack,
   Brain,
   Star,
+  Code2,
+  Layout,
+  Palette,
+  Terminal,
+  Database,
+  Server,
+  Smartphone,
+  Flame,
+  Box,
+  GitBranch,
+  Figma,
+  Coffee,
+  FileCode,
+  Waves,
 } from "lucide-react";
 
 interface Skill {
@@ -54,6 +68,80 @@ const getSkillDisplayName = (iconName: string): string => {
   return nameMap[iconName] || iconName.toUpperCase();
 };
 
+// Map skill names to icons
+const getSkillIcon = (iconName: string): React.ElementType => {
+  const iconMap: Record<string, React.ElementType> = {
+    react: Code2,
+    svelte: Waves,
+    htmlcss: Layout,
+    tailwind: Palette,
+    javascript: Terminal,
+    nodejs: Server,
+    php: FileCode,
+    laravel: Box,
+    python: Coffee,
+    flutter: Smartphone,
+    android: Smartphone,
+    firebase: Flame,
+    git: GitBranch,
+    figma: Figma,
+    supabase: Database,
+    laragon: Server,
+    xampp: Server,
+    java: Coffee,
+  };
+  return iconMap[iconName] || Code2;
+};
+
+// Map skill icon names to Lucide icon components
+const getSkillIcon = (iconName: string): React.ElementType => {
+  const iconMap: Record<string, React.ElementType> = {
+    react: Code2,
+    svelte: Waves,
+    htmlcss: Layout,
+    tailwind: Palette,
+    javascript: FileCode,
+    nodejs: Server,
+    php: Terminal,
+    laravel: Box,
+    python: Coffee,
+    flutter: Smartphone,
+    android: Smartphone,
+    firebase: Flame,
+    git: GitBranch,
+    figma: Figma,
+    supabase: Database,
+    laragon: Server,
+    xampp: Server,
+    java: Coffee,
+  };
+  return iconMap[iconName] || Code2;
+};
+
+// Map skill icon names to SVG icons
+const getSkillIcon = (iconName: string): string => {
+  const iconMap: Record<string, string> = {
+    react: "⚛️",
+    svelte: "🎐",
+    htmlcss: "🌐",
+    tailwind: "🌊",
+    javascript: "📜",
+    nodejs: "🟢",
+    php: "🐘",
+    laravel: "🔺",
+    python: "🐍",
+    flutter: "🦋",
+    android: "🤖",
+    firebase: "🔥",
+    git: "📋",
+    figma: "🎨",
+    supabase: "⚡",
+    laragon: "🦖",
+    xampp: "🎯",
+    java: "☕",
+  };
+  return iconMap[iconName] || "⚙️";
+};
 // Convert percentage to RPG level (1-5)
 const getSkillLevel = (level: number): number => {
   if (level >= 90) return 5;
@@ -146,6 +234,9 @@ function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKe
   const colors = categoryColors[categoryKey];
   const masteryTitle = getMasteryTitle(skill.level);
 
+  // Get first letter of skill name for icon
+  const skillLetter = skill.name.charAt(0).toUpperCase();
+
   return (
     <motion.div
       ref={ref}
@@ -166,10 +257,23 @@ function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKe
         style={{ backgroundColor: colors.bg }}
       />
 
-      {/* Skill Header */}
-      <div className="flex items-center justify-between mb-2">
+      {/* Skill Header with Icon */}
+      <div className="flex items-center gap-2 mb-2">
+        {/* Skill Icon */}
+        <div
+          className="w-6 h-6 flex items-center justify-center border text-[10px] font-bold"
+          style={{
+            borderColor: isHovered ? colors.border : "#3f3f46",
+            color: isHovered ? colors.border : "#a1a1aa",
+            backgroundColor: "rgba(0,0,0,0.3)",
+            fontFamily: "monospace",
+            transition: "all 0.2s"
+          }}
+        >
+          {skillLetter}
+        </div>
         <span
-          className="text-xs font-bold tracking-wider uppercase"
+          className="text-xs font-bold tracking-wider uppercase flex-1"
           style={{
             color: isHovered ? colors.border : "#e4e4e7",
             fontFamily: "monospace",
