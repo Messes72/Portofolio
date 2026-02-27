@@ -4,59 +4,109 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Github, Mail, MapPin, ArrowDown } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
+import {
+  PixelClouds,
+  PixelSun,
+  PixelBirds,
+  PixelButterflies,
+  PixelSparkles,
+} from "@/components/animations";
 
-// Floating Pixel Decorations with Parallax
-function FloatingPixels() {
+// Fantasy Nature Background
+function FantasyBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y3 = useTransform(scrollYProgress, [0, 1], [0, -150]);
-
-  const pixels = [
-    { x: "10%", y: "30%", color: "#FF006E", size: 16, yTransform: y1 },
-    { x: "85%", y: "20%", color: "#00F5FF", size: 12, yTransform: y2 },
-    { x: "75%", y: "70%", color: "#FFD60A", size: 20, yTransform: y3 },
-    { x: "15%", y: "80%", color: "#39FF14", size: 14, yTransform: y2 },
-    { x: "90%", y: "50%", color: "#9D4EDD", size: 10, yTransform: y1 },
-    { x: "5%", y: "60%", color: "#FF006E", size: 8, yTransform: y3 },
-    { x: "50%", y: "90%", color: "#00F5FF", size: 6, yTransform: y1 },
-  ];
 
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {pixels.map((pixel, index) => (
-        <motion.div
-          key={index}
-          className="absolute"
-          style={{
-            left: pixel.x,
-            top: pixel.y,
-            y: pixel.yTransform,
-          }}
-          animate={{
-            rotate: [0, 90, 180, 270, 360],
-          }}
-          transition={{
-            duration: 10 + index * 2,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+      {/* Sky gradient background */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(180deg, var(--sky-blue) 0%, var(--sky-light) 40%, var(--cloud-white) 100%)",
+        }}
+      />
+
+      {/* Distant mountains */}
+      <motion.div
+        className="absolute bottom-[30%] left-0 right-0 h-40"
+        style={{ y: y1 }}
+      >
+        <svg
+          viewBox="0 0 1440 200"
+          fill="none"
+          className="absolute bottom-0 w-full h-full"
+          preserveAspectRatio="none"
         >
-          <div
-            style={{
-              width: pixel.size,
-              height: pixel.size,
-              backgroundColor: pixel.color,
-              boxShadow: `0 0 ${pixel.size}px ${pixel.color}40`,
-            }}
+          <path
+            d="M0 200 L0 120 C150 80, 300 60, 480 100 C660 140, 800 40, 960 80 C1120 120, 1280 60, 1440 100 L1440 200 Z"
+            fill="var(--sky-dark)"
+            opacity="0.3"
           />
-        </motion.div>
-      ))}
+          <path
+            d="M0 200 L0 140 C200 100, 400 80, 600 120 C800 160, 1000 60, 1200 100 C1350 130, 1400 110, 1440 120 L1440 200 Z"
+            fill="var(--sky-dark)"
+            opacity="0.2"
+          />
+        </svg>
+      </motion.div>
+
+      {/* Midground hills */}
+      <motion.div
+        className="absolute bottom-[20%] left-0 right-0 h-32"
+        style={{ y: y2 }}
+      >
+        <svg
+          viewBox="0 0 1440 160"
+          fill="none"
+          className="absolute bottom-0 w-full h-full"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 160 L0 80 C180 40, 360 20, 540 60 C720 100, 900 40, 1080 80 C1260 120, 1350 60, 1440 80 L1440 160 Z"
+            fill="var(--grass-light)"
+          />
+        </svg>
+      </motion.div>
+
+      {/* Foreground grass */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-24"
+        style={{ y: y3 }}
+      >
+        <svg
+          viewBox="0 0 1440 120"
+          fill="none"
+          className="absolute bottom-0 w-full h-full"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 120 L0 40 C200 20, 400 0, 600 40 C800 80, 1000 20, 1200 50 C1320 70, 1380 40, 1440 50 L1440 120 Z"
+            fill="var(--grass-green)"
+          />
+          {/* Grass blades detail */}
+          <path
+            d="M0 120 L0 60 L10 30 L20 60 L30 20 L40 60 L50 35 L60 60 L70 25 L80 60 L90 40 L100 60 L110 30 L120 60"
+            stroke="var(--grass-dark)"
+            strokeWidth="2"
+            fill="none"
+            opacity="0.5"
+          />
+        </svg>
+      </motion.div>
+
+      {/* Nature decorations */}
+      <PixelClouds />
+      <PixelBirds />
+      <PixelButterflies />
+      <PixelSparkles />
     </div>
   );
 }
