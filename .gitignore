@@ -39,11 +39,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# project documentation
+# project documentation and planning files
 .claude/
-ACCESSIBILITY_REPORT.md
-CLAUDE.md
-PORTFOLIO_WEBSITE_PROMPT.md
-
-# planning/progress documentation
 /planning/
