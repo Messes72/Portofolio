@@ -6,12 +6,12 @@ import { Github, Gamepad2, ArrowUp, RotateCcw } from "lucide-react"
 import { PixelButton } from "@/components/pixel/PixelButton"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
 
-const COUNTDOWN_NUMBERS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+const COUNTDOWN_START = 9
 
 type MenuOption = "continue" | "retry" | "credits"
 
 export function Footer() {
-  const [countdownIndex, setCountdownIndex] = useState(0)
+  const [countdownValue, setCountdownValue] = useState(COUNTDOWN_START)
   const [selectedOption, setSelectedOption] = useState<MenuOption>("continue")
   const [showGameOver, setShowGameOver] = useState(true)
   const [showContinuePrompt, setShowContinuePrompt] = useState(true)
@@ -19,13 +19,18 @@ export function Footer() {
   const [hasContinued, setHasContinued] = useState(false)
   const prefersReducedMotion = useReducedMotion()
 
-  // Countdown timer effect
+  // Countdown timer effect - counts down from 9 to 0
   useEffect(() => {
     if (prefersReducedMotion) return
 
     const interval = setInterval(() => {
-      setCountdownIndex((prev) => (prev + 1) % COUNTDOWN_NUMBERS.length)
-    }, 800)
+      setCountdownValue((prev) => {
+        if (prev <= 0) {
+          return COUNTDOWN_START
+        }
+        return prev - 1
+      })
+    }, 1000)
 
     return () => clearInterval(interval)
   }, [prefersReducedMotion])
@@ -52,6 +57,7 @@ export function Footer() {
     setTimeout(() => {
       setHasContinued(false)
       setShowGameOver(true)
+      setCountdownValue(COUNTDOWN_START)
     }, 2000)
   }, [prefersReducedMotion])
 
@@ -203,24 +209,19 @@ export function Footer() {
             )}
           </AnimatePresence>
 
-          {/* Countdown Numbers */}
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {COUNTDOWN_NUMBERS.map((num, index) => (
-              <motion.span
-                key={num}
-                className={`text-lg sm:text-xl font-bold ${
-                  index === countdownIndex ? "text-green-400" : "text-white/30"
-                }`}
-                style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
-                animate={{
-                  scale: index === countdownIndex ? 1.3 : 1,
-                  opacity: index === countdownIndex ? 1 : 0.3,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                {num}
-              </motion.span>
-            ))}
+          {/* Countdown Number - Shows only current value */}
+          <div className="flex items-center justify-center">
+            <motion.span
+              key={countdownValue}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              className="text-4xl sm:text-5xl font-bold text-green-400"
+              style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              {countdownValue}
+            </motion.span>
           </div>
 
           {/* Menu Options */}
@@ -233,7 +234,7 @@ export function Footer() {
             role="menu"
             aria-label="Game menu options"
           >
-            {menuOptions.map((option, index) => (
+            {menuOptions.map((option) => (
               <motion.div
                 key={option.id}
                 role="menuitem"
