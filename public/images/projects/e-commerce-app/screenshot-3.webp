@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0D0221"/>
+  <rect x="40" y="40" width="720" height="420" fill="#1a1a2e" rx="8"/>
+  <rect x="50" y="50" width="700" height="60" fill="#9D4EDD" rx="4"/>
+  <text x="70" y="88" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="bold">Checkout</text>
+  <rect x="50" y="120" width="700" height="100" fill="#0D0221" rx="4"/>
+  <text x="70" y="150" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Shipping Address</text>
+  <text x="70" y="175" font-family="Arial, sans-serif" font-size="14" fill="white">Jalan Mawar No. 123, Jakarta</text>
+  <text x="70" y="195" font-family="Arial, sans-serif" font-size="14" fill="white">0812-3456-7890</text>
+  <rect x="50" y="230" width="700" height="100" fill="#0D0221" rx="4"/>
+  <text x="70" y="260" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Payment Method</text>
+  <rect x="70" y="270" width="100" height="40" fill="#FFD60A" rx="4"/>
+  <text x="85" y="295" font-family="Arial, sans-serif" font-size="12" fill="black">Transfer</text>
+  <rect x="180" y="270" width="100" height="40" fill="#FF006E" rx="4"/>
+  <text x="200" y="295" font-family="Arial, sans-serif" font-size="12" fill="white">E-Wallet</text>
+  <rect x="290" y="270" width="100" height="40" fill="#39FF14" rx="4"/>
+  <text x="305" y="295" font-family="Arial, sans-serif" font-size="12" fill="black">COD</text>
+  <rect x="50" y="340" width="700" height="100" fill="#39FF14" rx="4"/>
+  <text x="70" y="375" font-family="Arial, sans-serif" font-size="20" fill="black" font-weight="bold">Order Summary</text>
+  <text x="70" y="405" font-family="Arial, sans-serif" font-size="16" fill="black">Total Payment: Rp 898.000</text>
+  <rect x="550" y="360" width="180" height="60" fill="#FF006E" rx="4"/>
+  <text x="580" y="395" font-family="Arial, sans-serif" font-size="16" fill="white">Place Order</text>
+</svg>
