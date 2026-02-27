@@ -142,10 +142,10 @@ function PixelXPBar({ level, categoryKey, delay = 0 }: { level: number; category
         {Array.from({ length: 10 }).map((_, index) => (
           <motion.div
             key={index}
-            className="flex-1 border border-zinc-700"
+            className="flex-1 border border-[#8D6E63]/20"
             style={{
               backgroundColor: index < filledSegments && isInView ? colors.bg : "transparent",
-              borderColor: index < filledSegments && isInView ? colors.border : "#3f3f46",
+              borderColor: index < filledSegments && isInView ? colors.border : "#8D6E63",
               boxShadow: index < filledSegments && isInView ? `0 0 4px ${colors.glow}` : "none",
             }}
             initial={{ opacity: 0, scale: 0 }}
@@ -161,7 +161,7 @@ function PixelXPBar({ level, categoryKey, delay = 0 }: { level: number; category
 
       {/* Level Badge */}
       <motion.div
-        className="px-1.5 py-0.5 text-[10px] font-bold border border-zinc-600 bg-zinc-900"
+        className="px-1.5 py-0.5 text-[10px] font-bold border border-[#8D6E63]/50 bg-[#FFF8E7]"
         style={{
           color: colors.border,
           fontFamily: "monospace",

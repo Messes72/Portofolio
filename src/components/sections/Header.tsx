@@ -110,7 +110,7 @@ export function Header() {
       {/* Skip to content link for keyboard navigation - Nature Theme */}
       <a
         href="#main-content"
-        className="fixed top-0 left-0 z-[100] -translate-y-full focus:translate-y-0 bg-[#7CB342] text-white px-4 py-2 text-sm uppercase tracking-wider transition-transform focus:outline-none"
+        className="fixed top-0 left-0 z-[100] -translate-y-full focus:translate-y-0 bg-[#7CB342] text-[#3E2723] px-4 py-2 text-sm uppercase tracking-wider transition-transform focus:outline-none"
         style={pixelBorderEarth}
         onClick={(e) => handleNavClick(e, "#about")}
       >
@@ -126,12 +126,12 @@ export function Header() {
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-20" role="navigation" aria-label="Main navigation">
+          <nav className="grid grid-cols-3 items-center h-20" role="navigation" aria-label="Main navigation">
           {/* Logo - Nature Theme */}
           <Link
             href="/"
             onClick={(e) => handleNavClick(e, "#")}
-            className="group relative"
+            className="group relative justify-self-start"
           >
             <div className="relative">
               {/* Pixel border container */}
@@ -152,7 +152,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation - Pixel Style */}
-          <div className="hidden md:flex items-center gap-1" role="menubar">
+          <div className="hidden md:flex items-center justify-center gap-1" role="menubar">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -183,13 +183,13 @@ export function Header() {
 
           {/* Desktop Theme Toggle - Pixel Container */}
           <div
-            className="hidden md:flex items-center bg-[#1A0B2E] p-1"
+            className="hidden md:flex items-center justify-self-end bg-[#FFF8E7] p-1"
             style={{
               boxShadow: `
-                -2px 0 0 0 var(--pixel-cyan),
-                 2px 0 0 0 var(--pixel-cyan),
-                 0 -2px 0 0 var(--pixel-cyan),
-                 0 2px 0 0 var(--pixel-cyan)
+                -2px 0 0 0 #8D6E63,
+                 2px 0 0 0 #8D6E63,
+                 0 -2px 0 0 #8D6E63,
+                 0 2px 0 0 #8D6E63
               `,
             }}
           >
@@ -197,26 +197,26 @@ export function Header() {
           </div>
 
           {/* Mobile Menu - Pixel Style */}
-          <div className="flex items-center gap-3 md:hidden">
+          <div className="flex items-center gap-3 md:hidden justify-self-end">
             <ThemeToggle />
 
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button
-                  className="relative p-3 bg-[var(--pixel-cyan)] text-black transition-transform active:translate-y-1"
+                  className="relative p-3 bg-[#7CB342] text-[#3E2723] transition-transform active:translate-y-1"
                   style={{
                     fontFamily: "var(--font-pixel)",
                     fontSize: "10px",
                     textTransform: "uppercase",
                     boxShadow: `
-                      -3px 0 0 0 var(--pixel-cyan),
-                       3px 0 0 0 var(--pixel-cyan),
-                       0 -3px 0 0 var(--pixel-cyan),
-                       0 4px 0 0 #0D0221,
-                      -3px -3px 0 0 var(--pixel-cyan),
-                       3px -3px 0 0 var(--pixel-cyan),
-                      -3px 4px 0 0 #0D0221,
-                       3px 4px 0 0 #0D0221
+                      -3px 0 0 0 #7CB342,
+                       3px 0 0 0 #7CB342,
+                       0 -3px 0 0 #7CB342,
+                       0 4px 0 0 #3E2723,
+                      -3px -3px 0 0 #7CB342,
+                       3px -3px 0 0 #7CB342,
+                      -3px 4px 0 0 #3E2723,
+                       3px 4px 0 0 #3E2723
                     `,
                   }}
                   aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -228,44 +228,44 @@ export function Header() {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="w-[300px] bg-[#0D0221] border-l-4 border-[var(--pixel-cyan)] p-0"
+                className="w-[300px] bg-[#FFF8E7] border-l-4 border-[#8D6E63] p-0"
                 style={{
                   boxShadow: `
-                    -8px 0 0 0 rgba(0, 245, 255, 0.3),
-                    -4px 0 0 0 var(--pixel-cyan)
+                    -8px 0 0 0 rgba(135, 206, 235, 0.3),
+                    -4px 0 0 0 #8D6E63
                   `,
                 }}
               >
-                <SheetHeader className="p-6 border-b-4 border-[var(--pixel-purple)] bg-[#1A0B2E]">
+                <SheetHeader className="p-6 border-b-4 border-[#7CB342] bg-[#87CEEB]">
                   <SheetTitle className="text-left flex items-center gap-3">
                     <div
-                      className="bg-[var(--pixel-purple)] px-3 py-1"
+                      className="bg-[#7CB342] px-3 py-1"
                       style={{
                         boxShadow: `
-                          -3px 0 0 0 var(--pixel-purple),
-                           3px 0 0 0 var(--pixel-purple),
-                           0 -3px 0 0 var(--pixel-purple),
-                           0 3px 0 0 var(--pixel-purple)
+                          -3px 0 0 0 #7CB342,
+                           3px 0 0 0 #7CB342,
+                           0 -3px 0 0 #7CB342,
+                           0 3px 0 0 #7CB342
                         `,
                       }}
                     >
-                      <span className="font-pixel text-white text-sm">MH</span>
+                      <span className="font-pixel text-[#3E2723] text-sm">MH</span>
                     </div>
-                    <span className="font-vt323 text-[var(--pixel-muted)] text-lg">MENU</span>
+                    <span className="font-vt323 text-[#3E2723] text-lg">MENU</span>
                   </SheetTitle>
                 </SheetHeader>
                 {/* Pixel Close Button */}
                 <SheetClose asChild>
                   <button
-                    className="absolute top-4 right-4 p-2 bg-[var(--pixel-pink)] text-white"
+                    className="absolute top-4 right-4 p-2 bg-[#FFD54F] text-[#3E2723]"
                     style={{
                       fontFamily: "var(--font-pixel)",
                       fontSize: "10px",
                       boxShadow: `
-                        -2px 0 0 0 var(--pixel-pink),
-                         2px 0 0 0 var(--pixel-pink),
-                         0 -2px 0 0 var(--pixel-pink),
-                         0 2px 0 0 var(--pixel-pink)
+                        -2px 0 0 0 #FFD54F,
+                         2px 0 0 0 #FFD54F,
+                         0 -2px 0 0 #FFD54F,
+                         0 2px 0 0 #FFD54F
                       `,
                     }}
                   >
@@ -281,14 +281,14 @@ export function Header() {
                         className={cn(
                           "relative px-4 py-4 uppercase tracking-wider transition-all",
                           activeSection === link.href
-                            ? "text-[var(--pixel-cyan)] bg-[var(--pixel-cyan)]/10"
-                            : "text-[var(--pixel-muted)] hover:text-white hover:bg-white/5"
+                            ? "text-[#8D6E63] bg-[#8D6E63]/10"
+                            : "text-[#3E2723] hover:text-[#3E2723] hover:bg-white/5"
                         )}
                         style={{ fontFamily: "var(--font-vt323)", fontSize: "1.5rem" }}
                       >
                         {/* Menu item number */}
                         <span
-                          className="text-[var(--pixel-purple)] mr-3"
+                          className="text-[#8D6E63] mr-3"
                           style={{ fontFamily: "var(--font-pixel)", fontSize: "0.75rem" }}
                         >
                           {String(index + 1).padStart(2, "0")}
@@ -296,7 +296,7 @@ export function Header() {
                         {link.name}
                         {/* Active indicator arrow */}
                         {activeSection === link.href && (
-                          <span className="absolute right-4 text-[var(--pixel-cyan)]">
+                          <span className="absolute right-4 text-[#8D6E63]">
                             &gt;
                           </span>
                         )}
@@ -313,11 +313,11 @@ export function Header() {
                         className="w-3 h-3 animate-blink"
                         style={{
                           backgroundColor: [
-                            "var(--pixel-pink)",
-                            "var(--pixel-cyan)",
-                            "var(--pixel-yellow)",
-                            "var(--pixel-purple)",
-                            "var(--pixel-green)",
+                            "#FFD54F",
+                            "#8D6E63",
+                            "#7CB342",
+                            "#7CB342",
+                            "#6D4C41",
                           ][i],
                           animationDelay: `${i * 0.2}s`,
                         }}
@@ -325,7 +325,7 @@ export function Header() {
                     ))}
                   </div>
                   <p
-                    className="text-center text-[var(--pixel-muted)] text-sm mt-2"
+                    className="text-center text-[#3E2723] text-sm mt-2"
                     style={{ fontFamily: "var(--font-vt323)" }}
                   >
                     INSERT COIN TO CONTINUE

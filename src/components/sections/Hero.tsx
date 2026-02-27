@@ -253,7 +253,7 @@ function LocalPixelCloud({
         height="40"
         viewBox="0 0 80 40"
         fill="none"
-        className="text-[#9D4EDD]"
+        className="text-[#FFF8E7]"
       >
         <rect x="10" y="20" width="10" height="10" fill="currentColor" />
         <rect x="20" y="10" width="10" height="10" fill="currentColor" />
@@ -338,7 +338,7 @@ function GlitchText({
     <div className={`relative inline-block ${className}`}>
       <span className="relative z-10">{text}</span>
       <motion.span
-        className="absolute inset-0 text-[#FF006E] opacity-70"
+        className="absolute inset-0 text-[#7CB342] opacity-70"
         animate={{
           x: [-2, 2, -2, 0],
           y: [1, -1, 1, 0],
@@ -354,7 +354,7 @@ function GlitchText({
         {text}
       </motion.span>
       <motion.span
-        className="absolute inset-0 text-[#00F5FF] opacity-70"
+        className="absolute inset-0 text-[#4FC3F7] opacity-70"
         animate={{
           x: [2, -2, 2, 0],
           y: [-1, 1, -1, 0],
@@ -374,7 +374,7 @@ function GlitchText({
   );
 }
 
-// Enhanced Pixel Button Component - Arcade Style
+// Enhanced Pixel Button Component - Nature Theme
 function PixelButton({
   children,
   href = "#about",
@@ -385,10 +385,10 @@ function PixelButton({
   variant?: "primary" | "secondary";
 }) {
   const isPrimary = variant === "primary";
-  const bgColor = isPrimary ? "#FF006E" : "transparent";
-  const borderColor = isPrimary ? "#FF006E" : "#00F5FF";
-  const textColor = isPrimary ? "white" : "#00F5FF";
-  const shadowColor = isPrimary ? "#990044" : "#00F5FF40";
+  const bgColor = isPrimary ? "#7CB342" : "transparent";
+  const borderColor = isPrimary ? "#7CB342" : "#8D6E63";
+  const textColor = isPrimary ? "white" : "#8D6E63";
+  const shadowColor = isPrimary ? "#558B2F" : "#8D6E6340";
 
   return (
     <motion.div
@@ -424,7 +424,7 @@ function PixelButton({
   );
 }
 
-// Pixel Badge Component - Arcade Style with Stronger Blink
+// Pixel Badge Component - Nature Theme
 function PixelBadge({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
@@ -434,17 +434,17 @@ function PixelBadge({ children }: { children: React.ReactNode }) {
       className="mb-8"
     >
       <motion.span
-        className="inline-flex items-center gap-3 px-5 py-3 font-pixel text-sm text-[#0D0221] bg-[#00F5FF] crt-glow"
+        className="inline-flex items-center gap-3 px-5 py-3 font-pixel text-sm text-[#3E2723] bg-[#4FC3F7]"
         style={{
           boxShadow: `
-            -4px 0 0 0 #00F5FF,
-            4px 0 0 0 #00F5FF,
-            0 -4px 0 0 #00F5FF,
-            0 4px 0 0 #00F5FF,
-            -4px -4px 0 0 #FFD60A,
-            4px -4px 0 0 #FFD60A,
-            -4px 4px 0 0 #FFD60A,
-            4px 4px 0 0 #FFD60A,
+            -4px 0 0 0 #4FC3F7,
+            4px 0 0 0 #4FC3F7,
+            0 -4px 0 0 #4FC3F7,
+            0 4px 0 0 #4FC3F7,
+            -4px -4px 0 0 #FFD54F,
+            4px -4px 0 0 #FFD54F,
+            -4px 4px 0 0 #FFD54F,
+            4px 4px 0 0 #FFD54F,
             inset -4px -4px 0 0 rgba(0, 0, 0, 0.2),
             inset 4px 4px 0 0 rgba(255, 255, 255, 0.3)
           `,
@@ -461,7 +461,7 @@ function PixelBadge({ children }: { children: React.ReactNode }) {
         }}
       >
         <motion.span
-          className="w-3 h-3 bg-[#FF006E]"
+          className="w-3 h-3 bg-[#7CB342]"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [1, 0.5, 1],
@@ -530,7 +530,7 @@ function ScrollIndicator() {
       transition={{ delay: 2, duration: 0.3, ease: "linear" }}
       aria-hidden="true"
     >
-      <span className="font-vt323 text-sm text-[#B8B8D1] uppercase tracking-widest">
+      <span className="font-vt323 text-sm text-[#6D4C41] uppercase tracking-widest">
         PRESS START
       </span>
       <motion.div
@@ -540,7 +540,7 @@ function ScrollIndicator() {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="text-[#00F5FF]"
+        className="text-[#7CB342]"
       >
         <svg
           width="16"
