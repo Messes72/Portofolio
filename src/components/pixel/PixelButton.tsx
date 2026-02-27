@@ -10,13 +10,13 @@ const pixelButtonVariants = cva(
   {
     variants: {
       variant: {
-        pink: "bg-[#F48FB1] text-white",        // flower-pink
-        cyan: "bg-[#4FC3F7] text-white",        // water-blue
-        yellow: "bg-[#FFD54F] text-[#3E2723]",   // sun-yellow
-        purple: "bg-[#9D4EDD] text-white",      // keep purple as accent
-        green: "bg-[#7CB342] text-white",      // grass-green
-        nature: "bg-[#7CB342] text-white",      // alias for grass-green
-        earth: "bg-[#8D6E63] text-white",       // earth-brown
+        pink: "bg-[#7CB342] text-[#FFF8E7]",    // grass-green
+        cyan: "bg-[#4FC3F7] text-[#3E2723]",    // water-blue
+        yellow: "bg-[#FFD54F] text-[#3E2723]",  // sun-yellow
+        purple: "bg-[#8D6E63] text-[#FFF8E7]",  // earth-brown
+        green: "bg-[#7CB342] text-[#3E2723]",   // grass-green
+        nature: "bg-[#7CB342] text-[#FFF8E7]",  // alias for grass-green
+        earth: "bg-[#8D6E63] text-[#FFF8E7]",    // earth-brown
         sky: "bg-[#87CEEB] text-[#3E2723]",     // sky-blue
       },
       size: {
