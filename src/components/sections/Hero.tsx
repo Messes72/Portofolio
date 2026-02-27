@@ -556,250 +556,271 @@ function ScrollIndicator() {
   );
 }
 
+// Wood texture button for fantasy theme
+function WoodButton({
+  children,
+  href = "#about",
+  variant = "primary",
+}: {
+  children: React.ReactNode;
+  href?: string;
+  variant?: "primary" | "secondary";
+}) {
+  const isPrimary = variant === "primary";
+
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      whileTap={{ y: 0 }}
+      transition={{ duration: 0.1, ease: "linear" }}
+    >
+      <Link
+        href={href}
+        className={`relative inline-flex items-center gap-3 px-8 py-4 font-pixel text-sm tracking-wider ${
+          isPrimary ? "text-white" : "text-[#8D6E63]"
+        }`}
+        style={{
+          backgroundColor: isPrimary ? "#7CB342" : "transparent",
+          boxShadow: isPrimary
+            ? "-4px 0 0 0 #558B2F, 4px 0 0 0 #558B2F, 0 -4px 0 0 #558B2F, 0 4px 0 0 #558B2F, 0 8px 0 0 #3E2723, inset -4px -4px 0 0 rgba(0, 0, 0, 0.2), inset 4px 4px 0 0 rgba(255, 255, 255, 0.2)"
+            : "-4px 0 0 0 #8D6E63, 4px 0 0 0 #8D6E63, 0 -4px 0 0 #8D6E63, 0 4px 0 0 #8D6E63, 0 8px 0 0 #3E2723",
+          margin: "0 4px",
+          marginBottom: 8,
+          imageRendering: "pixelated",
+        }}
+      >
+        {children}
+      </Link>
+    </motion.div>
+  );
+}
+
+// Fantasy Badge
+function FantasyBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: "linear" as const, delay: 0.2 }}
+      className="mb-8"
+    >
+      <span
+        className="inline-flex items-center gap-3 px-5 py-3 font-pixel text-sm"
+        style={{
+          backgroundColor: "#FFD54F",
+          color: "#3E2723",
+          boxShadow:
+            "-4px 0 0 0 #FFB74D, 4px 0 0 0 #FFB74D, 0 -4px 0 0 #FFB74D, 0 4px 0 0 #FFB74D, -4px -4px 0 0 #8D6E63, 4px -4px 0 0 #8D6E63, -4px 4px 0 0 #8D6E63, 4px 4px 0 0 #8D6E63, inset -4px -4px 0 0 rgba(0, 0, 0, 0.1), inset 4px 4px 0 0 rgba(255, 255, 255, 0.3)",
+          margin: 4,
+        }}
+      >
+        <span className="w-3 h-3 bg-[#7CB342] animate-blink" />
+        {children}
+      </span>
+    </motion.div>
+  );
+}
+
 // Main Hero Component
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0D0221] scanlines"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Pixel Starfield Background */}
-      <PixelStarfield />
-
-      {/* Pixel Clouds */}
-      <PixelCloud x="5%" y="20%" delay={0} duration={12} />
-      <PixelCloud x="70%" y="30%" delay={3} duration={15} />
-      <PixelCloud x="20%" y="70%" delay={6} duration={10} />
-      <PixelCloud x="80%" y="60%" delay={2} duration={14} />
-
-      {/* Retro Grid Floor Effect */}
-      <RetroGridFloor />
-
-      {/* Floating Pixel Decorations */}
-      <FloatingPixels />
-
-      {/* Grid Pattern Overlay */}
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #00F5FF 1px, transparent 1px),
-            linear-gradient(to bottom, #00F5FF 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-        aria-hidden="true"
-      />
+      {/* Fantasy Nature Background */}
+      <FantasyBackground />
 
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* Pixel Border Container for Main Content */}
-          <div
+          {/* Main container with cloud style */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="relative p-8 sm:p-12"
             style={{
-              backgroundColor: "rgba(13, 2, 33, 0.8)",
-              boxShadow: `
-                -4px 0 0 0 #FF006E,
-                4px 0 0 0 #FF006E,
-                0 -4px 0 0 #FF006E,
-                0 4px 0 0 #FF006E,
-                -8px 0 0 0 #9D4EDD,
-                8px 0 0 0 #9D4EDD,
-                0 -8px 0 0 #9D4EDD,
-                0 8px 0 0 #9D4EDD,
-                -12px 0 0 0 #0D0221,
-                12px 0 0 0 #0D0221,
-                0 -12px 0 0 #0D0221,
-                0 12px 0 0 #0D0221,
-                inset -4px -4px 0 0 rgba(0, 0, 0, 0.5),
-                inset 4px 4px 0 0 rgba(255, 255, 255, 0.05)
-              `,
+              backgroundColor: "rgba(255, 248, 231, 0.95)",
+              boxShadow:
+                "-4px 0 0 0 #8D6E63, 4px 0 0 0 #8D6E63, 0 -4px 0 0 #8D6E63, 0 4px 0 0 #8D6E63, -8px 0 0 0 #A1887F, 8px 0 0 0 #A1887F, 0 -8px 0 0 #A1887F, 0 8px 0 0 #A1887F, 0 12px 20px rgba(0,0,0,0.1), inset -4px -4px 0 0 rgba(0, 0, 0, 0.05), inset 4px 4px 0 0 rgba(255, 255, 255, 0.5)",
               margin: 12,
             }}
           >
-            {/* Corner Decorations */}
-            <div className="absolute -top-3 -left-3 w-6 h-6 bg-[#FFD60A]" />
-            <div className="absolute -top-3 -right-3 w-6 h-6 bg-[#FFD60A]" />
-            <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-[#FFD60A]" />
-            <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-[#FFD60A]" />
+            {/* Corner decorations - leaves */}
+            <div className="absolute -top-3 -left-3 w-6 h-6 bg-[#7CB342]" />
+            <div className="absolute -top-3 -right-3 w-6 h-6 bg-[#7CB342]" />
+            <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-[#7CB342]" />
+            <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-[#7CB342]" />
 
-            {/* Pixel Badge */}
-            <PixelBadge>PLAYER 1 READY</PixelBadge>
+            {/* Fantasy Badge */}
+            <FantasyBadge>ADVENTURE AWAITS</FantasyBadge>
 
-          {/* Main headline with glitch effect */}
-          <h1 className="mb-6">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.3 }}
-              className="font-pixel text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wider mb-2 crt-glow"
-            >
-              <GlitchText text="MARIO CLAUDIUS" />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.3 }}
-              className="font-vt323 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#00F5FF] tracking-widest"
-            >
-              <GlitchText text="FULL-STACK DEVELOPER" className="crt-glow" />
-            </motion.div>
-          </h1>
-
-          {/* Subheadline with typewriter effect */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.3 }}
-            className="max-w-2xl mb-8"
-          >
-            <TypewriterText
-              text="&gt; A passionate developer from Surabaya, Indonesia. Building modern web applications with React, Next.js, and TypeScript. Currently pursuing Informatics at Universitas Kristen Petra."
-              className="font-vt323 text-lg sm:text-xl text-[#B8B8D1] text-center"
-              delay={1.4}
-            />
-          </motion.div>
-
-          {/* Stats Row - Game HUD Style */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.8, duration: 0.3, ease: "linear" }}
-            className="mb-10"
-          >
-            <div
-              className="inline-flex flex-wrap items-center justify-center gap-2 px-6 py-4 font-vt323 text-lg bg-[#0D0221]"
-              style={{
-                boxShadow: `
-                  -4px 0 0 0 #FFD60A,
-                  4px 0 0 0 #FFD60A,
-                  0 -4px 0 0 #FFD60A,
-                  0 4px 0 0 #FFD60A,
-                  inset -4px -4px 0 0 rgba(0, 0, 0, 0.5),
-                  inset 4px 4px 0 0 rgba(255, 255, 255, 0.1)
-                `,
-              }}
-            >
-              {/* LVL Stat */}
-              <div className="flex items-center gap-2 px-3">
-                <span className="text-[#FF006E] font-pixel text-sm">LVL</span>
-                <span className="text-[#FFD60A]">:</span>
-                <motion.span
-                  className="text-white font-pixel"
-                  animate={{ opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                >
-                  SENIOR
-                </motion.span>
-              </div>
-
-              {/* Pixel Separator */}
-              <div className="flex gap-1">
-                <div className="w-1 h-1 bg-[#00F5FF]" />
-                <div className="w-1 h-1 bg-[#00F5FF]" />
-                <div className="w-1 h-1 bg-[#00F5FF]" />
-              </div>
-
-              {/* EXP Stat */}
-              <div className="flex items-center gap-2 px-3">
-                <span className="text-[#FF006E] font-pixel text-sm">EXP</span>
-                <span className="text-[#FFD60A]">:</span>
-                <motion.span
-                  className="text-white font-pixel"
-                  animate={{ opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.3 }}
-                >
-                  3+ YEARS
-                </motion.span>
-              </div>
-
-              {/* Pixel Separator */}
-              <div className="flex gap-1">
-                <div className="w-1 h-1 bg-[#00F5FF]" />
-                <div className="w-1 h-1 bg-[#00F5FF]" />
-                <div className="w-1 h-1 bg-[#00F5FF]" />
-              </div>
-
-              {/* GPA Stat */}
-              <div className="flex items-center gap-2 px-3">
-                <span className="text-[#FF006E] font-pixel text-sm">GPA</span>
-                <span className="text-[#FFD60A]">:</span>
-                <motion.span
-                  className="text-white font-pixel"
-                  animate={{ opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.6 }}
-                >
-                  3.38/4.00
-                </motion.span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2, duration: 0.3, ease: "linear" }}
-            className="flex flex-col sm:flex-row gap-4 items-center"
-          >
-            <PixelButton href="#about" variant="primary">
-              <ArrowDown className="w-4 h-4" />
-              PRESS START
-            </PixelButton>
-
-            {/* GitHub Link */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.1, ease: "linear" }}
-            >
-              <Link
-                href="https://github.com/Messes72"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-3 font-pixel text-sm text-[#00F5FF] hover:text-white transition-colors"
+            {/* Main headline */}
+            <h1 className="mb-6">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.3 }}
+                className="font-pixel text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-2"
+                style={{ color: "#3E2723" }}
               >
-                <Github className="w-5 h-5" />
-                <span>GitHub</span>
-              </Link>
+                MARIO CLAUDIUS
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.3 }}
+                className="font-vt323 text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-widest"
+                style={{ color: "#7CB342" }}
+              >
+                FULL-STACK DEVELOPER
+              </motion.div>
+            </h1>
+
+            {/* Subheadline */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.3 }}
+              className="max-w-2xl mb-8 font-vt323 text-lg sm:text-xl text-[#6D4C41] text-center"
+            >
+              A passionate developer from Surabaya, Indonesia. Building modern web applications with React, Next.js, and TypeScript.
+            </motion.p>
+
+            {/* Stats Row - Nature themed */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.8, duration: 0.3, ease: "linear" }}
+              className="mb-10"
+            >
+              <div
+                className="inline-flex flex-wrap items-center justify-center gap-2 px-6 py-4 font-vt323 text-lg"
+                style={{
+                  backgroundColor: "#FFF8E7",
+                  boxShadow:
+                    "-4px 0 0 0 #7CB342, 4px 0 0 0 #7CB342, 0 -4px 0 0 #7CB342, 0 4px 0 0 #7CB342, inset -4px -4px 0 0 rgba(0, 0, 0, 0.05), inset 4px 4px 0 0 rgba(255, 255, 255, 0.5)",
+                }}
+              >
+                <div className="flex items-center gap-2 px-3">
+                  <span className="text-[#7CB342] font-pixel text-sm">LVL</span>
+                  <span className="text-[#8D6E63]">:</span>
+                  <span className="text-[#3E2723] font-pixel">SENIOR</span>
+                </div>
+
+                <div className="flex gap-1">
+                  <div className="w-1 h-1 bg-[#FFD54F]" />
+                  <div className="w-1 h-1 bg-[#FFD54F]" />
+                  <div className="w-1 h-1 bg-[#FFD54F]" />
+                </div>
+
+                <div className="flex items-center gap-2 px-3">
+                  <span className="text-[#7CB342] font-pixel text-sm">EXP</span>
+                  <span className="text-[#8D6E63]">:</span>
+                  <span className="text-[#3E2723] font-pixel">3+ YEARS</span>
+                </div>
+
+                <div className="flex gap-1">
+                  <div className="w-1 h-1 bg-[#FFD54F]" />
+                  <div className="w-1 h-1 bg-[#FFD54F]" />
+                  <div className="w-1 h-1 bg-[#FFD54F]" />
+                </div>
+
+                <div className="flex items-center gap-2 px-3">
+                  <span className="text-[#7CB342] font-pixel text-sm">GPA</span>
+                  <span className="text-[#8D6E63]">:</span>
+                  <span className="text-[#3E2723] font-pixel">3.38/4.00</span>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2, duration: 0.3, ease: "linear" }}
+              className="flex flex-col sm:flex-row gap-4 items-center"
+            >
+              <WoodButton href="#about" variant="primary">
+                <ArrowDown className="w-4 h-4" />
+                START JOURNEY
+              </WoodButton>
+
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.1, ease: "linear" }}
+              >
+                <Link
+                  href="https://github.com/Messes72"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-3 font-pixel text-sm text-[#8D6E63] hover:text-[#7CB342] transition-colors"
+                >
+                  <Github className="w-5 h-5" />
+                  <span>GitHub</span>
+                </Link>
+              </motion.div>
+            </motion.div>
 
             {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2.2, duration: 0.3 }}
-              className="mt-12 flex flex-wrap items-center justify-center gap-6 font-vt323 text-sm text-[#B8B8D1]"
+              className="mt-12 flex flex-wrap items-center justify-center gap-6 font-vt323 text-sm text-[#6D4C41]"
             >
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-[#39FF14] animate-blink" />
-                <span className="text-[#39FF14]">Open for opportunities</span>
+                <div className="w-3 h-3 bg-[#7CB342] animate-blink" />
+                <span className="text-[#7CB342]">Open for opportunities</span>
               </div>
-              <span className="text-[#FF006E]">*</span>
+              <span className="text-[#FFD54F]">*</span>
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#FFD60A]" />
+                <MapPin className="w-4 h-4 text-[#8D6E63]" />
                 <span>Surabaya, Indonesia</span>
               </div>
-              <span className="text-[#FF006E]">*</span>
+              <span className="text-[#FFD54F]">*</span>
               <a
                 href="mailto:marioclaudius10@gmail.com"
-                className="flex items-center gap-2 hover:text-[#00F5FF] transition-colors"
+                className="flex items-center gap-2 hover:text-[#7CB342] transition-colors"
               >
-                <Mail className="w-4 h-4 text-[#FFD60A]" />
+                <Mail className="w-4 h-4 text-[#8D6E63]" />
                 <span>marioclaudius10@gmail.com</span>
               </a>
             </motion.div>
-          </div>{/* End Pixel Container */}
+          </motion.div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <ScrollIndicator />
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0D0221] to-transparent pointer-events-none" />
+      <motion.div
+        className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2.5, duration: 0.3, ease: "linear" }}
+        aria-hidden="true"
+      >
+        <span className="font-vt323 text-sm uppercase tracking-widest" style={{ color: "#6D4C41" }}>
+          Scroll to explore
+        </span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{
+            duration: 1,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+          style={{ color: "#7CB342" }}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <rect x="6" y="0" width="4" height="4" />
+            <rect x="4" y="4" width="8" height="4" />
+            <rect x="2" y="8" width="12" height="4" />
+            <rect x="0" y="12" width="16" height="4" />
+          </svg>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
