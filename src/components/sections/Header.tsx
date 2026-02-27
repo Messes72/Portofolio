@@ -23,30 +23,30 @@ const navLinks = [
   { name: "CONTACT", href: "#contact" },
 ];
 
-// Pixel border style using box-shadow technique
+// Pixel border style using box-shadow technique - Nature theme colors
 const pixelBorder = {
   boxShadow: `
-    -3px 0 0 0 var(--pixel-cyan),
-     3px 0 0 0 var(--pixel-cyan),
-     0 -3px 0 0 var(--pixel-cyan),
-     0 3px 0 0 var(--pixel-cyan),
-    -3px -3px 0 0 var(--pixel-cyan),
-     3px -3px 0 0 var(--pixel-cyan),
-    -3px 3px 0 0 var(--pixel-cyan),
-     3px 3px 0 0 var(--pixel-cyan)
+    -3px 0 0 0 #7CB342,
+     3px 0 0 0 #7CB342,
+     0 -3px 0 0 #7CB342,
+     0 3px 0 0 #7CB342,
+    -3px -3px 0 0 #7CB342,
+     3px -3px 0 0 #7CB342,
+    -3px 3px 0 0 #7CB342,
+     3px 3px 0 0 #7CB342
   `,
 };
 
-const pixelBorderDark = {
+const pixelBorderEarth = {
   boxShadow: `
-    -3px 0 0 0 #0D0221,
-     3px 0 0 0 #0D0221,
-     0 -3px 0 0 #0D0221,
-     0 3px 0 0 #0D0221,
-    -3px -3px 0 0 #0D0221,
-     3px -3px 0 0 #0D0221,
-    -3px 3px 0 0 #0D0221,
-     3px 3px 0 0 #0D0221
+    -3px 0 0 0 #8D6E63,
+     3px 0 0 0 #8D6E63,
+     0 -3px 0 0 #8D6E63,
+     0 3px 0 0 #8D6E63,
+    -3px -3px 0 0 #8D6E63,
+     3px -3px 0 0 #8D6E63,
+    -3px 3px 0 0 #8D6E63,
+     3px 3px 0 0 #8D6E63
   `,
 };
 
@@ -107,11 +107,11 @@ export function Header() {
 
   return (
     <>
-      {/* Skip to content link for keyboard navigation - Pixel Style */}
+      {/* Skip to content link for keyboard navigation - Nature Theme */}
       <a
         href="#main-content"
-        className="fixed top-0 left-0 z-[100] -translate-y-full focus:translate-y-0 bg-[var(--pixel-cyan)] text-black px-4 py-2 text-sm uppercase tracking-wider transition-transform focus:outline-none"
-        style={pixelBorderDark}
+        className="fixed top-0 left-0 z-[100] -translate-y-full focus:translate-y-0 bg-[#7CB342] text-white px-4 py-2 text-sm uppercase tracking-wider transition-transform focus:outline-none"
+        style={pixelBorderEarth}
         onClick={(e) => handleNavClick(e, "#about")}
       >
         <span style={{ fontFamily: "var(--font-pixel)" }}>&gt; SKIP TO CONTENT</span>
@@ -121,13 +121,13 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-[#0D0221]/95 border-b-4 border-[var(--pixel-cyan)]"
+            ? "bg-[#87CEEB]/95 border-b-4 border-[#7CB342]"
             : "bg-transparent"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center justify-between h-20" role="navigation" aria-label="Main navigation">
-          {/* Logo - Pixel Style */}
+          {/* Logo - Nature Theme */}
           <Link
             href="/"
             onClick={(e) => handleNavClick(e, "#")}
@@ -136,18 +136,18 @@ export function Header() {
             <div className="relative">
               {/* Pixel border container */}
               <div
-                className="px-3 py-2 bg-[#240946] transition-all duration-100 group-hover:bg-[#3d1a6e]"
+                className="px-3 py-2 bg-[#8D6E63] transition-all duration-100 group-hover:bg-[#6D4C41]"
                 style={pixelBorder}
               >
                 <span
-                  className="text-lg text-[#00F5FF] tracking-wider"
+                  className="text-lg text-[#FFF8E7] tracking-wider"
                   style={{ fontFamily: "var(--font-pixel)" }}
                 >
                   MH
                 </span>
               </div>
               {/* Blinking indicator */}
-              <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#FF006E] animate-blink" />
+              <span className="absolute -top-1 -right-1 w-2 h-2 bg-[#FFD54F] animate-blink" />
             </div>
           </Link>
 
@@ -160,10 +160,10 @@ export function Header() {
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
                   "relative px-4 py-2 text-xs tracking-wider uppercase transition-all duration-100",
-                  "hover:bg-[#240946]",
+                  "hover:bg-[#7CB342]/20",
                   activeSection === link.href
-                    ? "text-[#00F5FF]"
-                    : "text-[#B8B8D1] hover:text-[#00F5FF]"
+                    ? "text-[#7CB342]"
+                    : "text-[#3E2723] hover:text-[#7CB342]"
                 )}
                 style={{ fontFamily: "var(--font-pixel)" }}
                 aria-current={activeSection === link.href ? "page" : undefined}
@@ -173,7 +173,7 @@ export function Header() {
                 {activeSection === link.href && (
                   <motion.span
                     layoutId="activeNav"
-                    className="absolute bottom-0 left-1 right-1 h-0.5 bg-[#00F5FF]"
+                    className="absolute bottom-0 left-1 right-1 h-0.5 bg-[#7CB342]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
