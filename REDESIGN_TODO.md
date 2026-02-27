@@ -52,17 +52,17 @@ Transform portfolio dari tema gelap/neon ke tema cerah 8-bit pixel fantasy.
 - [ ] Create pixel paper plane (message/send icon)
 
 ### Phase 1.2: Update Global Styles
-**Status:** Pending
+**Status:** COMPLETED
 **Assignee:** Frontend Agent
 
-- [ ] Update globals.css with new color palette
-- [ ] Update Tailwind config with fantasy colors
-- [ ] Create new gradient utilities (sky gradients)
-- [ ] Create pixel-border utilities with earth tones
-- [ ] Create shadow utilities (soft shadows, not neon glow)
-- [ ] Update font pairing (keep Press Start 2P, maybe add second body font)
-- [ ] Create CSS animations for floating elements
-- [ ] Create CSS animations for nature elements (sway, twinkle)
+- [x] Update globals.css with new color palette
+- [x] Update Tailwind config with fantasy colors
+- [x] Create new gradient utilities (sky gradients)
+- [x] Create pixel-border utilities with earth tones
+- [x] Create shadow utilities (soft shadows, not neon glow)
+- [x] Update font pairing (keep Press Start 2P, maybe add second body font)
+- [x] Create CSS animations for floating elements
+- [x] Create CSS animations for nature elements (sway, twinkle)
 
 ### Phase 1.3: Update Theme System
 **Status:** Pending

@@ -18,8 +18,3 @@ export {
 export { PixelGrass, PixelTree, GrassPatch } from "./PixelGrass";
 export { PixelFlower, FlowerField, FlowerCluster } from "./PixelFlower";
 export { PixelSwordInStone, SimpleStone } from "./PixelSwordInStone";
-
-// Nature Elements
-export { PixelGrass, PixelTree, GrassPatch } from "./PixelGrass";
-export { PixelFlower, FlowerField, FlowerCluster } from "./PixelFlower";
-export { PixelSwordInStone, SimpleStone } from "./PixelSwordInStone";

@@ -55,7 +55,7 @@ export function PixelSun({
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {rays.map((angle, index) = (
+          {rays.map((angle, index) => (
             <rect
               key={index}
               x={center - rayWidth / 2}

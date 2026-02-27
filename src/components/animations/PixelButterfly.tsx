@@ -213,7 +213,7 @@ export function StaticButterfly({
   return (
     <motion.div
       className={`pointer-events-none ${className}`}
-      style={{ width, height }}
+      style={{ width, height, transformOrigin: "center", willChange: "transform" }}
       animate={{ scaleX: [1, 0.4, 1, 0.4, 1], y: [-2, 2, -2] }}
       transition={{
         scaleX: {
@@ -227,7 +227,6 @@ export function StaticButterfly({
           ease: "easeInOut",
         },
       }}
-      style={{ transformOrigin: "center", willChange: "transform" }}
     >
       <svg
         width={width}
