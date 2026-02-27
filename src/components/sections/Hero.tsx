@@ -203,7 +203,7 @@ function GlitchText({
 // Pixel Button Component
 function PixelButton({
   children,
-  href = "#projects",
+  href = "#about",
   variant = "primary",
 }: {
   children: React.ReactNode;
@@ -427,7 +427,7 @@ export function Hero() {
             transition={{ delay: 2, duration: 0.3, ease: "linear" }}
             className="flex flex-col sm:flex-row gap-4 items-center"
           >
-            <PixelButton href="#projects" variant="primary">
+            <PixelButton href="#about" variant="primary">
               <ArrowDown className="w-4 h-4" />
               PRESS START
             </PixelButton>
