@@ -9,6 +9,7 @@ interface PixelSparkleProps {
   color?: "yellow" | "white" | "pink" | "blue";
   delay?: number;
   duration?: number;
+  style?: React.CSSProperties;
 }
 
 const sparkleColors = {
