@@ -121,7 +121,7 @@ export function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-[#87CEEB]/95 border-b-4 border-[#7CB342]"
+            ? "bg-[#FFF8E7]/95 border-b-4 border-[#8D6E63]"
             : "bg-transparent"
         )}
       >
@@ -236,7 +236,7 @@ export function Header() {
                   `,
                 }}
               >
-                <SheetHeader className="p-6 border-b-4 border-[#7CB342] bg-[#87CEEB]">
+                <SheetHeader className="p-6 border-b-4 border-[#8D6E63] bg-[#FFF8E7]">
                   <SheetTitle className="text-left flex items-center gap-3">
                     <div
                       className="bg-[#7CB342] px-3 py-1"
@@ -281,8 +281,8 @@ export function Header() {
                         className={cn(
                           "relative px-4 py-4 uppercase tracking-wider transition-all",
                           activeSection === link.href
-                            ? "text-[#8D6E63] bg-[#8D6E63]/10"
-                            : "text-[#3E2723] hover:text-[#3E2723] hover:bg-white/5"
+                            ? "text-[#7CB342] bg-[#7CB342]/10"
+                            : "text-[#6D4C41] hover:text-[#7CB342] hover:bg-[#7CB342]/5"
                         )}
                         style={{ fontFamily: "var(--font-vt323)", fontSize: "1.5rem" }}
                       >
@@ -296,7 +296,7 @@ export function Header() {
                         {link.name}
                         {/* Active indicator arrow */}
                         {activeSection === link.href && (
-                          <span className="absolute right-4 text-[#8D6E63]">
+                          <span className="absolute right-4 text-[#7CB342]">
                             &gt;
                           </span>
                         )}
