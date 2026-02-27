@@ -93,55 +93,6 @@ const getSkillIcon = (iconName: string): React.ElementType => {
   return iconMap[iconName] || Code2;
 };
 
-// Map skill icon names to Lucide icon components
-const getSkillIcon = (iconName: string): React.ElementType => {
-  const iconMap: Record<string, React.ElementType> = {
-    react: Code2,
-    svelte: Waves,
-    htmlcss: Layout,
-    tailwind: Palette,
-    javascript: FileCode,
-    nodejs: Server,
-    php: Terminal,
-    laravel: Box,
-    python: Coffee,
-    flutter: Smartphone,
-    android: Smartphone,
-    firebase: Flame,
-    git: GitBranch,
-    figma: Figma,
-    supabase: Database,
-    laragon: Server,
-    xampp: Server,
-    java: Coffee,
-  };
-  return iconMap[iconName] || Code2;
-};
-
-// Map skill icon names to SVG icons
-const getSkillIcon = (iconName: string): string => {
-  const iconMap: Record<string, string> = {
-    react: "⚛️",
-    svelte: "🎐",
-    htmlcss: "🌐",
-    tailwind: "🌊",
-    javascript: "📜",
-    nodejs: "🟢",
-    php: "🐘",
-    laravel: "🔺",
-    python: "🐍",
-    flutter: "🦋",
-    android: "🤖",
-    firebase: "🔥",
-    git: "📋",
-    figma: "🎨",
-    supabase: "⚡",
-    laragon: "🦖",
-    xampp: "🎯",
-    java: "☕",
-  };
-  return iconMap[iconName] || "⚙️";
-};
 // Convert percentage to RPG level (1-5)
 const getSkillLevel = (level: number): number => {
   if (level >= 90) return 5;
