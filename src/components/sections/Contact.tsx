@@ -509,15 +509,20 @@ export function Contact() {
                     className="text-center"
                   >
                     <div
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#22c55e]/20 border-2 border-[#22c55e]"
+                      className="inline-flex items-center gap-2 px-4 py-3 bg-[#22c55e]/20 border-2 border-[#22c55e]"
                       style={{
                         boxShadow: "0 0 20px rgba(34, 197, 94, 0.3), inset 0 0 20px rgba(34, 197, 94, 0.1)",
                       }}
                     >
-                      <Signal className="h-4 w-4 text-[#22c55e]" />
-                      <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider">
-                        TRANSMISSION COMPLETE
-                      </span>
+                      <Signal className="h-5 w-5 text-[#22c55e]" />
+                      <div className="text-left">
+                        <span className="font-pixel text-xs text-[#22c55e] uppercase tracking-wider block">
+                          TRANSMISSION COMPLETE
+                        </span>
+                        <span className="font-vt323 text-sm text-[#22c55e]/80">
+                          Message sent successfully!
+                        </span>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -528,7 +533,9 @@ export function Contact() {
                 <div className="flex items-center justify-between font-vt323 text-xs text-[#22c55e]/50">
                   <span>SECURE CHANNEL</span>
                   <span>ENC: AES-256</span>
-                  <span>STATUS: READY</span>
+                  <span className={isSubmitted ? "text-[#22c55e]" : ""}>
+                    STATUS: {isSubmitted ? "SENT ✓" : isSubmitting ? "SENDING..." : "READY"}
+                  </span>
                 </div>
               </div>
             </form>
