@@ -9,11 +9,20 @@ interface ProjectGridProps {
   projects: Project[];
 }
 
-type FilterCategory = "All" | "Web" | "Mobile" | "Live" | "Development";
+type FilterCategory = "All" | "Web" | "Mobile" | "Full-Stack" | "Live" | "Development";
 
-const filters: FilterCategory[] = ["All", "Web", "Mobile", "Live", "Development"];
+const filters: FilterCategory[] = ["All", "Web", "Mobile", "Full-Stack", "Live", "Development"];
 
-// Pixel filter button component - Arcade Style
+// Theme colors for filter buttons
+const THEME_COLORS = {
+  cyan: "#00F5FF",
+  pink: "#FF006E",
+  purple: "#9D4EDD",
+  yellow: "#FFD60A",
+  green: "#39FF14",
+};
+
+// Pixel filter button component - Enhanced Arcade Style
 function PixelFilterButton({
   filter,
   isActive,
@@ -23,56 +32,86 @@ function PixelFilterButton({
   isActive: boolean;
   onClick: () => void;
 }) {
+  // Get accent color based on filter
+  const getAccentColor = () => {
+    switch (filter) {
+      case "Web": return THEME_COLORS.cyan;
+      case "Mobile": return THEME_COLORS.pink;
+      case "Full-Stack": return THEME_COLORS.purple;
+      case "Development": return THEME_COLORS.yellow;
+      case "Live": return THEME_COLORS.green;
+      default: return THEME_COLORS.cyan;
+    }
+  };
+
+  const accentColor = getAccentColor();
+
   return (
     <motion.button
-      whileHover={{ y: -3 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ y: -3, scale: 1.02 }}
+      whileTap={{ scale: 0.95, y: 2 }}
       onClick={onClick}
       role="tab"
       aria-selected={isActive}
       className="relative"
     >
-      {/* Shadow layer */}
-      <div className="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-slate-900" />
+      {/* 3D Shadow layer */}
+      <div
+        className="absolute inset-0 translate-x-2 translate-y-2 rounded-none"
+        style={{
+          backgroundColor: isActive ? accentColor : "#1e293b",
+          opacity: 0.5,
+        }}
+      />
       {/* Button face */}
       <div
-        className={`relative px-4 py-2.5 border-2 transition-all duration-200 ${
-          isActive
-            ? "bg-primary border-primary-foreground/40 shadow-inner"
-            : "bg-slate-700 border-slate-600 hover:bg-slate-600"
-        }`}
+        className="relative px-5 py-3 border-2 transition-all duration-200"
+        style={{
+          backgroundColor: isActive ? accentColor : "#334155",
+          borderColor: isActive ? "rgba(255,255,255,0.4)" : "#475569",
+        }}
       >
         <span
-          className={`text-xs uppercase tracking-widest ${
-            isActive ? "text-white" : "text-slate-300"
-          }`}
-          style={{ fontFamily: "var(--font-pixel)" }}
+          className="text-xs uppercase tracking-widest font-bold"
+          style={{
+            fontFamily: "var(--font-pixel)",
+            color: isActive ? "#0f172a" : "#94a3b8",
+          }}
         >
           {filter}
         </span>
-        {/* Corner pixels */}
+        {/* Corner pixels for active state */}
         {isActive && (
           <>
-            <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white/50" />
-            <div className="absolute top-0.5 right-0.5 w-1 h-1 bg-white/50" />
-            <div className="absolute bottom-0.5 left-0.5 w-1 h-1 bg-black/30" />
-            <div className="absolute bottom-0.5 right-0.5 w-1 h-1 bg-black/30" />
+            <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-white/50" />
+            <div className="absolute top-1 right-1 w-1.5 h-1.5 bg-white/50" />
+            <div className="absolute bottom-1 left-1 w-1.5 h-1.5 bg-black/30" />
+            <div className="absolute bottom-1 right-1 w-1.5 h-1.5 bg-black/30" />
           </>
         )}
       </div>
-      {/* Active indicator */}
+      {/* Active indicator - blinking cursor */}
       {isActive && (
         <motion.div
           layoutId="activeFilter"
-          className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-2 h-2 bg-primary"
-          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+          className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-2 h-2"
+          style={{ backgroundColor: accentColor }}
+          animate={{ opacity: [1, 0.3, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        />
+      )}
+      {/* Hover glow */}
+      {!isActive && (
+        <motion.div
+          className="absolute -inset-1 opacity-0 hover:opacity-30 transition-opacity blur-md -z-10 rounded-full"
+          style={{ backgroundColor: accentColor }}
         />
       )}
     </motion.button>
   );
 }
 
-// Empty state - Game Over Screen
+// Empty state - No Games Found
 function EmptyState() {
   return (
     <motion.div
@@ -84,24 +123,31 @@ function EmptyState() {
       className="text-center py-16"
     >
       <div className="inline-block relative">
-        {/* Border */}
-        <div className="absolute inset-0 bg-slate-800 translate-x-2 translate-y-2" />
-        <div className="relative border-4 border-slate-600 p-10 bg-slate-900">
+        {/* 3D Shadow */}
+        <div className="absolute inset-0 bg-slate-800 translate-x-3 translate-y-3" />
+        {/* Border frame */}
+        <div className="relative border-4 border-slate-600 p-12 bg-slate-900">
+          {/* Corner decorations */}
+          <div className="absolute top-2 left-2 w-4 h-4 border-t-4 border-l-4 border-[#FF006E]" />
+          <div className="absolute top-2 right-2 w-4 h-4 border-t-4 border-r-4 border-[#FF006E]" />
+          <div className="absolute bottom-2 left-2 w-4 h-4 border-b-4 border-l-4 border-[#FF006E]" />
+          <div className="absolute bottom-2 right-2 w-4 h-4 border-b-4 border-r-4 border-[#FF006E]" />
+
           <motion.p
-            className="text-red-500 text-2xl md:text-3xl mb-4"
-            style={{ fontFamily: "var(--font-pixel)" }}
+            className="text-2xl md:text-3xl mb-4"
+            style={{ fontFamily: "var(--font-pixel)", color: THEME_COLORS.yellow }}
             animate={{ opacity: [1, 0.7, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            GAME OVER
+            NO GAMES FOUND
           </motion.p>
           <p
             className="text-slate-400 text-xl mb-6"
             style={{ fontFamily: "var(--font-vt323)" }}
           >
-            No cartridges found in this category
+            No cartridges in this category
           </p>
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-3">
             <motion.span
               animate={{ opacity: [0, 1, 1, 0] }}
               transition={{
@@ -109,13 +155,14 @@ function EmptyState() {
                 repeat: Infinity,
                 times: [0, 0.25, 0.75, 1],
               }}
-              className="w-3 h-3 bg-white"
+              className="w-3 h-3"
+              style={{ backgroundColor: THEME_COLORS.cyan }}
             />
             <span
               className="text-slate-500 text-sm"
               style={{ fontFamily: "var(--font-vt323)" }}
             >
-              Press any key to continue...
+              Try another filter...
             </span>
           </div>
         </div>
@@ -138,6 +185,8 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
           return project.category === "web";
         case "Mobile":
           return project.category === "mobile";
+        case "Full-Stack":
+          return project.category === "full-stack";
         case "Live":
           return project.status === "live";
         case "Development":
@@ -152,7 +201,7 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Filter Buttons - Game Menu Style */}
       <div
-        className="flex flex-wrap justify-center gap-3 mb-12"
+        className="flex flex-wrap justify-center gap-4 mb-12"
         role="tablist"
         aria-label="Filter cartridges by category"
       >
