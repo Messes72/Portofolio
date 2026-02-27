@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0D0221"/>
+  <rect x="40" y="40" width="720" height="420" fill="#1a1a2e" rx="8"/>
+  <rect x="50" y="50" width="700" height="80" fill="#FF006E" rx="4"/>
+  <text x="70" y="95" font-family="Arial, sans-serif" font-size="32" fill="white" font-weight="bold">MARIO CLAUDIUS</text>
+  <text x="70" y="115" font-family="Arial, sans-serif" font-size="16" fill="#00F5FF">Full-Stack Developer crafting digital experiences</text>
+  <rect x="50" y="140" width="200" height="40" fill="#9D4EDD" rx="4"/>
+  <text x="70" y="165" font-family="Arial, sans-serif" font-size="14" fill="white">About</text>
+  <rect x="260" y="140" width="200" height="40" fill="#9D4EDD" rx="4"/>
+  <text x="280" y="165" font-family="Arial, sans-serif" font-size="14" fill="white">Skills</text>
+  <rect x="470" y="140" width="200" height="40" fill="#9D4EDD" rx="4"/>
+  <text x="490" y="165" font-family="Arial, sans-serif" font-size="14" fill="white">Projects</text>
+  <rect x="50" y="190" width="700" height="200" fill="#0D0221" rx="4"/>
+  <text x="70" y="220" font-family="Arial, sans-serif" font-size="20" fill="#FFD60A">PLAYER 1 READY</text>
+  <text x="70" y="260" font-family="Arial, sans-serif" font-size="16" fill="white">Press START to explore my work</text>
+  <rect x="70" y="280" width="150" height="40" fill="#00F5FF" rx="4"/>
+  <text x="95" y="305" font-family="Arial, sans-serif" font-size="14" fill="black">PRESS START</text>
+</svg>
