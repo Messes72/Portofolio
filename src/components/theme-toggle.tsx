@@ -24,31 +24,31 @@ const themeOptions: ThemeOption[] = [
   { value: "system", label: "AUTO", icon: Monitor },
 ];
 
-// Pixel border using box-shadow technique
+// Pixel border using box-shadow technique - Nature theme
 const pixelBorder = {
   boxShadow: `
-    -3px 0 0 0 #00F5FF,
-     3px 0 0 0 #00F5FF,
-     0 -3px 0 0 #00F5FF,
-     0 3px 0 0 #00F5FF,
-    -3px -3px 0 0 #00F5FF,
-     3px -3px 0 0 #00F5FF,
-    -3px 3px 0 0 #00F5FF,
-     3px 3px 0 0 #00F5FF
+    -3px 0 0 0 #7CB342,
+     3px 0 0 0 #7CB342,
+     0 -3px 0 0 #7CB342,
+     0 3px 0 0 #7CB342,
+    -3px -3px 0 0 #7CB342,
+     3px -3px 0 0 #7CB342,
+    -3px 3px 0 0 #7CB342,
+     3px 3px 0 0 #7CB342
   `,
 };
 
 // Active/pressed pixel border (offset down)
 const pixelBorderPressed = {
   boxShadow: `
-    -3px 0 0 0 #00F5FF,
-     3px 0 0 0 #00F5FF,
-     0 -3px 0 0 #00F5FF,
-     0 0px 0 0 #00F5FF,
-    -3px -3px 0 0 #00F5FF,
-     3px -3px 0 0 #00F5FF,
-    -3px 0px 0 0 #00F5FF,
-     3px 0px 0 0 #00F5FF
+    -3px 0 0 0 #7CB342,
+     3px 0 0 0 #7CB342,
+     0 -3px 0 0 #7CB342,
+     0 0px 0 0 #7CB342,
+    -3px -3px 0 0 #7CB342,
+     3px -3px 0 0 #7CB342,
+    -3px 0px 0 0 #7CB342,
+     3px 0px 0 0 #7CB342
   `,
 };
 
@@ -79,7 +79,7 @@ export function ThemeToggle() {
 
   return (
     <div
-      className="inline-flex bg-[#240946] p-1"
+      className="inline-flex bg-[#8D6E63] p-1"
       style={pixelBorder}
       role="group"
       aria-label="Theme selection"
@@ -132,8 +132,8 @@ function PixelThemeButton({
 
   // Dynamic colors based on selection
   const colorClasses = isSelected
-    ? "bg-[#00F5FF] text-black"
-    : "bg-[#240946] text-[#00F5FF] hover:bg-[#3d1a6e]";
+    ? "bg-[#7CB342] text-black"
+    : "bg-[#8D6E63] text-[#7CB342] hover:bg-[#6D4C41]";
 
   if (prefersReducedMotion) {
     return (
@@ -174,7 +174,7 @@ function PixelThemeButton({
       {/* Selection indicator glow effect */}
       {isSelected && (
         <motion.div
-          className="absolute inset-0 bg-[#00F5FF]"
+          className="absolute inset-0 bg-[#7CB342]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -209,7 +209,7 @@ function PixelThemeButton({
           exit={{ opacity: 0, y: 2 }}
           transition={{ duration: 0.15 }}
         >
-          <div className="w-0 h-0 border-l-[3px] border-r-[3px] border-t-[4px] border-l-transparent border-r-transparent border-t-[#00F5FF]" />
+          <div className="w-0 h-0 border-l-[3px] border-r-[3px] border-t-[4px] border-l-transparent border-r-transparent border-t-[#7CB342]" />
         </motion.div>
       )}
     </motion.button>

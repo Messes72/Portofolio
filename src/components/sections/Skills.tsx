@@ -191,7 +191,7 @@ function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKe
   return (
     <motion.div
       ref={ref}
-      className="relative p-3 border border-zinc-800 bg-zinc-900/80 hover:border-zinc-600 transition-colors cursor-pointer group"
+      className="relative p-3 border border-[#8D6E63]/20 bg-[#FFF8E7] hover:border-[#8D6E63]/40 transition-colors cursor-pointer group"
       style={{
         imageRendering: "pixelated",
       }}
@@ -214,9 +214,9 @@ function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKe
         <div
           className="w-6 h-6 flex items-center justify-center border text-[10px] font-bold"
           style={{
-            borderColor: isHovered ? colors.border : "#3f3f46",
-            color: isHovered ? colors.border : "#a1a1aa",
-            backgroundColor: "rgba(0,0,0,0.3)",
+            borderColor: isHovered ? colors.border : "#8D6E63",
+            color: isHovered ? colors.border : "#6D4C41",
+            backgroundColor: "rgba(255,248,231,0.5)",
             fontFamily: "monospace",
             transition: "all 0.2s"
           }}
@@ -226,7 +226,7 @@ function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKe
         <span
           className="text-xs font-bold tracking-wider uppercase flex-1"
           style={{
-            color: isHovered ? colors.border : "#e4e4e7",
+            color: isHovered ? colors.border : "#3E2723",
             fontFamily: "monospace",
             transition: "color 0.2s"
           }}
@@ -252,7 +252,7 @@ function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKe
       <motion.div
         className="absolute -top-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-[10px] whitespace-nowrap pointer-events-none"
         style={{
-          backgroundColor: "#18181b",
+          backgroundColor: "#FFF8E7",
           border: `1px solid ${colors.border}`,
           color: colors.border,
           fontFamily: "monospace",
@@ -265,7 +265,7 @@ function SkillItem({ skill, categoryKey, delay = 0 }: { skill: Skill; categoryKe
         {/* Pixel Arrow */}
         <div
           className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
-          style={{ backgroundColor: "#18181b", borderRight: `1px solid ${colors.border}`, borderBottom: `1px solid ${colors.border}` }}
+          style={{ backgroundColor: "#FFF8E7", borderRight: `1px solid ${colors.border}`, borderBottom: `1px solid ${colors.border}` }}
         />
       </motion.div>
     </motion.div>
@@ -294,19 +294,19 @@ function CategoryCard({
     >
       {/* Category Card Container */}
       <div
-        className="h-full border-2 p-4 bg-zinc-950"
+        className="h-full border-2 p-4 bg-[#FFF8E7]"
         style={{
           borderColor: colors.border,
-          boxShadow: `0 0 20px ${colors.glow}, inset 0 0 20px rgba(0,0,0,0.5)`
+          boxShadow: `0 0 20px ${colors.glow}, inset 0 0 20px rgba(0,0,0,0.1)`
         }}
       >
         {/* Category Header */}
-        <div className="flex items-center gap-3 mb-4 pb-3 border-b border-zinc-800">
+        <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#8D6E63]/20">
           <div
             className="p-2 border"
             style={{
               borderColor: colors.border,
-              backgroundColor: "rgba(0,0,0,0.5)"
+              backgroundColor: "rgba(124, 179, 66, 0.1)"
             }}
           >
             <Icon className="w-5 h-5" style={{ color: colors.border }} />
@@ -325,7 +325,7 @@ function CategoryCard({
             </h3>
             <p
               className="text-[10px] uppercase tracking-wider"
-              style={{ color: "#71717a", fontFamily: "monospace" }}
+              style={{ color: "#6D4C41", fontFamily: "monospace" }}
             >
               {category.subtitle}
             </p>
@@ -512,7 +512,7 @@ export function Skills() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-sm text-zinc-400 max-w-md mx-auto"
+            className="text-sm text-[#6D4C41] max-w-md mx-auto"
             style={{ fontFamily: "monospace" }}
           >
             &gt; Select your skill to view details_
@@ -541,11 +541,11 @@ export function Skills() {
           className="mb-12"
         >
           <div
-            className="max-w-3xl mx-auto border border-zinc-800 p-4 bg-zinc-900/50"
+            className="max-w-3xl mx-auto border border-[#8D6E63]/30 p-4 bg-[#FFF8E7]/80"
             style={{ fontFamily: "monospace" }}
           >
             <div className="text-center mb-3">
-              <span className="text-xs tracking-widest uppercase text-zinc-500">Skill Mastery Levels</span>
+              <span className="text-xs tracking-widest uppercase text-[#8D6E63]">Skill Mastery Levels</span>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {legendItems.map((item) => (
@@ -553,7 +553,7 @@ export function Skills() {
                   <PixelStars count={item.stars} color={item.color} />
                   <div className="text-xs">
                     <span style={{ color: item.color }} className="font-bold">{item.title}</span>
-                    <span className="text-zinc-600 ml-1">({item.level})</span>
+                    <span className="text-[#6D4C41] ml-1">({item.level})</span>
                   </div>
                 </div>
               ))}
