@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0D0221"/>
+  <rect x="40" y="40" width="720" height="420" fill="#1a1a2e" rx="8"/>
+  <rect x="50" y="50" width="700" height="60" fill="#00F5FF" rx="4"/>
+  <text x="70" y="88" font-family="Arial, sans-serif" font-size="28" fill="black" font-weight="bold">CARTRIDGE COLLECTION</text>
+  <rect x="50" y="120" width="340" height="150" fill="#FF006E" rx="4"/>
+  <text x="70" y="160" font-family="Arial, sans-serif" font-size="18" fill="white">RS Bantarangin</text>
+  <text x="70" y="185" font-family="Arial, sans-serif" font-size="12" fill="white">Hospital Management System</text>
+  <rect x="50" y="280" width="340" height="150" fill="#9D4EDD" rx="4"/>
+  <text x="70" y="320" font-family="Arial, sans-serif" font-size="18" fill="white">Portfolio Website</text>
+  <text x="70" y="345" font-family="Arial, sans-serif" font-size="12" fill="white">Personal portfolio with animations</text>
+  <rect x="410" y="120" width="340" height="150" fill="#FFD60A" rx="4"/>
+  <text x="430" y="160" font-family="Arial, sans-serif" font-size="18" fill="black">E-Commerce App</text>
+  <text x="430" y="185" font-family="Arial, sans-serif" font-size="12" fill="black">Flutter mobile application</text>
+  <rect x="410" y="280" width="340" height="150" fill="#39FF14" rx="4"/>
+  <text x="430" y="320" font-family="Arial, sans-serif" font-size="18" fill="black">Laravel CMS</text>
+  <text x="430" y="345" font-family="Arial, sans-serif" font-size="12" fill="black">Content Management System</text>
+</svg>
