@@ -15,6 +15,8 @@ export function Footer() {
   const [selectedOption, setSelectedOption] = useState<MenuOption>("continue")
   const [showGameOver, setShowGameOver] = useState(true)
   const [showContinuePrompt, setShowContinuePrompt] = useState(true)
+  const [showHighScoreEasterEgg, setShowHighScoreEasterEgg] = useState(false)
+  const [hasContinued, setHasContinued] = useState(false)
   const prefersReducedMotion = useReducedMotion()
 
   // Countdown timer effect
@@ -40,10 +42,17 @@ export function Footer() {
   }, [prefersReducedMotion])
 
   const scrollToTop = useCallback(() => {
+    setHasContinued(true)
+    setShowGameOver(false)
     window.scrollTo({
       top: 0,
       behavior: prefersReducedMotion ? "auto" : "smooth",
     })
+    // Reset after animation
+    setTimeout(() => {
+      setHasContinued(false)
+      setShowGameOver(true)
+    }, 2000)
   }, [prefersReducedMotion])
 
   const handleRetry = useCallback(() => {
@@ -151,15 +160,13 @@ export function Footer() {
               className="text-4xl sm:text-5xl md:text-6xl font-black tracking-wider"
               style={{
                 fontFamily: "'Press Start 2P', monospace",
-                color: "#FF4444",
-                textShadow: `
-                  4px 4px 0px #8B0000,
-                  -2px -2px 0px #FF8888,
-                  0 0 20px rgba(255, 68, 68, 0.5)
-                `,
+                color: hasContinued ? "#39FF14" : "#FF4444",
+                textShadow: hasContinued
+                  ? `4px 4px 0px #1a6b0e, -2px -2px 0px #7fff7f, 0 0 20px rgba(57, 255, 20, 0.5)`
+                  : `4px 4px 0px #8B0000, -2px -2px 0px #FF8888, 0 0 20px rgba(255, 68, 68, 0.5)`,
               }}
             >
-              GAME OVER
+              {hasContinued ? "CONTINUED!" : "GAME OVER"}
             </h2>
           </motion.div>
 
@@ -233,6 +240,7 @@ export function Footer() {
                 tabIndex={0}
                 onKeyDown={(e) => handleKeyDown(e, option.id)}
                 onMouseEnter={() => setSelectedOption(option.id)}
+                onFocus={() => setSelectedOption(option.id)}
                 className="relative"
               >
                 {/* Selection indicator */}
@@ -261,6 +269,17 @@ export function Footer() {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Menu Selection Indicator */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-xs text-white/40 mt-2"
+            style={{ fontFamily: "var(--font-vt323)" }}
+            aria-live="polite"
+          >
+            Selected: {selectedOption.toUpperCase()}
+          </motion.p>
 
           {/* Insert Coin Reference */}
           <motion.p
@@ -333,13 +352,51 @@ export function Footer() {
                 THANKS FOR PLAYING
               </motion.p>
 
-              {/* High Score Hint */}
-              <p
-                className="text-white/30 text-[10px] mt-2"
-                style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
-              >
-                HIGH SCORE: 999999
-              </p>
+              {/* High Score Easter Egg */}
+              <div className="mt-4">
+                <motion.button
+                  onClick={() => setShowHighScoreEasterEgg(!showHighScoreEasterEgg)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400/50 rounded px-2 py-1"
+                  aria-label="Click to reveal easter egg"
+                >
+                  <p
+                    className="text-white/30 text-[10px] hover:text-yellow-400/50 transition-colors"
+                    style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
+                  >
+                    HIGH SCORE: 999999
+                  </p>
+                </motion.button>
+
+                {/* Easter Egg Reveal */}
+                <AnimatePresence>
+                  {showHighScoreEasterEgg && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, height: 0 }}
+                      animate={{ opacity: 1, y: 0, height: "auto" }}
+                      exit={{ opacity: 0, y: -10, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 p-4 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded border border-purple-500/30"
+                    >
+                      <p
+                        className="text-yellow-400 text-xs mb-2"
+                        style={{ fontFamily: "var(--font-pixel), 'Press Start 2P', monospace" }}
+                      >
+                        🎉 SECRET UNLOCKED! 🎉
+                      </p>
+                      <p
+                        className="text-cyan-400 text-xs"
+                        style={{ fontFamily: "var(--font-vt323)", fontSize: "14px" }}
+                      >
+                        You found the hidden easter egg!<br/>
+                        Thanks for exploring my portfolio.<br/>
+                        <span className="text-pink-400">Made with ❤️ and lots of ☕</span>
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </motion.div>
 
