@@ -37,8 +37,8 @@ function NatureContactCard({
       transition={{ delay, duration: 0.3 }}
       className={cn(
         "flex items-center gap-4 p-4",
-        "bg-[#FFF8E7] border-2 border-[#8D6E63]/30",
-        "hover:border-[#7CB342] hover:bg-[#FFF8E7]/90",
+        "bg-[var(--card)] border-2 border-[var(--border)]",
+        "hover:border-[#7CB342] hover:bg-[var(--card)]/90",
         "transition-colors duration-200"
       )}
       style={{
@@ -63,7 +63,7 @@ function NatureContactCard({
             {label}
           </PixelBadge>
         </div>
-        <p className="mt-1 truncate font-vt323 text-lg text-[#3E2723]">{value}</p>
+        <p className="mt-1 truncate font-vt323 text-lg text-[var(--foreground)]">{value}</p>
       </div>
     </motion.div>
   )
@@ -100,10 +100,10 @@ function NatureInput({
   isTextarea?: boolean
 }) {
   const baseClasses = cn(
-    "w-full bg-white border-2 border-[#8D6E63]/30",
-    "text-[#3E2723] font-vt323 text-lg",
+    "w-full bg-[var(--card)] border-2 border-[var(--border)]",
+    "text-[var(--foreground)] font-vt323 text-lg",
     "focus:border-[#7CB342] focus:outline-none",
-    "placeholder:text-[#8D6E63]/50",
+    "placeholder:text-[var(--muted-foreground)]",
     "transition-colors duration-200"
   )
 
