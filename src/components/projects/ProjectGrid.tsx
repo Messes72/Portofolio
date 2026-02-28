@@ -15,11 +15,12 @@ const filters: FilterCategory[] = ["All", "Web", "Mobile", "Full-Stack", "Live",
 
 // Theme colors for filter buttons - Nature palette
 const THEME_COLORS = {
-  cyan: "#4FC3F7",      // water-blue
-  pink: "#F48FB1",      // flower-pink
-  purple: "#8D6E63",    // earth-brown
-  yellow: "#FFD54F",    // sun-yellow
-  green: "#7CB342",     // grass-green
+  sky: "#87CEEB",       // sky-blue
+  grass: "#7CB342",     // grass-green
+  wood: "#8D6E63",      // earth-brown
+  sun: "#FFD54F",       // sun-yellow
+  leaf: "#66BB6A",      // leaf-green
+  flower: "#F48FB1",    // flower-pink
 };
 
 // Pixel filter button component - Enhanced Arcade Style
@@ -35,12 +36,12 @@ function PixelFilterButton({
   // Get accent color based on filter
   const getAccentColor = () => {
     switch (filter) {
-      case "Web": return THEME_COLORS.cyan;
-      case "Mobile": return THEME_COLORS.pink;
-      case "Full-Stack": return THEME_COLORS.purple;
-      case "Development": return THEME_COLORS.yellow;
-      case "Live": return THEME_COLORS.green;
-      default: return THEME_COLORS.cyan;
+      case "Web": return THEME_COLORS.sky;
+      case "Mobile": return THEME_COLORS.flower;
+      case "Full-Stack": return THEME_COLORS.wood;
+      case "Development": return THEME_COLORS.sun;
+      case "Live": return THEME_COLORS.grass;
+      default: return THEME_COLORS.leaf;
     }
   };
 
@@ -59,7 +60,7 @@ function PixelFilterButton({
       <div
         className="absolute inset-0 translate-x-2 translate-y-2 rounded-none"
         style={{
-          backgroundColor: isActive ? accentColor : "#1e293b",
+          backgroundColor: isActive ? accentColor : "#5D4037",
           opacity: 0.5,
         }}
       />
@@ -67,15 +68,15 @@ function PixelFilterButton({
       <div
         className="relative px-5 py-3 border-2 transition-all duration-200"
         style={{
-          backgroundColor: isActive ? accentColor : "#334155",
-          borderColor: isActive ? "rgba(255,255,255,0.4)" : "#475569",
+          backgroundColor: isActive ? accentColor : "#8D6E63",
+          borderColor: isActive ? "rgba(255,255,255,0.4)" : "#A1887F",
         }}
       >
         <span
           className="text-xs uppercase tracking-widest font-bold"
           style={{
             fontFamily: "var(--font-pixel)",
-            color: isActive ? "#0f172a" : "#94a3b8",
+            color: isActive ? "#3E2723" : "#FFF8E7",
           }}
         >
           {filter}
@@ -124,25 +125,25 @@ function EmptyState() {
     >
       <div className="inline-block relative">
         {/* 3D Shadow */}
-        <div className="absolute inset-0 bg-slate-800 translate-x-3 translate-y-3" />
+        <div className="absolute inset-0 bg-[#5D4037] translate-x-3 translate-y-3" />
         {/* Border frame */}
-        <div className="relative border-4 border-slate-600 p-12 bg-slate-900">
+        <div className="relative border-4 border-[#8D6E63] p-12 bg-[#FFF8E7]">
           {/* Corner decorations */}
-          <div className="absolute top-2 left-2 w-4 h-4 border-t-4 border-l-4 border-[#F48FB1]" />
-          <div className="absolute top-2 right-2 w-4 h-4 border-t-4 border-r-4 border-[#F48FB1]" />
-          <div className="absolute bottom-2 left-2 w-4 h-4 border-b-4 border-l-4 border-[#F48FB1]" />
-          <div className="absolute bottom-2 right-2 w-4 h-4 border-b-4 border-r-4 border-[#F48FB1]" />
+          <div className="absolute top-2 left-2 w-4 h-4 border-t-4 border-l-4 border-[#7CB342]" />
+          <div className="absolute top-2 right-2 w-4 h-4 border-t-4 border-r-4 border-[#7CB342]" />
+          <div className="absolute bottom-2 left-2 w-4 h-4 border-b-4 border-l-4 border-[#7CB342]" />
+          <div className="absolute bottom-2 right-2 w-4 h-4 border-b-4 border-r-4 border-[#7CB342]" />
 
           <motion.p
             className="text-2xl md:text-3xl mb-4"
-            style={{ fontFamily: "var(--font-pixel)", color: THEME_COLORS.yellow }}
+            style={{ fontFamily: "var(--font-pixel)", color: THEME_COLORS.sun }}
             animate={{ opacity: [1, 0.7, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
             NO GAMES FOUND
           </motion.p>
           <p
-            className="text-slate-400 text-xl mb-6"
+            className="text-[#6D4C41] text-xl mb-6"
             style={{ fontFamily: "var(--font-vt323)" }}
           >
             No cartridges in this category
@@ -156,10 +157,10 @@ function EmptyState() {
                 times: [0, 0.25, 0.75, 1],
               }}
               className="w-3 h-3"
-              style={{ backgroundColor: THEME_COLORS.cyan }}
+              style={{ backgroundColor: THEME_COLORS.grass }}
             />
             <span
-              className="text-slate-500 text-sm"
+              className="text-[#8D6E63] text-sm"
               style={{ fontFamily: "var(--font-vt323)" }}
             >
               Try another filter...
@@ -244,7 +245,7 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
 
       {/* Decorative pixel elements */}
       <div className="mt-12 flex justify-center">
-        <div className="flex items-center gap-2 text-slate-600">
+        <div className="flex items-center gap-2 text-[#8D6E63]">
           <div className="w-2 h-2 bg-current" />
           <div className="w-2 h-2 bg-current" />
           <div className="w-2 h-2 bg-current" />

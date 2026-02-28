@@ -31,11 +31,12 @@ import {
 
 // Nature theme color palette
 const THEME_COLORS = {
-  cyan: "#4FC3F7",      // water-blue
-  pink: "#F48FB1",      // flower-pink
-  purple: "#8D6E63",    // earth-brown
-  yellow: "#FFD54F",    // sun-yellow
-  green: "#7CB342",     // grass-green
+  sky: "#87CEEB",       // sky-blue
+  grass: "#7CB342",     // grass-green
+  wood: "#8D6E63",      // earth-brown
+  sun: "#FFD54F",       // sun-yellow
+  leaf: "#66BB6A",      // leaf-green
+  flower: "#F48FB1",    // flower-pink
 };
 
 // Cartridge label colors by category - strict theme adherence
@@ -44,40 +45,40 @@ const categoryColors: Record<
   { bg: string; border: string; text: string; glow: string; hex: string }
 > = {
   web: {
-    bg: "bg-cyan-500",
-    border: "border-cyan-400",
-    text: "text-cyan-950",
-    glow: "shadow-cyan-500/50",
-    hex: THEME_COLORS.cyan,
+    bg: "bg-[#87CEEB]",
+    border: "border-[#5DADE2]",
+    text: "text-[#1B4F72]",
+    glow: "shadow-[#87CEEB]/50",
+    hex: THEME_COLORS.sky,
   },
   mobile: {
-    bg: "bg-pink-500",
-    border: "border-pink-400",
-    text: "text-pink-950",
-    glow: "shadow-pink-500/50",
-    hex: THEME_COLORS.pink,
+    bg: "bg-[#F48FB1]",
+    border: "border-[#EC407A]",
+    text: "text-[#880E4F]",
+    glow: "shadow-[#F48FB1]/50",
+    hex: THEME_COLORS.flower,
   },
   "full-stack": {
-    bg: "bg-purple-500",
-    border: "border-purple-400",
-    text: "text-purple-950",
-    glow: "shadow-purple-500/50",
-    hex: THEME_COLORS.purple,
+    bg: "bg-[#8D6E63]",
+    border: "border-[#6D4C41]",
+    text: "text-[#3E2723]",
+    glow: "shadow-[#8D6E63]/50",
+    hex: THEME_COLORS.wood,
   },
   other: {
-    bg: "bg-yellow-500",
-    border: "border-yellow-400",
-    text: "text-yellow-950",
-    glow: "shadow-yellow-500/50",
-    hex: THEME_COLORS.yellow,
+    bg: "bg-[#FFD54F]",
+    border: "border-[#FFB74D]",
+    text: "text-[#BF360C]",
+    glow: "shadow-[#FFD54F]/50",
+    hex: THEME_COLORS.sun,
   },
 };
 
 // Status badges - Nature theme colors
 const statusBadges: Record<string, { label: string; bg: string; textColor: string }> = {
-  live: { label: "NEW RELEASE", bg: "bg-[#7CB342]", textColor: "text-slate-950" },
-  "in-development": { label: "COMING SOON", bg: "bg-[#FFD54F]", textColor: "text-slate-950" },
-  archived: { label: "CLASSIC", bg: "bg-slate-500", textColor: "text-white" },
+  live: { label: "NEW RELEASE", bg: "bg-[#7CB342]", textColor: "text-[#3E2723]" },
+  "in-development": { label: "COMING SOON", bg: "bg-[#FFD54F]", textColor: "text-[#3E2723]" },
+  archived: { label: "CLASSIC", bg: "bg-[#8D6E63]", textColor: "text-[#FFF8E7]" },
 };
 
 // Tech stack icon mapping to Lucide icons
@@ -128,10 +129,10 @@ function TechIcon({ name }: { name: string }) {
   if (IconComponent) {
     return (
       <div
-        className="w-7 h-7 bg-slate-800 border-2 border-slate-600 flex items-center justify-center shadow-inner"
+        className="w-7 h-7 bg-[#5D4037] border-2 border-[#8D6E63] flex items-center justify-center shadow-inner"
         title={name}
       >
-        <IconComponent className="w-4 h-4 text-slate-300" />
+        <IconComponent className="w-4 h-4 text-[#FFF8E7]" />
       </div>
     );
   }
@@ -140,11 +141,11 @@ function TechIcon({ name }: { name: string }) {
   const firstLetter = name.charAt(0).toUpperCase();
   return (
     <div
-      className="w-7 h-7 bg-slate-800 border-2 border-slate-600 flex items-center justify-center shadow-inner"
+      className="w-7 h-7 bg-[#5D4037] border-2 border-[#8D6E63] flex items-center justify-center shadow-inner"
       title={name}
     >
       <span
-        className="text-[10px] text-slate-300 font-bold"
+        className="text-[10px] text-[#FFF8E7] font-bold"
         style={{ fontFamily: "var(--font-pixel)" }}
       >
         {firstLetter}
@@ -158,14 +159,14 @@ function GripLines({ count = 12 }: { count?: number }) {
   return (
     <div className="flex items-center justify-center gap-1">
       {[...Array(count)].map((_, i) => (
-        <div key={i} className="w-1 h-full bg-slate-600/80" />
+        <div key={i} className="w-1 h-full bg-[#8D6E63]/80" />
       ))}
     </div>
   );
 }
 
 // Pixel corner decoration
-function PixelCorners({ color = "bg-slate-600" }: { color?: string }) {
+function PixelCorners({ color = "bg-[#8D6E63]" }: { color?: string }) {
   return (
     <>
       <div className={`absolute top-2 left-2 w-2 h-2 ${color}`} />
@@ -200,12 +201,12 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
     >
       <Link href={`/projects/${project.id}`}>
         {/* Cartridge Shadow */}
-        <div className="absolute inset-0 translate-y-3 translate-x-2 bg-black/60" />
+        <div className="absolute inset-0 translate-y-3 translate-x-2 bg-[#3E2723]/60" />
 
         {/* Cartridge Body */}
-        <div className="relative bg-slate-800 border-4 border-slate-600 overflow-hidden">
+        <div className="relative bg-[#3E2723] border-4 border-[#8D6E63] overflow-hidden">
           {/* NES-style grip lines at top */}
-          <div className="h-8 bg-slate-700 flex items-center justify-center border-b-4 border-slate-600">
+          <div className="h-8 bg-[#5D4037] flex items-center justify-center border-b-4 border-[#8D6E63]">
             <GripLines count={14} />
           </div>
 
@@ -232,7 +233,7 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
             )}
 
             {/* Screenshot / Image Area */}
-            <div className="aspect-video bg-slate-900 border-4 border-slate-800 flex items-center justify-center overflow-hidden relative">
+            <div className="aspect-video bg-[#2D1B18] border-4 border-[#5D4037] flex items-center justify-center overflow-hidden relative">
               {/* Animated scanlines */}
               <div
                 className="absolute inset-0 opacity-20 pointer-events-none z-10"
@@ -297,7 +298,7 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
                       ))}
                     </div>
                     <span
-                      className="text-[10px] text-slate-500 uppercase"
+                      className="text-[10px] text-[#8D6E63] uppercase"
                       style={{ fontFamily: "var(--font-pixel)" }}
                     >
                       NO SIGNAL
@@ -307,10 +308,10 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
               )}
 
               {/* Corner pixels for authentic look */}
-              <div className="absolute top-2 left-2 w-2 h-2 bg-slate-700 z-20" />
-              <div className="absolute top-2 right-2 w-2 h-2 bg-slate-700 z-20" />
-              <div className="absolute bottom-2 left-2 w-2 h-2 bg-slate-700 z-20" />
-              <div className="absolute bottom-2 right-2 w-2 h-2 bg-slate-700 z-20" />
+              <div className="absolute top-2 left-2 w-2 h-2 bg-[#8D6E63] z-20" />
+              <div className="absolute top-2 right-2 w-2 h-2 bg-[#8D6E63] z-20" />
+              <div className="absolute bottom-2 left-2 w-2 h-2 bg-[#8D6E63] z-20" />
+              <div className="absolute bottom-2 right-2 w-2 h-2 bg-[#8D6E63] z-20" />
             </div>
 
             {/* Game Title */}
@@ -339,7 +340,7 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
           </div>
 
           {/* Cartridge Bottom - Platform Icons & Play Button */}
-          <div className="bg-slate-800 p-4">
+          <div className="bg-[#3E2723] p-4">
             <div className="flex items-center justify-between">
               {/* Tech Stack Icons (Platform) */}
               <div className="flex gap-1.5 flex-wrap">
@@ -347,9 +348,9 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
                   <TechIcon key={i} name={tech} />
                 ))}
                 {project.techStack.length > 4 && (
-                  <div className="w-7 h-7 bg-slate-800 border-2 border-slate-600 flex items-center justify-center">
+                  <div className="w-7 h-7 bg-[#5D4037] border-2 border-[#8D6E63] flex items-center justify-center">
                     <span
-                      className="text-[7px] text-slate-400"
+                      className="text-[7px] text-[#FFF8E7]"
                       style={{ fontFamily: "var(--font-pixel)" }}
                     >
                       +{project.techStack.length - 4}
@@ -367,16 +368,16 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
                 {/* 3D shadow */}
                 <div
                   className="absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-none"
-                  style={{ backgroundColor: "#166534" }}
+                  style={{ backgroundColor: "#558B2F" }}
                 />
                 {/* Button face */}
                 <div
                   className="relative px-4 py-2.5 border-2 border-white/30"
-                  style={{ backgroundColor: THEME_COLORS.green }}
+                  style={{ backgroundColor: THEME_COLORS.grass }}
                 >
                   <span
                     className="text-[10px] font-bold uppercase tracking-wider"
-                    style={{ fontFamily: "var(--font-pixel)", color: "#0f172a" }}
+                    style={{ fontFamily: "var(--font-pixel)", color: "#3E2723" }}
                   >
                     PLAY
                   </span>
@@ -389,14 +390,14 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
                 {/* Hover glow */}
                 <motion.div
                   className="absolute -inset-2 opacity-0 group-hover/btn:opacity-100 transition-opacity blur-md -z-10"
-                  style={{ backgroundColor: THEME_COLORS.green }}
+                  style={{ backgroundColor: THEME_COLORS.grass }}
                 />
               </motion.div>
             </div>
           </div>
 
           {/* Grip lines at bottom */}
-          <div className="h-6 bg-slate-700 flex items-center justify-center border-t-4 border-slate-600">
+          <div className="h-6 bg-[#5D4037] flex items-center justify-center border-t-4 border-[#8D6E63]">
             <GripLines count={10} />
           </div>
         </div>
