@@ -13,7 +13,7 @@ const sectionHeaderVariants = cva(
         default: "",
         accent: "",
         highlight: "",
-        purple: "",
+        wood: "",
         green: "",
       },
       size: {
@@ -53,7 +53,7 @@ export function SectionHeader({
   // Map variant to nature colors
   const variantColors = {
     default: {
-      primary: "#4FC3F7",    // water-blue
+      primary: "#7CB342",    // grass-green (default nature)
       text: "#3E2723",       // text-dark
     },
     accent: {
@@ -64,7 +64,7 @@ export function SectionHeader({
       primary: "#FFD54F",    // sun-yellow
       text: "#3E2723",       // text-dark
     },
-    purple: {
+    wood: {
       primary: "#8D6E63",    // earth-brown
       text: "#3E2723",       // text-dark
     },

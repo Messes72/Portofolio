@@ -10,11 +10,11 @@ const pixelContainerVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-[#4FC3F7]",    // water-blue
+        default: "border-[#7CB342]",    // grass-green (default nature)
         accent: "border-[#F48FB1]",     // flower-pink
         highlight: "border-[#FFD54F]", // sun-yellow
-        purple: "border-[#8D6E63]",     // earth-brown
-        green: "border-[#7CB342]",     // grass-green
+        wood: "border-[#8D6E63]",       // earth-brown
+        green: "border-[#7CB342]",      // grass-green
       },
       size: {
         sm: "p-4",
@@ -51,10 +51,10 @@ export function PixelContainer({
 
   // Map variant to nature colors for glow and borders
   const variantColors = {
-    default: "#4FC3F7",    // water-blue
+    default: "#7CB342",    // grass-green (default nature)
     accent: "#F48FB1",     // flower-pink
     highlight: "#FFD54F",  // sun-yellow
-    purple: "#8D6E63",     // earth-brown
+    wood: "#8D6E63",       // earth-brown
     green: "#7CB342",      // grass-green
   };
 
