@@ -198,8 +198,8 @@ export function Projects() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-xl md:text-2xl lg:text-4xl text-[#3E2723] uppercase tracking-tight font-pixel"
             >
-              <span className="text-[#4FC3F7]">PROJECT</span>{" "}
-              <span className="text-[#7CB342]">COLLECTION</span>
+              <span className="text-[#7CB342]">PROJECT</span>{" "}
+              <span className="text-[#8D6E63]">COLLECTION</span>
             </motion.h2>
 
             <motion.p
