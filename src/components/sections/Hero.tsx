@@ -636,7 +636,7 @@ export function Hero() {
 
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto w-full">
           {/* Main container with cloud style */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
