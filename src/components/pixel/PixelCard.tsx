@@ -22,11 +22,11 @@ export function PixelCard({
   const prefersReducedMotion = useReducedMotion();
 
   const variantStyles = {
-    default: "bg-[#FFF8E7] border-[#4FC3F7]",
-    primary: "bg-[#FFF8E7] border-[#7CB342]",
-    secondary: "bg-[#FFF8E7] border-[#FFD54F]",
-    accent: "bg-[#FFF8E7] border-[#8D6E63]",
-    highlight: "bg-[#FFF8E7] border-[#7CB342]",
+    default: "bg-[hsl(var(--card))] border-[hsl(var(--border))]",
+    primary: "bg-[hsl(var(--card))] border-[hsl(var(--primary))]",
+    secondary: "bg-[hsl(var(--card))] border-[hsl(var(--secondary))]",
+    accent: "bg-[hsl(var(--card))] border-[hsl(var(--accent))]",
+    highlight: "bg-[hsl(var(--card))] border-[hsl(var(--primary))]",
   };
 
   // 8-bit pixel border with inner highlight
@@ -56,11 +56,11 @@ export function PixelCard({
         <div
           className={cn(
             "px-6 py-3 mb-4 -mx-6 -mt-0",
-            variant === "default" && "bg-[#F5F0E6] border-b-4 border-[#4FC3F7]",
-            variant === "primary" && "bg-[#F5F0E6] border-b-4 border-[#7CB342]",
-            variant === "secondary" && "bg-[#F5F0E6] border-b-4 border-[#FFD54F]",
-            variant === "accent" && "bg-[#F5F0E6] border-b-4 border-[#8D6E63]",
-            variant === "highlight" && "bg-[#F5F0E6] border-b-4 border-[#7CB342]"
+            variant === "default" && "bg-[hsl(var(--muted))] border-b-4 border-[hsl(var(--border))]",
+            variant === "primary" && "bg-[hsl(var(--muted))] border-b-4 border-[hsl(var(--primary))]",
+            variant === "secondary" && "bg-[hsl(var(--muted))] border-b-4 border-[hsl(var(--secondary))]",
+            variant === "accent" && "bg-[hsl(var(--muted))] border-b-4 border-[hsl(var(--accent))]",
+            variant === "highlight" && "bg-[hsl(var(--muted))] border-b-4 border-[hsl(var(--primary))]"
           )}
         >
           {header}
