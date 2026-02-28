@@ -264,10 +264,10 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
                     className="absolute inset-0 opacity-20"
                     style={{
                       backgroundImage: `
-                        linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                        linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
-                        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
-                        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%)
+                        linear-gradient(45deg, rgba(124,179,66,0.2) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(124,179,66,0.2) 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, rgba(124,179,66,0.2) 75%),
+                        linear-gradient(-45deg, transparent 75%, rgba(124,179,66,0.2) 75%)
                       `,
                       backgroundSize: "8px 8px",
                       backgroundPosition: "0 0, 0 4px, 4px -4px, -4px 0px",
@@ -283,7 +283,7 @@ export function GameCartridge({ project, index }: GameCartridgeProps) {
                           key={i}
                           className="w-2.5 h-2.5"
                           style={{
-                            backgroundColor: i % 3 === 0 ? colors.hex : "#475569",
+                            backgroundColor: i % 3 === 0 ? colors.hex : "#5D4037",
                             opacity: i % 2 === 0 ? 1 : 0.6
                           }}
                           animate={{
